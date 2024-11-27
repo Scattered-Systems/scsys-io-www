@@ -3,10 +3,10 @@
   Contrib: @FL03
 */
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import '@/assets/styles/globals.css';
 import { cookies } from 'next/headers';
 import { ThemeProvider } from 'next-themes';
+import localFont from 'next/font/local';
+import '@/assets/styles/globals.css';
 
 const geistSans = localFont({
   src: '../assets/fonts/GeistVF.woff',
