@@ -1,3 +1,7 @@
+/*
+  Appellation: page <root>
+  Contrib: @FL03
+*/
 import Image from "next/image";
 
 export default function Home() {
