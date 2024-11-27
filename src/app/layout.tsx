@@ -2,19 +2,21 @@
   Appellation: layout <root>
   Contrib: @FL03
 */
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "@/assets/globals.css";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import '@/assets/styles/globals.css';
+import { cookies } from 'next/headers';
+import { ThemeProvider } from 'next-themes';
 
 const geistSans = localFont({
-  src: "../assets/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+  src: '../assets/fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
 });
 const geistMono = localFont({
-  src: "../assets/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+  src: '../assets/fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
 });
 
 export const metadata: Metadata = {
@@ -34,23 +36,47 @@ export const metadata: Metadata = {
   creator: 'Scattered-Systems, LLC',
   description: 'Empowering the next generationg of internet-based experiences.',
   generator: 'scsys',
-  keywords: ['scsys', 'scattered-systems', 'software', 'development', 'technology'],
+  icons: [
+    {
+      url: '/favicon.ico',
+      sizes: '16x16',
+      type: 'image/x-icon',
+    },
+  ],
+  keywords: [
+    'scsys',
+    'scattered-systems',
+    'software',
+    'development',
+    'technology',
+  ],
   title: { default: 'Scattered-Systems', template: '%s | scsys' },
 };
 
-const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = ({
+const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = async ({
   children,
 }) => {
+  const cookieStore = await cookies();
+
+  const prefferedTheme = cookieStore.get('theme')?.value || 'system';
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-svh p-0 m-0`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          enableColorScheme
+          enableSystem
+          defaultTheme={prefferedTheme}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
-}
-RootLayout.displayName = "RootLayout";
+};
+RootLayout.displayName = 'RootLayout';
 
 export default RootLayout;
