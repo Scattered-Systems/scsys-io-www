@@ -1,40 +1,126 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Language Specific
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+## Node.js
+**/.DS_STORE
+**/build
+**/node_modules
 
-# testing
-/coverage
+**/*.tsbuildinfo
 
-# next.js
-/.next/
-/out/
+### Dependencies
+**/.pnp
+**/.pnp.*
 
-# production
-/build
+**/.yarn/install-state.gz
 
-# misc
-.DS_Store
-*.pem
+### Frameworks
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+#### Next.js
+**/.next
+**/out
 
-# env files (can opt-in for committing if needed)
-.env*
+**/next-env.d.ts
 
-# vercel
-.vercel
+### Package Manager
+**/yarn-error.log
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+## Python
+**/__pycache__
+**/.pytest_cache
+**/venv
+
+## Rust
+**/target
+
+**/Cargo.lock
+
+**/*.rs.bk
+**/*.rs.bk.*
+
+# Miscellaneous
+
+## Development
+
+### Configuration
+
+#### Custom Configurations
+**/.config/*.config.*
+
+#### dotenv
+**/.env.*
+**/*.env
+**/*.env.*
+
+!**/.env.default*
+!**/*default.env
+
+!**/*.env.example
+!**/*.env.example.*
+
+!**/*.example.env
+!**/*.example.env.*
+
+### IDE
+
+#### Atom
+**/.atom
+
+#### JetBrains
+**/.idea
+
+**/*.iml
+**/*.ipr
+**/*.iws
+
+#### Visual Studio Code
+**/.vscode
+
+### Integrations
+
+#### Supabase
+**/supabase/temp
+
+#### Vercel
+**/.vercel
+
+## Directories
+**/build
+**/debug
+**/dist
+**/release
+
+### testing
+**/coverage
+
+## File Extensions
+**/*.bak
+**/*.bak.*
+
+**/*.bk
+**/*.bk.*
+
+**/*.db
+
+**/*.lock
+**/*-lock.json
+
+**/*.log
+**/*.log.*
+
+**/*.pem
+
+**/*.gz
+
+**/*.sqlite
+
+**/*.zip
+
+## Operating Systems
+
+### NixOs
+!**/flake.lock
+
+### Windows
+
+#### Windows Subsystem for Linux (WSL)
+**/*:Zone.identifier
