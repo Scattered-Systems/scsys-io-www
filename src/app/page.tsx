@@ -4,12 +4,18 @@
 */
 import * as React from 'react';
 import Image from 'next/image';
+import { Appbar, AppbarLeading, AppbarTitle} from '@/components/common/appbar';
 
 const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col flex-1">
+      <Appbar variant="default">
+        <AppbarLeading>
+          <AppbarTitle className="text-lg font-semibold">scsys</AppbarTitle>
+        </AppbarLeading>
+      </Appbar>
       <section>
-        <Homer/>
+        <Homer />
       </section>
     </div>
   );
@@ -115,3 +121,5 @@ function Homer() {
     </div>
   );
 }
+
+export default HomePage;
