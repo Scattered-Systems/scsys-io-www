@@ -2,8 +2,9 @@
   "author": {
     "name": "scsys",
     "email": "support@scsys.io",
-    "url": "https://scsys.io"
+    "url": "https://github.com/scattered-systems"
   },
+  "homepage": "https://scsys.io",
   "private": true,
   "name": "@scsys/scsys-io",
   "version": "0.0.0",
@@ -14,6 +15,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
