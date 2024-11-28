@@ -122,4 +122,5 @@ function Homer() {
   );
 }
 
+export const runtime = 'edge';
 export default HomePage;
