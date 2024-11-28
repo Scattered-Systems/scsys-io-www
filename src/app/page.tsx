@@ -2,6 +2,7 @@
   Appellation: page <root>
   Contrib: @FL03
 */
+'use client';
 import * as React from 'react';
 import Image from 'next/image';
 import { Appbar, AppbarLeading, AppbarTitle} from '@/components/common/appbar';
