@@ -4,7 +4,7 @@
 */
 import * as React from 'react';
 import { useTheme } from 'next-themes';
-import { cn } from '@/utils';
+import { cn } from '@/utils/cn';
 
 // Scaffold
 const ThemeSelector = React.forwardRef<
