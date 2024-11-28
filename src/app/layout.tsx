@@ -79,4 +79,6 @@ const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = async ({
 };
 RootLayout.displayName = 'RootLayout';
 
+export const runtime = 'edge';
+
 export default RootLayout;

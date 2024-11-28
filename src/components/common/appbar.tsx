@@ -114,7 +114,7 @@ const AppbarTrailing = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center justify-end',
+      'ml-auto flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center justify-end',
       className
     )}
     {...props}
