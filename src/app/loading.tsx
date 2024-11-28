@@ -3,15 +3,14 @@
   Contrib: @FL03
 */
 
-import { Centered } from '@/components/common/layouts';
-import { Loading } from '@/components/common/screens';
 import * as React from 'react';
+import { Loading } from '@/components/common/screens';
 
 const LoadingPage: React.FC = () => {
   return (
-    <Centered>
-      <Loading/>
-    </Centered>
+    <div className="h-full">
+      <Loading />
+    </div>
   );
 }
 LoadingPage.displayName = 'LoadingPage';

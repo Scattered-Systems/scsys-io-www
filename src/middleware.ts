@@ -3,11 +3,18 @@
   Contrib: @FL03
 */
 
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const middleware = async (request: NextRequest) => {
-  // Add your middleware code here.
-  return request;
+  let response = NextResponse.next();
+  // Set the response headers
+  response.headers.set('x-content-type-options', 'nosniff');
+  response.headers.set('x-frame-options', 'DENY');
+  response.headers.set('x-xss-protection', '1; mode=block');
+  response.headers.set('referrer-policy', 'same-origin');
+  response.headers.set('strict-transport-security', 'max-age=31536000; includeSubDomains; preload');
+  // Return the response
+  return response;
 }
 
 export const config = {
