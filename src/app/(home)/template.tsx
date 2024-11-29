@@ -19,7 +19,7 @@ import { AppLogo } from '@/components/common/icons';
 import { ScrollIndicator } from '@/components/animated/scroll-indicator';
 import { ThemeToggle } from '@/components/common/theme';
 import { Footer, FooterContent, FooterLeading, FooterTrailing } from '@/components/common/footer';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
 import { sitemap } from '@/lib/data/sitemap';
 
 export const runtime = 'edge';
@@ -27,7 +27,7 @@ export const runtime = 'edge';
 const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
   children,
 }) => {
-
+  const title = 'Scattered-Systems';
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Appbar variant="default">
@@ -84,7 +84,7 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
           </div>
         </FooterLeading>
         <FooterContent className="">
-          <div className="inline-block m-auto">
+          <div className="flex flex-col">
             <span className="w-full text-muted-foreground">
               © 2024 Scattered-Systems, LLC
             </span>
