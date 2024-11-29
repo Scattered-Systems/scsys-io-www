@@ -9,6 +9,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import {
   Appbar,
+  AppbarContent,
   AppbarLeading,
   AppbarLogo,
   AppbarTitle,
@@ -18,6 +19,8 @@ import { AppLogo } from '@/components/common/icons';
 import { ScrollIndicator } from '@/components/animated/scroll-indicator';
 import { ThemeToggle } from '@/components/common/theme';
 import { Footer, FooterContent, FooterLeading, FooterTrailing } from '@/components/common/footer';
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
+import { sitemap } from '@/lib/data/sitemap';
 
 export const runtime = 'edge';
 
@@ -45,6 +48,21 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
           </AppbarLogo>
           <AppbarTitle className="text-lg font-semibold">scsys</AppbarTitle>
         </AppbarLeading>
+        <AppbarContent>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                {sitemap.pages.map(({ href, title }) => {
+                  return (
+                    <NavigationMenuLink key={href} href={href} className="px-2 hover:italic">
+                      {title}
+                    </NavigationMenuLink>
+                  );
+                })}
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </AppbarContent>
         <AppbarTrailing>
           <ThemeToggle />
         </AppbarTrailing>
@@ -64,7 +82,7 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
         <FooterContent className="">
           <div className="inline-block m-auto">
             <span className="w-full text-muted-foreground">
-              © 2024 Scattered-Systems, LLC 
+              © 2024 Scattered-Systems, LLC
             </span>
             <span className="text-muted-foreground">All Rights Reserved</span>
           </div>

@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   generator: 'scsys',
   icons: [
     {
-      url: '/favicon.ico',
       sizes: '16x16',
-      type: 'image/x-icon',
+      type: 'image/x-svg',
+      url: '/favico.svg',
     },
   ],
   keywords: [
