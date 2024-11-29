@@ -23,11 +23,12 @@ const AppTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
 
   return (
     <div>
+      <ScrollIndicator flavor="blue" position="top" />
       <Appbar variant="default">
         <AppbarLeading>
           <AppbarLogo>
             <motion.div
-              transition={{duration: 2}}
+              transition={{ duration: 2 }}
               whileHover={{
                 borderRadius: ['0%', '0%', '50%', '50%', '0%'],
                 repeatCount: Infinity,
@@ -47,7 +48,6 @@ const AppTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
       <main className="container mx-auto flex flex-col space-y-4 w-full px-4 py-2">
         {children}
       </main>
-      <ScrollIndicator flavor="blue" position="bottom" />
     </div>
   );
 };

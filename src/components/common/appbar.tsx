@@ -161,22 +161,6 @@ const AppbarActions = React.forwardRef<
 ));
 AppbarActions.displayName = 'AppbarActions';
 
-// AppbarSection
-const AppbarSection = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'flex flex-row flex-grow flex-nowrap space-x-2 items-center justify-items-center',
-      className
-    )}
-    {...props}
-  />
-));
-AppbarSection.displayName = 'AppbarSection';
-
 export {
   Appbar,
   AppbarActions,

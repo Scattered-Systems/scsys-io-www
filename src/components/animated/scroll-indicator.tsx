@@ -9,7 +9,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { HTMLMotionProps, motion, useScroll, } from 'motion/react';
 import { cn } from '@/utils/cn';
 
-const indicatorVariants = cva('block min-h-2 w-full sticky z-50', {
+const indicatorVariants = cva('block min-h-2 w-full fixed z-50', {
   defaultVariants: {
     flavor: 'default',
     position: 'bottom',
