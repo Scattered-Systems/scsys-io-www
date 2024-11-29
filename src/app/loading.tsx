@@ -2,6 +2,7 @@
   Appellation: loading <root>
   Contrib: @FL03
 */
+'use client';
 
 import * as React from 'react';
 import { Loading } from '@/components/common/loading';
