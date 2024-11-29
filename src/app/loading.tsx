@@ -4,7 +4,7 @@
 */
 
 import * as React from 'react';
-import { Loading } from '@/components/common/screens';
+import { Loading } from '@/components/common/loading';
 
 const LoadingPage: React.FC = () => {
   return (
@@ -14,5 +14,7 @@ const LoadingPage: React.FC = () => {
   );
 }
 LoadingPage.displayName = 'LoadingPage';
+
+export const runtime = 'edge';
 
 export default LoadingPage;

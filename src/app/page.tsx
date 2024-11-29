@@ -3,71 +3,60 @@
   Contrib: @FL03
 */
 'use client';
-import * as React from 'react';
-import { Appbar, AppbarLeading, AppbarLogo, AppbarTitle} from '@/components/common/appbar';
-import { AppLogo } from '@/components/common/icons';
-import { motion } from 'motion/react';
 
-const HomeHero: React.FC = () => {
-  return (
-    <section>
-      <h1 className="text-2xl font-semibold">Welcome to scsys</h1>
-      <p className="text-sm text-gray-500">
-        Get started by editing{' '}
-        <code className="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded font-semibold">
-          src/app/page.tsx
-        </code>
-        .
-      </p>
-    </section>
-  );
-}
+import * as React from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { AnimatedCard } from '@/components/animated/card';
+import { ContentSection } from '@/components/common/content';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const HomePage: React.FC = () => {
+
   return (
     <>
-      <Appbar variant="default">
-        <AppbarLeading>
-          <AppbarLogo>
-            <AppLogo />
-          </AppbarLogo>
-          <AppbarTitle className="text-lg font-semibold">scsys</AppbarTitle>
-        </AppbarLeading>
-      </Appbar>
-      <main className="container mx-auto flex flex-col px-4 py-2 text-foreground">
+      <ContentSection className="min-h-screen" flavor="secondary">
+        <AnimatedCard>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </CardDescription>
+          </CardContent>
+        </AnimatedCard>
+      </ContentSection>
+      <ContentSection className="min-h-screen" flavor="secondary">
         <motion.div
-          animate={{
-            opacity: 1,
-            scale: 0.75,
-            transition: { duration: 0.5 },
+          transition={{ duration: 2 }}
+          whileHover={{
+            cursor: 'pointer',
+            rotate: [0, -45, 90, 180, 0],
+            scale: [1, 0.95, 1, 1.05, 1],
+            
           }}
-          initial={{ backgroundColor: 'rgb(255, 0, 0)', opacity: 0 }}
-          whileInView={{ backgroundColor: 'rgb(0, 255, 255)', opacity: 1 }}
         >
-          <span className="bg-blue-500 block rounded-xl w-8 h-8" />
+          <Card>
+            <CardHeader>
+              <CardTitle>Card Title</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </CardDescription>
+            </CardContent>
+          </Card>
         </motion.div>
-        <motion.div
-          className="w-8 h-8 bg-blue-500 rounded-xl"
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [0, 0, 180, 180, 0],
-            borderRadius: ['0%', '0%', '50%', '50%', '0%'],
-          }}
-          transition={{
-            duration: 2,
-            ease: 'easeInOut',
-            times: [0, 0.2, 0.5, 0.8, 1],
-            repeat: Infinity,
-            repeatDelay: 1,
-          }}
-        />
-        <HomeHero />
-      </main>
+      </ContentSection>
+      <AnimatePresence>
+        <section className="min-h-screen rounded shadow-inner drop-shadow bg-accent text-accent-foreground"></section>
+      </AnimatePresence>
     </>
   );
 };
 HomePage.displayName = 'HomePage';
-
 
 export const runtime = 'edge';
 
