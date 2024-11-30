@@ -13,14 +13,15 @@ const contentVariants = cva('flex flex-col flex-1 space-y-2 px-4 py-2', {
   },
   variants: {
     flavor: {
-      default: 'bg-accent text-accent-foreground',
-      accent: 'bg-accent-variant text-accent-foreground',
-      primary: 'bg-primary text-primary-foreground',
-      secondary: 'bg-secondary text-secondary-foreground',
+      default: 'bg-background text-foreground border-background',
+      accent: 'bg-accent text-accent-foreground border-accent',
+      card: 'bg-card text-card-foreground border-card',
+      primary: 'bg-primary text-primary-foreground border-primary',
+      secondary: 'bg-secondary text-secondary-foreground border-secondary',
     },
     variant: {
       default: 'rounded shadow-inner drop-shadow',
-      card: 'rounded-lg shadow-inner drop-shadow-lg',
+      card: 'rounded-xl shadow-inner drop-shadow',
       hero: 'rounded-none shadow-none drop-shadow-none',
     },
   }

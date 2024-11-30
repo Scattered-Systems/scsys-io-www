@@ -6,26 +6,23 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils';
 
-const heroVariants = cva(
-  'w-full',
-  {
-    variants: {
-      flavor: {
-        default: 'bg-background text-foreground',
-        accent: 'bg-accent text-foreground',
-        primary: 'bg-primary text-primary-foreground',
-        secondary: 'bg-secondary text-secondary-foreground',
-      },
-      variant: {
-        default: '',
-      },
+const heroVariants = cva('flex flex-col flex-1 w-full px-4 py-2', {
+  variants: {
+    flavor: {
+      default: 'bg-background text-foreground',
+      accent: 'bg-accent text-foreground',
+      primary: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground',
     },
-    defaultVariants: {
-      flavor: 'default',
-      variant: 'default',
+    variant: {
+      default: '',
     },
-  }
-);
+  },
+  defaultVariants: {
+    flavor: 'default',
+    variant: 'default',
+  },
+});
 
 // Hero
 export const Hero = React.forwardRef<
