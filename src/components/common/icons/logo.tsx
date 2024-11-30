@@ -4,12 +4,14 @@
 */
 import * as React from 'react';
 
-const AppLogo = ({ ...props }) => (
+export const AppLogo: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({
+  ...props
+}) => (
   <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
     fill="none"
+    height="32"
+    width="32"
+    viewBox="0 0 32 32"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
@@ -23,4 +25,4 @@ const AppLogo = ({ ...props }) => (
   </svg>
 );
 
-export { AppLogo };
+export default AppLogo;

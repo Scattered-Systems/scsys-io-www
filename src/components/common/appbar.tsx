@@ -52,11 +52,16 @@ const AppbarContext = React.createContext<AppbarContext>({
   centerTitle: false,
 });
 
+type AppbarProps = {
+  centerTitle?: boolean;
+};
+
 // Appbar
 const Appbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> &
-    VariantProps<typeof appBarVariants> & { centerTitle?: boolean }
+    VariantProps<typeof appBarVariants> &
+    AppbarProps
 >(({ className, centerTitle, position, size, variant, ...props }, ref) => {
   centerTitle = centerTitle ?? false;
 
@@ -98,7 +103,7 @@ const AppbarLeading = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center',
+      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center mr-auto',
       className
     )}
     {...props}
@@ -160,22 +165,6 @@ const AppbarActions = React.forwardRef<
   />
 ));
 AppbarActions.displayName = 'AppbarActions';
-
-// AppbarSection
-const AppbarSection = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'flex flex-row flex-grow flex-nowrap space-x-2 items-center justify-items-center',
-      className
-    )}
-    {...props}
-  />
-));
-AppbarSection.displayName = 'AppbarSection';
 
 export {
   Appbar,

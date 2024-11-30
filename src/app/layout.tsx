@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   generator: 'scsys',
   icons: [
     {
-      url: '/favicon.ico',
       sizes: '16x16',
-      type: 'image/x-icon',
+      type: 'image/x-svg',
+      url: '/favico.svg',
     },
   ],
   keywords: [
@@ -52,6 +52,8 @@ export const metadata: Metadata = {
   ],
   title: { default: 'Scattered-Systems', template: '%s | scsys' },
 };
+
+export const runtime = 'edge';
 
 const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = async ({
   children,
@@ -78,7 +80,5 @@ const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = async ({
   );
 };
 RootLayout.displayName = 'RootLayout';
-
-export const runtime = 'edge';
 
 export default RootLayout;

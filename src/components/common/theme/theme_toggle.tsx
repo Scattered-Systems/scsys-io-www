@@ -15,30 +15,64 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/utils/cn';
+import { ButtonSize, ButtonVariant } from '@/types/cmp';
 
-export interface ThemeToggleProps
-  extends React.PropsWithRef<React.ComponentProps<'button'>> {
+type ThemeToggleProps = {
   lightIcon?: any;
   darkIcon?: any;
-  size?: 'default' | 'icon' | 'sm' | 'lg' | null;
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'ghost'
-    | 'link'
-    | 'outline'
-    | 'secondary'
-    | null;
+  size?: ButtonSize;
+  variant?: ButtonVariant
 }
+// ThemeSelector
+export const ThemeSelector = React.forwardRef<
+  HTMLSelectElement,
+  React.HTMLAttributes<HTMLSelectElement>
+>(({ children, className, ...props }, ref) => {
+  const [mounted, setMounted] = React.useState(false);
+  const { theme, setTheme } = useTheme();
 
-export function ThemeToggle({
+  // useEffect only runs on the client, so now we can safely show the UI
+  React.useEffect(() => {
+    setMounted(true);
+  }, [setMounted]);
+
+  if (!mounted) return null;
+  
+  return (
+    <select
+      ref={ref}
+      className={cn(
+        'rounded-lg shadow-inner text-foreground bg-accent',
+        className
+      )}
+      onChange={(e) => setTheme(e.target.value)}
+      value={theme}
+      {...props}
+    >
+      <option value="system">System</option>
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+      {children}
+    </select>
+  );
+});
+ThemeSelector.displayName = 'ThemeSelector';
+
+export const ThemeSelectorOption = React.forwardRef<
+  HTMLOptionElement,
+  React.HTMLAttributes<HTMLOptionElement>
+>(({ ...props }, ref) => <option ref={ref} {...props} />);
+ThemeSelectorOption.displayName = 'ThemeSelectorOption';
+
+// ThemeToggle
+export const ThemeToggle = React.forwardRef<HTMLButtonElement, React.HTMLAttributes<HTMLButtonElement> & ThemeToggleProps>(({
   className,
   size,
   variant,
   darkIcon,
   lightIcon,
   ...props
-}: ThemeToggleProps) {
+}, ref) => {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -49,14 +83,14 @@ export function ThemeToggle({
   const icon = (mode?: string) =>
     mode === 'system' || mode === 'dark' ? darkIcon : lightIcon;
 
-  function onClick() {
+  const onClick = () => {
     setTheme(isDark() ? 'light' : 'dark');
   }
 
   // useEffect only runs on the client, so now we can safely show the UI
   React.useEffect(() => {
     setMounted(true);
-  }, []);
+  }, [setMounted]);
 
   if (!mounted || !resolvedTheme) return null;
 
@@ -65,6 +99,7 @@ export function ThemeToggle({
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+            ref={ref}
             className={cn('relative w-full', className)}
             onClick={onClick}
             size={size ?? 'icon'}
@@ -81,6 +116,7 @@ export function ThemeToggle({
       </Tooltip>
     </TooltipProvider>
   );
-}
+})
+ThemeToggle.displayName = 'ThemeToggle';
 
 export default ThemeToggle;
