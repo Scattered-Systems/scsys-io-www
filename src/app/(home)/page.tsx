@@ -11,6 +11,7 @@ import { ContentSection } from '@/components/common/content';
 import { Hero } from '@/components/common/heros';
 
 import HeroImage from '@/assets/Penrose Shapes.jpeg';
+import { ParticleFieldHeader } from '@/components/animated/particle-field';
 
 export const runtime = 'edge';
 
@@ -44,7 +45,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <HomeHeader />
+      <ParticleFieldHeader count={100}/>
       <AnimatePresence>
         <ContentSection id="about" flavor="accent" variant="card">
           <div className="flex flex-row flex-nowrap justify-items-center justify-center">
