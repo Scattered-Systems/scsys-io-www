@@ -27,16 +27,16 @@ export const runtime = 'edge';
 const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
   children,
 }) => {
-  const title = 'Scattered-Systems';
+  const title =  'scsys'; // 'Scattered-Systems';
   return (
     <div className="flex flex-col w-full min-h-screen">
-      <Appbar variant="default">
+      <Appbar variant="secondary">
         <AppbarLeading>
           <AppbarLogo>
             <motion.div
               transition={{ duration: 2 }}
               whileHover={{
-                rotate: [0, -45, 90, 180, 0],
+                rotate: [0, -15, 15, -45, 0],
                 scale: [1, 1.25, 1.0, 0.75, 1],
               }}
               whileTap={{
@@ -46,7 +46,7 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
               <AppLogo />
             </motion.div>
           </AppbarLogo>
-          <AppbarTitle className="text-lg font-semibold">scsys</AppbarTitle>
+          <AppbarTitle className="text-lg font-semibold">{title}</AppbarTitle>
         </AppbarLeading>
         <AppbarContent>
           <NavigationMenu>

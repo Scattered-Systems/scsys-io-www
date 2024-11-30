@@ -7,12 +7,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils';
 
 const heroVariants = cva(
-  'flex flex-col items-center justify-center w-full h-full',
+  'w-full',
   {
     variants: {
       flavor: {
-        default: 'bg-primary-foreground text-foreground',
+        default: 'bg-background text-foreground',
         accent: 'bg-accent text-foreground',
+        primary: 'bg-primary text-primary-foreground',
         secondary: 'bg-secondary text-secondary-foreground',
       },
       variant: {
@@ -26,6 +27,7 @@ const heroVariants = cva(
   }
 );
 
+// Hero
 export const Hero = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof heroVariants>
@@ -39,3 +41,18 @@ export const Hero = React.forwardRef<
   );
 });
 Hero.displayName = 'Hero';
+
+// HeaderContent
+export const HeroContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn('', className)}
+      {...props}
+    />
+  );
+});
+HeroContent.displayName = 'HeroContent';

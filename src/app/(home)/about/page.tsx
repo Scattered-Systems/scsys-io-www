@@ -3,15 +3,22 @@
   Contrib: @FL03
 */
 import * as React from 'react';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const runtime = 'edge';
 
 const AboutPage: React.FC = () => {
   return (
-    <div>
-      <h2>About</h2>
-      <p>This is the about page</p>
-    </div>
+    <>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>
+            About
+          </CardTitle>
+        </CardHeader>
+      </Card>
+      <section></section>
+    </>
   );
 }
 AboutPage.displayName = 'AboutPage';
