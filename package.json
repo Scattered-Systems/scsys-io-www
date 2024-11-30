@@ -7,7 +7,7 @@
   "homepage": "https://scsys.io",
   "private": true,
   "name": "@scsys/scsys-io",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
