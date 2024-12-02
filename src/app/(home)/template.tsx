@@ -77,38 +77,6 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
       <main className="container mx-auto flex flex-col flex-1 space-y-4 px-4 py-2">
         {children}
       </main>
-      <Footer flavor="secondary">
-        <div className="container mx-auto flex flex-row flex-nowrap px-4 py-2">
-          <FooterLeading>
-            <div className="font-semibold transition-all">
-              Scattered-Systems, LLC
-            </div>
-            <div className="text-muted-foreground">
-              Empowering the next generation of internet-based experiences.
-            </div>
-          </FooterLeading>
-          <FooterContent className="justify-start">
-            <div className="flex flex-col">
-              <span className="w-full text-muted-foreground">
-                © 2024 Scattered-Systems, LLC
-              </span>
-              <span className="text-muted-foreground">All Rights Reserved</span>
-            </div>
-          </FooterContent>
-          <FooterTrailing className="">
-            <Link
-              href="https://github.com/FL03"
-              className="w-full text-end justify-items-center"
-            >
-              Author
-            </Link>
-          </FooterTrailing>
-        </div>
-      </Footer>
-      <ScrollIndicator
-        className="bg-gradient-to-br from-blue-500 to-green-600 "
-        position="fixedBottom"
-      />
     </div>
   );
 };
