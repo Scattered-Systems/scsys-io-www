@@ -3,22 +3,16 @@
   Contrib: @FL03
 */
 import * as React from 'react';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import About from '@/features/about/data/about.mdx';
+import ContentSection from '@/components/common/content';
 
 export const runtime = 'edge';
 
 const AboutPage: React.FC = () => {
   return (
-    <>
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>
-            About
-          </CardTitle>
-        </CardHeader>
-      </Card>
-      <section></section>
-    </>
+    <ContentSection flavor="accent">
+      <About />
+    </ContentSection>
   );
 }
 AboutPage.displayName = 'AboutPage';

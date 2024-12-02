@@ -7,29 +7,16 @@ import {
   motion,
   useMotionValue,
   useTransform,
-  HTMLMotionProps,
   useSpring,
 } from 'motion/react';
 import { cn } from '@/utils';
-
-import {
-  AnimatedDescription,
-  AnimatedTitle,
-} from '@/components/animated/typography';
 import { ParticleField } from './particle-field';
 
-type HeaderProps = {
-  count?: number;
-  description?: any;
-  title?: any;
-}
-
 export const ParticleFieldHeader: React.FC<
-  HTMLMotionProps<'div'> & HeaderProps
-> = ({ children, className, count, description, style, title, ...props }) => {
-  title ??= 'Scattered-Systems';
-  description ??=
-    'Empowering the next generation of internet-based experiences.';
+  React.HTMLAttributes<HTMLDivElement> & {
+    count?: number;
+  }
+> = ({ children, className, count, ...props }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -38,7 +25,7 @@ export const ParticleFieldHeader: React.FC<
 
   const handleMouseMove = (e: any) => {
     const rect = e.currentTarget?.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
+    mouseX.set(e.clientX + rect.left);
     mouseY.set(e.clientY - rect.top);
   };
 
@@ -46,34 +33,34 @@ export const ParticleFieldHeader: React.FC<
   const scaleSpring = useSpring(1, springConfig);
 
   return (
-    <div className="inset-0 flex flex-col flex-1 justify-start w-full overflow-hidden">
-      <motion.div
-        className={cn('relative', 'flex flex-col flex-1 w-full', className)}
-        onMouseMove={handleMouseMove}
-        style={{
-          scale: scaleSpring,
-          ...style,
-        }}
-        {...props}
-      >
-        <ParticleField count={count} className="rounded-full" />
+    <div
+      className={cn(
+        'relative',
+        'relative inset-0 flex flex-col flex-1 justify-start w-full overflow-hidden',
+        className
+      )}
+      {...props}
+    >
+      <ParticleField count={count} className="rounded-full" />
+      <div className="block m-auto w-fit">
         <motion.div
           className="relative z-10 text-center m-auto bg-gradient-to-br from-background to-background/50 w-fit px-4 py-2 rounded-xl"
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, stiffness: 100, damping: 30 }}
+          onMouseEnter={() => scaleSpring.set(1)}
+          onMouseLeave={() => scaleSpring.set(0.95)}
+          onMouseMove={handleMouseMove}
           style={{
             rotateX,
             rotateY,
+            scale: scaleSpring,
             transformStyle: 'preserve-3d',
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            {children}
-          </motion.div>
+          {children}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };

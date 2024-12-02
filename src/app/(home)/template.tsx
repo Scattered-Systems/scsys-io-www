@@ -18,6 +18,8 @@ import { AppLogo } from '@/components/common/icons';
 import { ThemeToggle } from '@/components/common/theme';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
 
+import { sitemap } from '@/config';
+
 export const runtime = 'edge';
 
 const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
@@ -47,22 +49,15 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
         <AppbarContent>
           <NavigationMenu>
             <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  key={0}
-                  href="/"
-                  className="px-2 hover:italic"
-                >
-                  Home
-                </NavigationMenuLink>
-                <NavigationMenuLink
-                  key={2}
-                  href="#about"
-                  className="px-2 hover:italic"
-                >
-                  About
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+                {sitemap.pages.map(({ href, title}) => {
+                  return (
+                    <NavigationMenuItem key={title}>
+                      <NavigationMenuLink href={href} className="transition-colors hover:underline">
+                        {title}
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  );
+                })}
             </NavigationMenuList>
           </NavigationMenu>
         </AppbarContent>
