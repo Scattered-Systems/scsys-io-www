@@ -1,0 +1,115 @@
+/*
+  Appellation: particle-field <animated>
+  Contrib: @FL03
+*/
+'use client';
+
+import * as React from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
+import {
+  motion,
+  HTMLMotionProps,
+} from 'motion/react';
+import { cn } from '@/utils';
+
+const particleVariants = cva('absolute inset-0 overflow-hidden', {
+  defaultVariants: {
+    flavor: 'default',
+    variant: 'default',
+  },
+  variants: {
+    flavor: {
+      default: 'bg-gradient-to-br from-background to-foreground/90',
+    },
+    variant: {
+      default: '',
+      rounded: 'rounded-full',
+    },
+  },
+});
+
+type WeightedPoint = {
+  weight: number;
+  [key: string]: number;
+};
+
+type GenRand = (offset?: number, scale?: number) => number;
+
+type ParticleProps = {
+  index: number;
+  value: WeightedPoint;
+}
+export const Particle: React.FC<
+  HTMLMotionProps<'div'> &
+    ParticleProps
+> = ({ className, index, style, value, ...props }) => {
+
+  const randBound: GenRand = (offset = 50, scale = 100) => Math.random() * scale - offset;
+  const randDuration: GenRand = (offset = 10, scale = 10) => Math.random() * scale + offset;
+
+  const generateBound = () => {
+    const value = randBound();
+    return [0, value, value, 0]
+  }
+
+  return (
+    <motion.div
+      key={index}
+      className={cn('relative rounded-full bg-gradient-to-br from-foreground to-foreground/75', className)}
+      animate={{
+        opacity: [0.75, 1, 0.75],
+        x: generateBound(),
+        y: generateBound(),
+      }}
+      style={{
+        left: `${value.x}%`,
+        top: `${value.y}%`,
+        width: value.weight,
+        height: value.weight,
+        ...style,
+      }}
+      transition={{
+        duration: randDuration(),
+        repeat: Infinity,
+        ...props.transition,
+      }}
+      {...props}
+    />
+  );
+};
+
+export const ParticleField: React.FC<
+  React.HTMLAttributes<HTMLDivElement> &
+    VariantProps<typeof particleVariants> & {
+      count?: number;
+      particle?: typeof Particle;
+    }
+> = ({ className, count, flavor, variant, ...props }) => {
+  count ||= 100;
+
+  const [particles, setParticles] = React.useState<WeightedPoint[]>([]);
+
+  React.useEffect(() => {
+    const newParticles = Array.from({ length: count }, () => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      weight: Math.random() * 3 + 1,
+    }));
+    setParticles(newParticles);
+  }, [count, setParticles]);
+
+  return (
+    <div
+      className={cn(particleVariants({ flavor, variant }), className)}
+      {...props}
+    >
+      {particles.map((value, index) => (
+        <Particle key={index} index={index} value={value} />
+      ))}
+    </div>
+  );
+};
+ParticleField.displayName = 'ParticleField';
+
+
+export default ParticleField;

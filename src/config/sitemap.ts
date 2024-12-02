@@ -31,3 +31,5 @@ export const sitemap = {
     },
   ],
 };
+
+export default sitemap;
