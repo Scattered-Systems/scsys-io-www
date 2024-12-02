@@ -6,7 +6,6 @@
 
 import * as React from 'react';
 import { motion } from 'motion/react';
-import Link from 'next/link';
 import {
   Appbar,
   AppbarContent,
@@ -16,11 +15,8 @@ import {
   AppbarTrailing,
 } from '@/components/common/appbar';
 import { AppLogo } from '@/components/common/icons';
-import { ScrollIndicator } from '@/components/animated/scroll-indicator';
 import { ThemeToggle } from '@/components/common/theme';
-import { Footer, FooterContent, FooterLeading, FooterTrailing } from '@/components/common/footer';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
-import { sitemap } from '@/lib/data/sitemap';
 
 export const runtime = 'edge';
 

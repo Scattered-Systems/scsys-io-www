@@ -11,7 +11,11 @@ export const runtime = 'edge';
 
 const HomePage: React.FC = () => {
 
-  return <ParticleFieldHeader count={100}/>;
+  return (
+    <div>
+      <ParticleFieldHeader/>
+    </div>
+  )
 };
 HomePage.displayName = 'HomePage';
 
