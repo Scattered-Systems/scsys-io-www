@@ -8,72 +8,70 @@ import * as React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 import {
   motion,
-  useMotionValue,
-  useTransform,
-  useSpring,
   HTMLMotionProps,
 } from 'motion/react';
 import { cn } from '@/utils';
-import { AnimatedTitle } from '@/components/animated/typography';
 
-const particleVariants = cva('relative', {
+const particleVariants = cva('absolute inset-0 overflow-hidden', {
   defaultVariants: {
     flavor: 'default',
     variant: 'default',
   },
   variants: {
     flavor: {
-      default: 'bg-gradient-to-r from-foreground to-foreground/90',
-      destructive: 'bg-gradient-to-r from-destructive to-destructive/90',
-      blueGreen: 'bg-gradient-to-r from-blue-500/90 to-green-500/90',
+      default: 'bg-gradient-to-br from-background to-foreground/90',
     },
     variant: {
-      default: 'rounded-full',
+      default: '',
+      rounded: 'rounded-full',
     },
   },
 });
 
-type ParticleFieldProps = {
-  count?: number;
-};
-
-type Point = {
+type WeightedPoint = {
+  weight: number;
   [key: string]: number;
 };
 
-type WeightedPoint = {
-  weight: number;
-} & Point;
+type GenRand = (offset?: number, scale?: number) => number;
 
+type ParticleProps = {
+  index: number;
+  value: WeightedPoint;
+}
 export const Particle: React.FC<
   HTMLMotionProps<'div'> &
-    VariantProps<typeof particleVariants> & {
-      index: number;
-      value: WeightedPoint;
-    }
-> = ({ className, flavor, variant, index, value, ...props }) => {
-  const generateBound = () => Math.random() * 100 - 50;
+    ParticleProps
+> = ({ className, index, style, value, ...props }) => {
 
-  const generateDuration = () => Math.random() * 10 + 10;
+  const randBound: GenRand = (offset = 50, scale = 100) => Math.random() * scale - offset;
+  const randDuration: GenRand = (offset = 10, scale = 10) => Math.random() * scale + offset;
+
+  const generateBound = () => {
+    const value = randBound();
+    return [0, value, value, 0]
+  }
 
   return (
     <motion.div
       key={index}
-      className={cn(particleVariants({ flavor, variant }), className)}
+      className={cn('relative rounded-full bg-gradient-to-br from-foreground to-foreground/75', className)}
+      animate={{
+        opacity: [0.75, 1, 0.75],
+        x: generateBound(),
+        y: generateBound(),
+      }}
       style={{
         left: `${value.x}%`,
         top: `${value.y}%`,
         width: value.weight,
         height: value.weight,
-      }}
-      animate={{
-        x: [0, generateBound()],
-        y: [0, generateBound()],
+        ...style,
       }}
       transition={{
-        duration: generateDuration(),
+        duration: randDuration(),
         repeat: Infinity,
-        repeatType: 'reverse',
+        ...props.transition,
       }}
       {...props}
     />
@@ -82,8 +80,10 @@ export const Particle: React.FC<
 
 export const ParticleField: React.FC<
   React.HTMLAttributes<HTMLDivElement> &
-    VariantProps<typeof particleVariants> &
-    ParticleFieldProps
+    VariantProps<typeof particleVariants> & {
+      count?: number;
+      particle?: typeof Particle;
+    }
 > = ({ className, count, flavor, variant, ...props }) => {
   count ||= 100;
 
@@ -100,17 +100,11 @@ export const ParticleField: React.FC<
 
   return (
     <div
-      className={cn('absolute inset-0 overflow-hidden', className)}
+      className={cn(particleVariants({ flavor, variant }), className)}
       {...props}
     >
       {particles.map((value, index) => (
-        <Particle
-          key={index}
-          index={index}
-          value={value}
-          flavor={flavor}
-          variant={variant}
-        />
+        <Particle key={index} index={index} value={value} />
       ))}
     </div>
   );

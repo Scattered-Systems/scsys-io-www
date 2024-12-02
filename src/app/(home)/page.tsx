@@ -12,10 +12,17 @@ export const runtime = 'edge';
 const HomePage: React.FC = () => {
 
   return (
-    <div>
-      <ParticleFieldHeader/>
+    <div className="flex flex-col flex-1 w-full p-4">
+      <ParticleFieldHeader className="bg-gradient-to-br from-background to-foreground rounded-full text-foreground">
+        <h1 className="text-4xl font-bold text-accent-foreground">
+          Scattered-Systems
+        </h1>
+        <span className="text-lg font-semibold ">
+          Empowering the next generation of internet-based experiences.
+        </span>
+      </ParticleFieldHeader>
     </div>
-  )
+  );
 };
 HomePage.displayName = 'HomePage';
 
