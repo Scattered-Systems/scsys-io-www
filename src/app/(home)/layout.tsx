@@ -65,7 +65,7 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
           <ThemeToggle />
         </AppbarTrailing>
       </Appbar>
-      <main className="container mx-auto flex flex-col flex-1 space-y-4 px-4 py-2">
+      <main className="flex flex-col flex-1">
         {children}
       </main>
     </div>

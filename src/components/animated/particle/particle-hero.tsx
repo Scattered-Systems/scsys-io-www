@@ -2,7 +2,10 @@
   Appellation: particle-hero <module>
   Contrib: @FL03
 */
+'use client';
+
 import * as React from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
 import {
   motion,
   useMotionValue,
@@ -12,11 +15,22 @@ import {
 import { cn } from '@/utils';
 import { ParticleField } from './particle-field';
 
+const particleHeroVariants = cva('relative inset-0 overflow-hidden h-auto w-full', {
+  defaultVariants: {
+    flavor: 'default',
+  },
+  variants: {
+    flavor: {
+      default: 'bg-gradient-to-br from-background to-background/75',
+    },
+  },
+});
+
 export const ParticleFieldHeader: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & {
+  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof particleHeroVariants> & {
     count?: number;
   }
-> = ({ children, className, count, ...props }) => {
+> = ({ children, className, count, flavor, ...props }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -33,21 +47,22 @@ export const ParticleFieldHeader: React.FC<
   const scaleSpring = useSpring(1, springConfig);
 
   return (
-    <div
-      className={cn(
-        'relative',
-        'relative inset-0 flex flex-col flex-1 justify-start w-full overflow-hidden',
-        className
-      )}
-      {...props}
-    >
-      <ParticleField count={count} className="rounded-full" />
-      <div className="block m-auto w-fit">
+    <div className={cn(particleHeroVariants({ flavor }), className)} {...props}>
+      <ParticleField count={count} />
+      <div className="m-auto">
         <motion.div
-          className="relative z-10 text-center m-auto bg-gradient-to-br from-background to-background/50 w-fit px-4 py-2 rounded-xl"
+          className={cn(
+            'block relative rounded px-4 py-2 m-auto w-fit z-10 ',
+            'bg-gradient-to-br from-background to-background/50'
+          )}
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, stiffness: 100, damping: 30 }}
+          transition={{
+            duration: 0.8,
+            delay: 0.6,
+            stiffness: 100,
+            damping: 30,
+          }}
           onMouseEnter={() => scaleSpring.set(1)}
           onMouseLeave={() => scaleSpring.set(0.95)}
           onMouseMove={handleMouseMove}
