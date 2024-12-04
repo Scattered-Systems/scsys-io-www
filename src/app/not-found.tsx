@@ -4,6 +4,8 @@
 */
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 const NotFound: React.FC = () => {
   return (
     <div>
@@ -16,7 +18,5 @@ const NotFound: React.FC = () => {
   );
 }
 NotFound.displayName = 'NotFound';
-
-export const runtime = 'edge';
 
 export default NotFound;

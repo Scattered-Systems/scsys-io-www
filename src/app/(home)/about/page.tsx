@@ -8,14 +8,14 @@ import ContentSection from '@/components/common/content';
 
 export const runtime = 'edge';
 
-const AboutPage: React.FC = () => {
+const Page: React.FC = () => {
   return (
     <ContentSection flavor="accent">
       <About />
     </ContentSection>
   );
 }
-AboutPage.displayName = 'AboutPage';
+Page.displayName = 'AboutPage';
 
 
-export default AboutPage;
+export default Page;

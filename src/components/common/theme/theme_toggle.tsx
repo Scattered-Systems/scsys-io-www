@@ -14,8 +14,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { cn } from '@/utils/cn';
-import { ButtonSize, ButtonVariant } from '@/types/cmp';
+import { cn } from '@/utils';
+import { ButtonSize, ButtonVariant } from '@/types';
 
 type ThemeToggleProps = {
   lightIcon?: any;
