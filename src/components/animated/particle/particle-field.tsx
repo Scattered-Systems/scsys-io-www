@@ -20,7 +20,8 @@ const fieldVariants = cva('absolute inset-0 overflow-hidden w-full', {
   },
   variants: {
     flavor: {
-      default: 'bg-gradient-to-br from-background to-foreground/90',
+      default: 'bg-gradient-to-br from-foreground/25 to-background/85',
+      foreground: 'bg-gradient-to-br from-foreground to-foreground/75',
     },
     rounded: {
       'none': 'rounded-none',
