@@ -16,7 +16,7 @@ const pageData = {
 const Page: React.FC = () => {
   const { title, description } = pageData;
   return (
-    <ParticleFieldHeader className="rounded-sm text-foreground flex flex-col flex-1">
+    <ParticleFieldHeader className="rounded-sm text-foreground flex flex-col flex-1" flavor="blueGreen">
       <h1 className="text-4xl font-bold">{title}</h1>
       <span className="text-lg font-semibold text-muted-foreground">
         {description}

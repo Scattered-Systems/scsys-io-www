@@ -12,9 +12,10 @@ const appBarVariants = cva(
   'flex flex-row flex-nowrap space-x-2 w-full items-center justify-items-center justify-between px-4 py-2 z-50 sticky',
   {
     variants: {
-      variant: {
-        default: 'bg-primary-foreground text-foreground',
+      flavor: {
+        default: 'bg-transparent text-foreground',
         accent: 'bg-accent text-foreground',
+        primary: 'bg-primary text-primary-foreground',
         secondary: 'bg-secondary text-secondary-foreground',
       },
       rounded: {
@@ -34,8 +35,12 @@ const appBarVariants = cva(
         top: 'top-0',
         bottom: 'bottom-0',
       },
+      variant: {
+        default: '',
+      },
     },
     defaultVariants: {
+      flavor: 'default',
       position: 'top',
       rounded: 'default',
       size: 'default',
@@ -62,21 +67,29 @@ const Appbar = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> &
     VariantProps<typeof appBarVariants> &
     AppbarProps
->(({ className, centerTitle, position, size, variant, ...props }, ref) => {
-  centerTitle = centerTitle ?? false;
+>(
+  (
+    { className, centerTitle, position, size, flavor: variant, ...props },
+    ref
+  ) => {
+    centerTitle = centerTitle ?? false;
 
-  const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
+    const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
 
-  return (
-    <AppbarContext.Provider value={contextValue}>
-      <div
-        ref={ref}
-        className={cn(appBarVariants({ position, size, variant }), className)}
-        {...props}
-      />
-    </AppbarContext.Provider>
-  );
-});
+    return (
+      <AppbarContext.Provider value={contextValue}>
+        <div
+          ref={ref}
+          className={cn(
+            appBarVariants({ position, size, flavor: variant }),
+            className
+          )}
+          {...props}
+        />
+      </AppbarContext.Provider>
+    );
+  }
+);
 Appbar.displayName = 'Appbar';
 
 // AppbarContent

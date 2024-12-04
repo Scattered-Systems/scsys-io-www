@@ -16,7 +16,12 @@ import {
 } from '@/components/common/appbar';
 import { AppLogo } from '@/components/common/icons';
 import { ThemeToggle } from '@/components/common/theme';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList} from '@/components/ui/navigation-menu';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from '@/components/ui/navigation-menu';
 
 import { sitemap } from '@/config';
 
@@ -25,10 +30,10 @@ export const runtime = 'edge';
 const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
   children,
 }) => {
-  const title =  'scsys'; // 'Scattered-Systems';
+  const title = 'scsys'; // 'Scattered-Systems';
   return (
     <div className="flex flex-col w-full min-h-screen">
-      <Appbar variant="secondary">
+      <Appbar flavor="primary">
         <AppbarLeading>
           <AppbarLogo>
             <motion.div
@@ -49,15 +54,18 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
         <AppbarContent>
           <NavigationMenu>
             <NavigationMenuList>
-                {sitemap.pages.map(({ href, title}) => {
-                  return (
-                    <NavigationMenuItem key={title}>
-                      <NavigationMenuLink href={href} className="transition-colors hover:underline">
-                        {title}
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  );
-                })}
+              {sitemap.pages.map(({ href, title }) => {
+                return (
+                  <NavigationMenuItem key={title}>
+                    <NavigationMenuLink
+                      href={href}
+                      className="transition-colors hover:underline"
+                    >
+                      {title}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
         </AppbarContent>
@@ -65,9 +73,7 @@ const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
           <ThemeToggle />
         </AppbarTrailing>
       </Appbar>
-      <main className="flex flex-col flex-1">
-        {children}
-      </main>
+      <main className="flex flex-col flex-1">{children}</main>
     </div>
   );
 };
