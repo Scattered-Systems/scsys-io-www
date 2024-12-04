@@ -13,10 +13,10 @@ const appBarVariants = cva(
   {
     variants: {
       flavor: {
-        default: 'bg-transparent text-foreground',
-        accent: 'bg-accent text-foreground',
-        primary: 'bg-primary text-primary-foreground',
-        secondary: 'bg-secondary text-secondary-foreground',
+        default: 'bg-foreground text-background',
+        accent: 'bg-accent-foreground text-accent',
+        primary: 'bg-primary-foreground text-primary',
+        secondary: 'bg-secondary-foreground text-secondary',
       },
       rounded: {
         default: 'rounded-none',

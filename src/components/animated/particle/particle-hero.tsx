@@ -13,7 +13,7 @@ export const ParticleFieldHeader: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
       count?: number;
       description?: any;
-      flavor?: 'default' | 'foreground' | 'blueGreen';
+      flavor?: 'default' | 'foreground' | 'blueGreen' | 'blueOrange' | 'orangeGreen';
       title?: any;
     }
 > = ({ children, className, count, flavor, ...props }) => {
