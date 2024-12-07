@@ -27,9 +27,9 @@ import { sitemap } from '@/config';
 
 export const runtime = 'edge';
 
-const PageTemplate: React.FC<Readonly<React.PropsWithChildren>> = ({
+const PageTemplate = ({
   children,
-}) => {
+}: Readonly<React.PropsWithChildren>) => {
   const title = 'scsys'; // 'Scattered-Systems';
   return (
     <div className="flex flex-col w-full min-h-screen">

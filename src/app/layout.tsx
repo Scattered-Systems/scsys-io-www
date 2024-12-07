@@ -3,9 +3,10 @@
   Contrib: @FL03
 */
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import { cookies } from 'next/headers';
 import { ThemeProvider } from 'next-themes';
-import localFont from 'next/font/local';
+import { Analytics } from '@vercel/analytics/react';
 import '@/assets/styles/globals.css';
 
 const geistSans = localFont({
@@ -75,6 +76,7 @@ const RootLayout: React.FC<Readonly<React.PropsWithChildren>> = async ({
         >
           {children}
         </ThemeProvider>
+        <Analytics/>
       </body>
     </html>
   );
