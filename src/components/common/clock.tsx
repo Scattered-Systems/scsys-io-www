@@ -1,60 +1,125 @@
 /*
-    Appellation: clock <components>
-    Contrib: @FL03
+  Appellation: clock <components>
+  Contrib: @FL03
 */
 'use client';
+
 import * as React from 'react';
-import { cn } from '@/utils/cn';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/ui/tooltip';
+import { cn } from '@/utils';
 
 interface ClockProps {
   key?: any;
   locals?: Intl.LocalesArgument;
   options?: Intl.DateTimeFormatOptions;
+  refresh?: number; // refresh time in seconds
 }
 
 type ClockContext = {
-  time?: boolean;
+  time?: number;
+  setTime?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClockContext = React.createContext<ClockContext>({});
 
-const DigitalClock = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & ClockProps
->(({ className, locals, options, ...props }, ref) => {
-  locals = locals ?? 'en-US';
+export const useClock = () => {
+  const context = React.useContext(ClockContext);
+  if (!context) {
+    throw new Error('useClock must be used within a ClockProvider');
+  }
+  return context;
+};
 
-  options = options ?? {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  };
+type ProviderProps = {
+  interval?: number;
+};
 
-  const [time, setTime] = React.useState(
-    new Date().toLocaleTimeString(locals, options)
-  );
+export const ClockProvider: React.FC<
+  React.PropsWithChildren<ProviderProps>
+> = ({ children, interval: intervalProp = 1000 }) => {
+  const [time, setTime] = React.useState<number>(Date.now());
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setTime(new Date().toLocaleTimeString(locals, options));
-    }, 1000 * 30);
+      setTime(Date.now());
+    }, intervalProp);
 
     return () => clearInterval(interval);
-  }, [locals, options, setTime]);
+  }, [setTime]);
 
-  return (
-    <span
-      ref={ref}
-      className={cn('text-foreground font-semibold px-4 py-2 w-fit', className)}
-      {...props}
-    >
-      {time}
-    </span>
-  );
-});
-DigitalClock.displayName = 'DigitalClock';
+  const ctx = React.useMemo(() => ({ time, setTime }), [time, setTime]);
+  return <ClockContext.Provider value={ctx}>{children}</ClockContext.Provider>;
+};
 
-export { DigitalClock };
+export const ClockWidget = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement> & ClockProps
+>(
+  (
+    {
+      className,
+      locals = 'en-US',
+      options = {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      },
+      refresh = 30,
+      ...props
+    },
+    ref
+  ) => {
+    const [time, setTime] = React.useState(
+      new Date().toLocaleTimeString(locals, options)
+    );
+    const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
+
+    const interval = intervalRef.current;
+
+    const updateClock = () => {
+      setTime(new Date().toLocaleTimeString(locals, options));
+    };
+
+    React.useEffect(() => {
+      setInterval(updateClock, 1000 * refresh);
+      updateClock(); // Update immediately on mount
+
+      return () => {
+        if (interval) {
+          clearInterval(interval);
+        }
+      };
+    }, [, refresh]);
+
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              ref={ref}
+              className={cn(
+                'inline-flex items-center text-foreground font-semibold',
+                className
+              )}
+              {...props}
+            >
+              <React.Suspense fallback={null}>{time}</React.Suspense>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>{new Date().toLocaleDateString()}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+);
+ClockWidget.displayName = 'Clock';
+
+export default ClockWidget;

@@ -1,21 +1,27 @@
 /*
-    Appellation: appbar <module>
+    Appellation: appbar <components>
     Contrib: @FL03
 */
 'use client';
-
+// imports
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+// project
+import { Url } from '@/types';
 import { cn } from '@/utils';
+// components
+import { Button } from '@/ui/button';
+import Link from 'next/link';
 
 const appBarVariants = cva(
   'flex flex-row flex-nowrap space-x-2 w-full items-center justify-items-center justify-between px-4 py-2 z-50 sticky',
   {
     variants: {
-      variant: {
-        default: 'bg-primary-foreground text-foreground',
-        accent: 'bg-accent text-foreground',
-        secondary: 'bg-secondary text-secondary-foreground',
+      flavor: {
+        default: 'bg-foreground text-background',
+        accent: 'bg-accent-foreground text-accent',
+        primary: 'bg-primary-foreground text-primary',
+        secondary: 'bg-secondary-foreground text-secondary',
       },
       rounded: {
         default: 'rounded-none',
@@ -34,8 +40,12 @@ const appBarVariants = cva(
         top: 'top-0',
         bottom: 'bottom-0',
       },
+      variant: {
+        default: '',
+      },
     },
     defaultVariants: {
+      flavor: 'default',
       position: 'top',
       rounded: 'default',
       size: 'default',
@@ -62,21 +72,29 @@ const Appbar = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> &
     VariantProps<typeof appBarVariants> &
     AppbarProps
->(({ className, centerTitle, position, size, variant, ...props }, ref) => {
-  centerTitle = centerTitle ?? false;
+>(
+  (
+    { className, centerTitle, position, size, flavor: variant, ...props },
+    ref
+  ) => {
+    centerTitle = centerTitle ?? false;
 
-  const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
+    const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
 
-  return (
-    <AppbarContext.Provider value={contextValue}>
-      <div
-        ref={ref}
-        className={cn(appBarVariants({ position, size, variant }), className)}
-        {...props}
-      />
-    </AppbarContext.Provider>
-  );
-});
+    return (
+      <AppbarContext.Provider value={contextValue}>
+        <div
+          ref={ref}
+          className={cn(
+            appBarVariants({ position, size, flavor: variant }),
+            className
+          )}
+          {...props}
+        />
+      </AppbarContext.Provider>
+    );
+  }
+);
 Appbar.displayName = 'Appbar';
 
 // AppbarContent
@@ -144,7 +162,7 @@ const AppbarTitle = React.forwardRef<
     <h1
       ref={ref}
       className={cn(
-        'text-lg font-semibold',
+        'font-semibold',
         centerTitle && 'absolute left-1/2 transform -translate-x-1/2',
         className
       )}
@@ -160,11 +178,19 @@ const AppbarActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex items-center space-x-2', className)}
+    className={cn('inline-flex items-center gap-2', className)}
     {...props}
   />
 ));
 AppbarActions.displayName = 'AppbarActions';
+
+const AppbarLink: React.FC<React.ComponentProps<typeof Button> & { href: Url, description?: React.ReactNode; title?: React.ReactNode; icon?: React.ReactNode; }> = ({ href, description, title, ...props }) => {
+  return (
+    <Link href={href}>
+        <span className="transition-colors font-semibold">{title}</span>
+    </Link>
+    );
+};
 
 export {
   Appbar,

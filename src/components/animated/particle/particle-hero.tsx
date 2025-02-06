@@ -5,31 +5,17 @@
 'use client';
 
 import * as React from 'react';
-import { cva, VariantProps } from 'class-variance-authority';
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useSpring,
-} from 'motion/react';
+import { motion, useMotionValue, useTransform, useSpring } from 'motion/react';
 import { cn } from '@/utils';
 import { ParticleField } from './particle-field';
 
-const particleHeroVariants = cva('relative inset-0 overflow-hidden h-auto w-full', {
-  defaultVariants: {
-    flavor: 'default',
-  },
-  variants: {
-    flavor: {
-      default: 'bg-gradient-to-br from-background to-background/75',
-    },
-  },
-});
-
 export const ParticleFieldHeader: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof particleHeroVariants> & {
-    count?: number;
-  }
+  React.HTMLAttributes<HTMLDivElement> & {
+      count?: number;
+      description?: any;
+      flavor?: 'default' | 'foreground' | 'blueGreen' | 'blueOrange' | 'orangeGreen';
+      title?: any;
+    }
 > = ({ children, className, count, flavor, ...props }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -47,8 +33,14 @@ export const ParticleFieldHeader: React.FC<
   const scaleSpring = useSpring(1, springConfig);
 
   return (
-    <div className={cn(particleHeroVariants({ flavor }), className)} {...props}>
-      <ParticleField count={count} />
+    <div
+      className={cn(
+        'relative inset-0 overflow-hidden h-auto w-full',
+        className
+      )}
+      {...props}
+    >
+      <ParticleField count={count} flavor={flavor}/>
       <div className="m-auto">
         <motion.div
           className={cn(

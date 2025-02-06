@@ -1,5 +1,5 @@
 /*
-  Appellation: index <module>
+  Appellation: utils <module>
   Contrib: @FL03
 */
-export * from './cn';
+export * from './helpers';

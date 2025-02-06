@@ -7,7 +7,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { HTMLMotionProps, motion, useScroll } from 'motion/react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/helpers';
 
 const indicatorVariants = cva('block min-h-2 w-full z-50', {
   defaultVariants: {

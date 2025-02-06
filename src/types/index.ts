@@ -4,12 +4,11 @@
 */
 export * from './datetime';
 
-export type ButtonSize = 'default' | 'icon' | 'sm' | 'lg' | null | undefined;
 
-export type ButtonVariant =
-  | 'default'
-  | 'link'
-  | 'ghost'
-  | 'secondary'
-  | null
-  | undefined;
+export type Nullish<T = unknown> = T | null | undefined;
+
+export type SetAction<T> = T | ((prev: T) => T);
+
+export type ChangeHandler<T> = (value: SetAction<T>) => void;
+
+export type Url = import("url").UrlObject | string;
