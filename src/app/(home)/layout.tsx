@@ -5,7 +5,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'motion/react';
 import {
   Appbar,
   AppbarContent,
@@ -25,29 +24,16 @@ import {
 
 import { sitemap } from '@/config';
 
-export const runtime = 'edge';
-
-const PageTemplate = ({
+export default Layout({
   children,
-}: Readonly<React.PropsWithChildren>) => {
+}: Readonly<React.PropsWithChildren>) {
   const title = 'scsys'; // 'Scattered-Systems';
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Appbar flavor="primary">
         <AppbarLeading>
           <AppbarLogo>
-            <motion.div
-              transition={{ duration: 2 }}
-              whileHover={{
-                rotate: [0, -15, 15, -45, 0],
-                scale: [1, 1.25, 1.0, 0.75, 1],
-              }}
-              whileTap={{
-                scale: 0.9,
-              }}
-            >
-              <AppLogo />
-            </motion.div>
+            <AppLogo />
           </AppbarLogo>
           <AppbarTitle className="text-lg font-semibold">{title}</AppbarTitle>
         </AppbarLeading>
@@ -77,6 +63,5 @@ const PageTemplate = ({
     </div>
   );
 };
-PageTemplate.displayName = 'PageTemplate';
+Layout.displayName = 'PageTemplate';
 
-export default PageTemplate;

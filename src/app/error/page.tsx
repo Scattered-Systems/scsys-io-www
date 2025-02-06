@@ -2,19 +2,16 @@
   Appellation: page <error>
   Contrib: @FL03
 */
+'use client';
 
-import * as React from 'react';
-
-const ErrorPage: React.FC = () => {
+export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
-      <h1 className="text-4xl font-bold text-center">Error</h1>
-      <p className="text-lg text-center">An error occurred while trying to load this page.</p>
+    <div className="h-full w-full flex flex-1 flex-col">
+      <div className="container mx-auto">
+        <h2>Error</h2>
+        <p>An error occurred while trying to load this page.</p>
+      </div>
     </div>
-  )
+  );
 }
-ErrorPage.displayName = 'ErrorPage';
-
-export const runtime = 'edge';
-
-export default ErrorPage;
+Page.displayName = 'ErrorPage';

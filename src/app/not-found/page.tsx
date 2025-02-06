@@ -1,14 +1,12 @@
 /*
-  Appellation: not-found <module>
+  Appellation: page <error>
   Contrib: @FL03
 */
-import Link from 'next/link';
+'use client';
 
-export const runtime = 'edge';
-
-const NotFound: React.FC = () => {
+export default function Page() {
   return (
-    <div>
+    <div className="h-full w-full flex flex-1 flex-col">
       <div className="container mx-auto">
         <h2>Not Found</h2>
         <p>Could not find requested resource</p>
@@ -17,6 +15,4 @@ const NotFound: React.FC = () => {
     </div>
   );
 }
-NotFound.displayName = 'NotFound';
-
-export default NotFound;
+Page.displayName = 'NotFound';
