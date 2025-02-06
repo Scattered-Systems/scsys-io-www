@@ -4,7 +4,7 @@
 */
 'use client';
 import * as React from 'react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/helpers';
 
 interface ClockProps {
   key?: any;

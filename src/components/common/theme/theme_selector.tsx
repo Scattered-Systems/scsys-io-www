@@ -4,7 +4,4 @@
 */
 import * as React from 'react';
 import { useTheme } from 'next-themes';
-import { cn } from '@/utils/cn';
-
-
-
+import { cn } from '@/utils/helpers';

@@ -1,10 +1,14 @@
 /*
-  Appellation: template <module>
+  Appellation: layout <(home)>
   Contrib: @FL03
 */
 'use client';
-
+// imports
 import * as React from 'react';
+import Link from 'next/link';
+// project
+import { Url } from '@/types'
+// components
 import {
   Appbar,
   AppbarContent,
@@ -12,46 +16,48 @@ import {
   AppbarLogo,
   AppbarTitle,
   AppbarTrailing,
-} from '@/components/common/appbar';
-import { AppLogo } from '@/components/common/icons';
-import { ThemeToggle } from '@/components/common/theme';
+} from '@/common/appbar';
+import { AppLogo } from '@/common/icons';
+import { ThemeToggle } from '@/common/theme';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu';
+} from '@/ui/navigation-menu';
 
-import { sitemap } from '@/config';
-
-export default Layout({
+export default function Layout({
   children,
 }: Readonly<React.PropsWithChildren>) {
-  const title = 'scsys'; // 'Scattered-Systems';
+  const MenuLink: React.FC<
+    React.ComponentProps<typeof NavigationMenuItem> & {
+      href: Url;
+      name: string;
+    }
+  > = ({ href, name, ...props }) => (
+    <NavigationMenuItem {...props}>
+      <NavigationMenuLink asChild>
+        <Link href={href} className="transition-colors hover:underline">
+          <span>{name}</span>
+        </Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  );
   return (
-    <div className="flex flex-col w-full min-h-screen">
+    <div className="h-full w-full flex flex-1 flex-col">
       <Appbar flavor="primary">
         <AppbarLeading>
           <AppbarLogo>
             <AppLogo />
           </AppbarLogo>
-          <AppbarTitle className="text-lg font-semibold">{title}</AppbarTitle>
+          <AppbarTitle>scsys</AppbarTitle>
         </AppbarLeading>
         <AppbarContent>
           <NavigationMenu>
             <NavigationMenuList>
-              {sitemap.pages.map(({ href, title }) => {
-                return (
-                  <NavigationMenuItem key={title}>
-                    <NavigationMenuLink
-                      href={href}
-                      className="transition-colors hover:underline"
-                    >
-                      {title}
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                );
-              })}
+              <MenuLink href="/" name="Home" id="home" />
+              {/* <MenuLink href="/projects" name="Projects" id="projects" /> */}
+              <MenuLink href="/blog" name="Blog" id="blog" />
             </NavigationMenuList>
           </NavigationMenu>
         </AppbarContent>
@@ -59,9 +65,10 @@ export default Layout({
           <ThemeToggle />
         </AppbarTrailing>
       </Appbar>
-      <main className="flex flex-col flex-1">{children}</main>
+      <main className="h-full w-full p-2 flex flex-col flex-1">
+        {children}
+      </main>
     </div>
   );
-};
+}
 Layout.displayName = 'PageTemplate';
-

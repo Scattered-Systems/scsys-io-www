@@ -1,8 +1,9 @@
 /*
-  Appellation: page <error>
+  Appellation: page <not-found>
   Contrib: @FL03
 */
 'use client';
+import Link from 'next/link';
 
 export default function Page() {
   return (

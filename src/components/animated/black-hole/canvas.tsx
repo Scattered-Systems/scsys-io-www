@@ -1,21 +1,21 @@
+
 'use client';
 
-import type React from 'react';
+import * as React from 'react';
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { cn } from '@/utils';
 import * as THREE from 'three';
 
-const ParticleField = () => {
+export const BlackHoleParticles: React.FC<{ particles?: number }> = ({ particles = 4500 }) => {
   const particlesRef = useRef<THREE.Points>(null!);
-  const particleCount = 2500;
 
   const [positions, colors] = useMemo(() => {
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
+    const positions = new Float32Array(particles * 3);
+    const colors = new Float32Array(particles * 3);
     const color = new THREE.Color();
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < particles; i++) {
       const distance = Math.random() * 2 + 1;
       const theta = THREE.MathUtils.randFloatSpread(360);
       const phi = THREE.MathUtils.randFloatSpread(360);
@@ -38,7 +38,7 @@ const ParticleField = () => {
       const positions = particlesRef.current.geometry.attributes.position
         .array as Float32Array;
 
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < particles; i++) {
         const i3 = i * 3;
         const x = positions[i3];
         const y = positions[i3 + 1];
@@ -92,15 +92,19 @@ const ParticleField = () => {
     </points>
   );
 };
+BlackHoleParticles.displayName = 'BlackHoleParticles';
 
 export const BlackHoleAnimation: React.FC<React.ComponentProps<"div">> = ({ className, ...props }) => {
   return (
-    <div className={cn("fixed inset-0 w-full h-full bg-black", className)} {...props}>
+    <div className={cn("fixed inset-0 w-full h-full dark:bg-primary/10", className)} {...props}>
       <Canvas camera={{ position: [0, 0, 3], fov: 75 }}>
-        <ParticleField />
+        <React.Suspense fallback={null}>
+          <BlackHoleParticles />
+        </React.Suspense>
       </Canvas>
     </div>
   );
 };
+BlackHoleAnimation.displayName = 'BlackHoleAnimation';
 
 export default BlackHoleAnimation;

@@ -1,12 +1,17 @@
 /*
-    Appellation: appbar <module>
+    Appellation: appbar <components>
     Contrib: @FL03
 */
 'use client';
-
+// imports
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+// project
+import { Url } from '@/types';
 import { cn } from '@/utils';
+// components
+import { Button } from '@/ui/button';
+import Link from 'next/link';
 
 const appBarVariants = cva(
   'flex flex-row flex-nowrap space-x-2 w-full items-center justify-items-center justify-between px-4 py-2 z-50 sticky',
@@ -157,7 +162,7 @@ const AppbarTitle = React.forwardRef<
     <h1
       ref={ref}
       className={cn(
-        'text-lg font-semibold',
+        'font-semibold',
         centerTitle && 'absolute left-1/2 transform -translate-x-1/2',
         className
       )}
@@ -173,11 +178,19 @@ const AppbarActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex items-center space-x-2', className)}
+    className={cn('inline-flex items-center gap-2', className)}
     {...props}
   />
 ));
 AppbarActions.displayName = 'AppbarActions';
+
+const AppbarLink: React.FC<React.ComponentProps<typeof Button> & { href: Url, description?: React.ReactNode; title?: React.ReactNode; icon?: React.ReactNode; }> = ({ href, description, title, ...props }) => {
+  return (
+    <Link href={href}>
+        <span className="transition-colors font-semibold">{title}</span>
+    </Link>
+    );
+};
 
 export {
   Appbar,
