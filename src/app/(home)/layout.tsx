@@ -44,8 +44,8 @@ export default function Layout({
     </NavigationMenuItem>
   );
   return (
-    <div className="h-full w-full flex flex-1 flex-col">
-      <Appbar flavor="primary">
+    <div className="relative h-full w-full flex flex-1 flex-col">
+      <Appbar flavor="primary" className="z-50">
         <AppbarLeading>
           <AppbarLogo>
             <AppLogo />
