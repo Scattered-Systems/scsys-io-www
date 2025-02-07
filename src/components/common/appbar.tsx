@@ -102,7 +102,7 @@ const AppbarLeading = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'inline-flex max-w-sm items-center gap-2',
+      'mr-auto w-fit inline-flex max-w-sm items-center gap-2',
       className
     )}
     {...props}
@@ -117,15 +117,13 @@ const AppbarTrailing = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center justify-end',
-      className
-    )}
+    className={cn('ml-auto w-fit inline-flex max-w-sm gap-2 justify-end', className)}
     {...props}
   />
 ));
 AppbarTrailing.displayName = 'AppbarTrailing';
 
+//
 const AppbarLogo = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>

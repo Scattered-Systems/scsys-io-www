@@ -21,12 +21,6 @@ import {
 import { AppLogo } from '@/common/icons';
 import { ThemeToggle } from '@/common/theme';
 import { Button } from '@/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from '@/ui/navigation-menu';
 
 const MenuLink: React.FC<
   React.ComponentProps<typeof Button> & {
@@ -40,7 +34,7 @@ const MenuLink: React.FC<
   description,
   href,
   name = '',
-  size = 'sm',
+  size = 'default',
   variant = 'link',
   ...props
 }) => {
@@ -88,6 +82,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           </AppbarContent>
           <AppbarTrailing>
             <ThemeToggle />
+            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="secondary"/>
           </AppbarTrailing>
         </Appbar>
       </header>
