@@ -18,7 +18,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="relative antialiased bg-background text-foreground min-h-svh w-full p-0 m-0">
+      <body className="z-0 relative antialiased bg-background text-foreground min-h-svh w-full p-0 m-0">
         <ThemeProvider
           enableColorScheme
           enableSystem

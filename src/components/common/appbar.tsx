@@ -1,27 +1,23 @@
 /*
-    Appellation: appbar <components>
+    Appellation: appbar <module>
     Contrib: @FL03
 */
 'use client';
-// imports
+
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-// project
-import { Url } from '@/types';
 import { cn } from '@/utils';
-// components
-import { Button } from '@/ui/button';
-import Link from 'next/link';
 
 const appBarVariants = cva(
-  'flex flex-row flex-nowrap space-x-2 w-full items-center justify-items-center justify-between px-4 py-2 z-50 sticky',
+  'w-full z-50 flex flex-row flex-nowrap w-full items-center gap-2 lg:gap-4 px-2 py-1 inset-0',
   {
     variants: {
-      flavor: {
-        default: 'bg-foreground text-background',
-        accent: 'bg-accent-foreground text-accent',
-        primary: 'bg-primary-foreground text-primary',
-        secondary: 'bg-secondary-foreground text-secondary',
+      variant: {
+        default: 'bg-background text-foreground',
+        inherit: 'bg-inherit text-inherit',
+        accent: 'bg-accent text-foreground',
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
       },
       rounded: {
         default: 'rounded-none',
@@ -37,16 +33,14 @@ const appBarVariants = cva(
         lg: 'h-20',
       },
       position: {
-        top: 'top-0',
-        bottom: 'bottom-0',
-      },
-      variant: {
-        default: '',
+        default: 'sticky top-0',
+        bottom: 'sticky bottom-0',
+        top: 'sticky top-0',
+        topCenter: 'sticky top-0 left-1/2 transform -translate-x-1/2',
       },
     },
     defaultVariants: {
-      flavor: 'default',
-      position: 'top',
+      position: 'default',
       rounded: 'default',
       size: 'default',
       variant: 'default',
@@ -62,39 +56,26 @@ const AppbarContext = React.createContext<AppbarContext>({
   centerTitle: false,
 });
 
-type AppbarProps = {
-  centerTitle?: boolean;
-};
-
 // Appbar
 const Appbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> &
-    VariantProps<typeof appBarVariants> &
-    AppbarProps
->(
-  (
-    { className, centerTitle, position, size, flavor: variant, ...props },
-    ref
-  ) => {
-    centerTitle = centerTitle ?? false;
+    VariantProps<typeof appBarVariants> & { centerTitle?: boolean }
+>(({ className, centerTitle, position, size, variant, ...props }, ref) => {
+  centerTitle = centerTitle ?? false;
 
-    const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
+  const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
 
-    return (
-      <AppbarContext.Provider value={contextValue}>
-        <div
-          ref={ref}
-          className={cn(
-            appBarVariants({ position, size, flavor: variant }),
-            className
-          )}
-          {...props}
-        />
-      </AppbarContext.Provider>
-    );
-  }
-);
+  return (
+    <AppbarContext.Provider value={contextValue}>
+      <div
+        ref={ref}
+        className={cn(appBarVariants({ position, size, variant }), className)}
+        {...props}
+      />
+    </AppbarContext.Provider>
+  );
+});
 Appbar.displayName = 'Appbar';
 
 // AppbarContent
@@ -105,7 +86,7 @@ const AppbarContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex flex-row flex-1 flex-nowrap space-x-2 items-center justify-items-center',
+      'w-full flex flex-row flex-1 flex-nowrap gap-2 items-center',
       className
     )}
     {...props}
@@ -121,7 +102,7 @@ const AppbarLeading = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center mr-auto',
+      'inline-flex max-w-sm items-center gap-2',
       className
     )}
     {...props}
@@ -137,7 +118,7 @@ const AppbarTrailing = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'ml-auto flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center justify-end',
+      'flex flex-row flex-shrink flex-nowrap space-x-2 items-center justify-items-center justify-end',
       className
     )}
     {...props}
@@ -162,7 +143,7 @@ const AppbarTitle = React.forwardRef<
     <h1
       ref={ref}
       className={cn(
-        'font-semibold',
+        'text-lg font-semibold',
         centerTitle && 'absolute left-1/2 transform -translate-x-1/2',
         className
       )}
@@ -178,19 +159,27 @@ const AppbarActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('inline-flex items-center gap-2', className)}
+    className={cn('flex items-center space-x-2', className)}
     {...props}
   />
 ));
 AppbarActions.displayName = 'AppbarActions';
 
-const AppbarLink: React.FC<React.ComponentProps<typeof Button> & { href: Url, description?: React.ReactNode; title?: React.ReactNode; icon?: React.ReactNode; }> = ({ href, description, title, ...props }) => {
-  return (
-    <Link href={href}>
-        <span className="transition-colors font-semibold">{title}</span>
-    </Link>
-    );
-};
+// AppbarSection
+const AppbarSection = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      'flex flex-row flex-grow flex-nowrap space-x-2 items-center justify-items-center',
+      className
+    )}
+    {...props}
+  />
+));
+AppbarSection.displayName = 'AppbarSection';
 
 export {
   Appbar,
