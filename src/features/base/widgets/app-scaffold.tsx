@@ -46,7 +46,7 @@ const MenuLink: React.FC<
       variant={variant}
       {...props}
     >
-      <Link href={href} about={description}>
+      <Link href={href} about={description} className="inline-flex items-center px-2">
         <span>{name}</span>
       </Link>
     </Button>
@@ -82,7 +82,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           </AppbarContent>
           <AppbarTrailing>
             <ThemeToggle />
-            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="default"/>
+            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="link" className="hover:bg-primary/80 hover:text-primary/80"/>
           </AppbarTrailing>
         </Appbar>
       </header>
