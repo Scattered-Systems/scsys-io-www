@@ -82,7 +82,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           </AppbarContent>
           <AppbarTrailing>
             <ThemeToggle />
-            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="secondary"/>
+            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="default"/>
           </AppbarTrailing>
         </Appbar>
       </header>
