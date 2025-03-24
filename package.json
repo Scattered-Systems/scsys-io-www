@@ -53,7 +53,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-resizable-panels": "^2.1.7",
     "sonner": "^1.7.0",
-    "three": "^0.173.0",
+    "three": "^0.174.0",
     "tailwind-merge": "latest",
     "tailwindcss-animate": "latest"
   },
