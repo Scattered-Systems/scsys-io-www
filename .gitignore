@@ -126,3 +126,6 @@
 
 #### Windows Subsystem for Linux (WSL)
 **/*:Zone.identifier
+
+# OpenNext build output
+.open-next
