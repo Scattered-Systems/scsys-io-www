@@ -22,6 +22,7 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "next lint",
+    "cf:build": "opennextjs-cloudflare",
     "preview": "opennextjs-cloudflare && wrangler dev",
     "deploy": "opennextjs-cloudflare && wrangler deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
@@ -60,7 +61,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "latest",
-    "@opennextjs/cloudflare": "^0.5.12",
+    "@opennextjs/cloudflare": "^0.2.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
