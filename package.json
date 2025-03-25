@@ -20,7 +20,6 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "install": "npm install --legacy-peer-deps",
     "start": "next start",
     "lint": "next lint"
   },
@@ -48,9 +47,8 @@
     "next": "latest",
     "next-themes": "latest",
     "pino": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-loader-spinner": "latest",
+    "react": "^19",
+    "react-dom": "^19",
     "react-resizable-panels": "latest",
     "sonner": "latest",
     "three": "latest",
@@ -60,8 +58,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "latest",
     "@types/node": "^22",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/three": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",

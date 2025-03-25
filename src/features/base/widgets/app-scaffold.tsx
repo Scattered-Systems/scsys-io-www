@@ -61,7 +61,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
 }) => {
   const links = [
     { href: '/', name: 'Home', label: 'home' },
-    { href: '/blog', name: 'Blog', label: 'blog' },
+    { href: '/about', name: 'About', label: 'about' },
   ];
   return (
     <div className={cn('relative h-full w-full', className)}>
