@@ -82,7 +82,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           </AppbarContent>
           <AppbarTrailing>
             <ThemeToggle />
-            <MenuLink href="https://app.scsys.io/auth/login" name="Login" variant="link" className="hover:bg-primary/80 hover:text-primary/80"/>
+            <MenuLink href="https://workout.scsys.io/auth/login" name="Login" variant="link" className="hover:bg-primary/80 hover:text-primary/80"/>
           </AppbarTrailing>
         </Appbar>
       </header>

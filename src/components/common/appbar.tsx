@@ -1,147 +1,190 @@
-/*
-    Appellation: appbar <module>
-    Contrib: @FL03
-*/
+/**
+ * Created At: 2025-04-04:21:14:54
+ * @author - @FL03
+ * @description - Appbar component
+ * @file - appbar.tsx
+ */
 'use client';
-
+// imports
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { Slot } from '@radix-ui/react-slot';
+// project
+import { cn } from '@/lib/utils';
 
-const appBarVariants = cva(
-  'w-full z-50 flex flex-row flex-nowrap w-full items-center gap-2 lg:gap-4 px-2 py-1 inset-0',
-  {
-    variants: {
-      variant: {
-        default: 'bg-background text-foreground',
-        inherit: 'bg-inherit text-inherit',
-        accent: 'bg-accent text-foreground',
-        primary: 'bg-primary text-primary-foreground',
-        secondary: 'bg-secondary text-secondary-foreground',
-      },
-      rounded: {
-        default: 'rounded-none',
-        sm: 'rounded-sm',
-        md: 'rounded-md',
-        lg: 'rounded-lg',
-        full: 'rounded-full',
-      },
-      size: {
-        default: 'h-1/12',
-        sm: 'h-12',
-        md: 'h-16',
-        lg: 'h-20',
-      },
-      position: {
-        default: 'sticky top-0',
-        bottom: 'sticky bottom-0',
-        top: 'sticky top-0',
-        topCenter: 'sticky top-0 left-1/2 transform -translate-x-1/2',
-      },
+const appBarVariants = cva('sticky-top w-full', {
+  variants: {
+    flavor: {
+      default: 'bg-background text-foreground',
+      inherit: 'bg-inherit text-inherit',
+      accent: 'bg-accent text-accent-foreground',
+      primary: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground',
+      transparent: 'bg-transparent text-foreground',
     },
-    defaultVariants: {
-      position: 'default',
-      rounded: 'default',
-      size: 'default',
-      variant: 'default',
+    variant: {
+      default: '',
+      rounded: 'rounded-full mx-auto ',
     },
-  }
-);
+  },
+  defaultVariants: {
+    flavor: 'default',
+    variant: 'default',
+  },
+});
 
+type AppbarVariants = VariantProps<typeof appBarVariants>;
 type AppbarContext = {
   centerTitle: boolean;
-};
+} & AppbarVariants;
 
 const AppbarContext = React.createContext<AppbarContext>({
   centerTitle: false,
+  flavor: 'default',
+  variant: 'default',
 });
 
-// Appbar
-const Appbar = React.forwardRef<
+export const useAppbar = (): AppbarContext => {
+  const context = React.useContext(AppbarContext);
+  if (!context) {
+    throw new Error('useAppbar must be used within an AppbarProvider');
+  }
+  return context;
+};
+
+// AppbarProvider
+export const AppbarProvider = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> &
-    VariantProps<typeof appBarVariants> & { centerTitle?: boolean }
->(({ className, centerTitle, position, size, variant, ...props }, ref) => {
-  centerTitle = centerTitle ?? false;
-
-  const contextValue = React.useMemo(() => ({ centerTitle }), [centerTitle]);
-
+  React.HTMLAttributes<HTMLDivElement> & {
+    asChild?: boolean;
+    centerTitle?: boolean;
+  }
+>(({ className, asChild = false, centerTitle = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  const ctx = React.useMemo(() => ({ centerTitle }), [centerTitle]);
+  // render the appbar as a context provider to allow for nested appbars
   return (
-    <AppbarContext.Provider value={contextValue}>
-      <div
-        ref={ref}
-        className={cn(appBarVariants({ position, size, variant }), className)}
-        {...props}
-      />
+    <AppbarContext.Provider value={ctx}>
+      <Comp ref={ref} className={cn('w-full', className)} {...props} />
     </AppbarContext.Provider>
   );
 });
+AppbarProvider.displayName = 'AppbarProvider';
+
+type AppbarProps = { asChild?: boolean } & VariantProps<typeof appBarVariants>;
+export const Appbar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & AppbarProps
+>(
+  (
+    {
+      className,
+      asChild = false,
+      flavor = 'default',
+      variant = 'default',
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : 'div';
+    // render the appbar as a context provider to allow for nested appbars
+    return (
+      <Comp
+        ref={ref}
+        className={cn(
+          appBarVariants({ flavor, variant }),
+          'flex flex-row flex-nowrap items-center gap-2 lg:gap-4 px-4 py-2 w-full',
+          'bg-background text-foreground inner-shadow',
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 Appbar.displayName = 'Appbar';
 
 // AppbarContent
-const AppbarContent = React.forwardRef<
+export const AppbarContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'w-full flex flex-row flex-1 flex-nowrap gap-2 items-center',
-      className
-    )}
-    {...props}
-  />
-));
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'inline-flex flex-row flex-1 flex-nowrap gap-2 items-center justify-items-center',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 AppbarContent.displayName = 'AppbarContent';
 
 // AppbarLeading
-const AppbarLeading = React.forwardRef<
+export const AppbarLeading = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'mr-auto w-fit inline-flex max-w-sm items-center gap-2',
-      className
-    )}
-    {...props}
-  />
-));
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ asChild, className, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'mr-auto inline-flex flex-nowrap gap-2 items-center',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 AppbarLeading.displayName = 'AppbarLeading';
 
 // AppbarTrailing
-const AppbarTrailing = React.forwardRef<
+export const AppbarTrailing = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('ml-auto w-fit inline-flex max-w-sm gap-2 justify-end', className)}
-    {...props}
-  />
-));
-AppbarTrailing.displayName = 'AppbarTrailing';
-
-//
-const AppbarLogo = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('h-full w-8 my-auto', className)} {...props} />
-));
-AppbarLogo.displayName = 'AppbarLogo';
-
-const AppbarTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => {
-  const { centerTitle } = React.useContext(AppbarContext);
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
   return (
-    <h1
+    <Comp
       ref={ref}
       className={cn(
-        'text-lg font-semibold',
+        'ml-auto inline-flex flex-nowrap gap-2 lg:gap-4 items-center justify-end',
+        '',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+AppbarTrailing.displayName = 'AppbarTrailing';
+
+// AppbarLogo
+export const AppbarLogo = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  return (
+    <Comp ref={ref} className={cn('h-6 w-6 my-auto border-none ring-none', className)} {...props} />
+  );
+});
+AppbarLogo.displayName = 'AppbarLogo';
+
+export const AppbarTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const { centerTitle } = useAppbar();
+  const Comp = asChild ? Slot : 'h1';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'font-semibold',
         centerTitle && 'absolute left-1/2 transform -translate-x-1/2',
         className
       )}
@@ -151,40 +194,77 @@ const AppbarTitle = React.forwardRef<
 });
 AppbarTitle.displayName = 'AppbarTitle';
 
-const AppbarActions = React.forwardRef<
+export const AppbarActions = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex items-center space-x-2', className)}
-    {...props}
-  />
-));
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  return (
+    <Comp
+      ref={ref}
+      className={cn('flex flex-nowrap items-center gap-2 lg:gap-4', className)}
+      {...props}
+    />
+  );
+});
 AppbarActions.displayName = 'AppbarActions';
 
 // AppbarSection
-const AppbarSection = React.forwardRef<
+export const AppbarSection = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'flex flex-row flex-grow flex-nowrap space-x-2 items-center justify-items-center',
-      className
-    )}
-    {...props}
-  />
-));
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'div';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'flex flex-row flex-nowrap gap-2 items-center justify-items-center',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 AppbarSection.displayName = 'AppbarSection';
 
-export {
-  Appbar,
-  AppbarActions,
-  AppbarContent,
-  AppbarLeading,
-  AppbarLogo,
-  AppbarTitle,
-  AppbarTrailing,
-};
+/**
+ * The appbar menu component is a wrapper for the appbar menu items.
+ */
+export const AppbarMenu = React.forwardRef<
+  HTMLUListElement,
+  React.HTMLAttributes<HTMLUListElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'ul';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'inline-flex flex-row flex-nowrap flex-shrink gap-2 lg:gap-4 items-center',
+        'bg-inherit text-inherit',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+AppbarMenu.displayName = 'AppbarMenu';
+
+export const AppbarMenuItem = React.forwardRef<
+  HTMLLIElement,
+  React.HTMLAttributes<HTMLLIElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'li';
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'inline-flex flex-row flex-1',
+        'bg-inherit text-inherit',
+        className
+      )}
+      {...props}
+    />
+  );
+});
+AppbarMenuItem.displayName = 'AppbarMenuItem';

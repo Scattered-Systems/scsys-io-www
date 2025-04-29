@@ -1,12 +1,9 @@
-/*
-    Appellation: toolbar <nav>
-    Contrib: @FL03
-*/
+// toolbar.tsx
 'use client';
 
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 const toolbarVariants = cva(
   'w-full flex flex-row flex-nowrap gap-2 lg:gap-4 items-center mt-4 px-4 py-2 transform inset-1',
