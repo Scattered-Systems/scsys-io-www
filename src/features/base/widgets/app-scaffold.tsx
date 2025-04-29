@@ -66,7 +66,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
   return (
     <div className={cn('relative h-full w-full', className)}>
       <header className="w-full max-h-[10%]">
-        <Appbar variant="secondary">
+        <Appbar>
           <AppbarLeading>
             <AppbarLogo>
               <AppLogo />
