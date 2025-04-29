@@ -19,7 +19,7 @@ import {
   AppbarTrailing,
 } from '@/common/appbar';
 import { AppLogo } from '@/common/icons';
-import { ThemeToggle } from '@/common/theme';
+import { ThemeButton } from '@/common/theme/theme-toggle';
 import { Button } from '@/ui/button';
 
 const MenuLink: React.FC<
@@ -81,7 +81,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
             </div>
           </AppbarContent>
           <AppbarTrailing>
-            <ThemeToggle />
+            <ThemeButton />
             <MenuLink href="https://workout.scsys.io/auth/login" name="Login" variant="link" className="hover:bg-primary/80 hover:text-primary/80"/>
           </AppbarTrailing>
         </Appbar>
