@@ -67,8 +67,8 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
   ];
   return (
     <div className={cn('relative flex flex-col flex-1 w-full min-h-full', className)}>
-      <header className="flex flex-nowrap w-full items-center h-16 px-2">
-        <Appbar>
+      <header className="flex flex-nowrap w-full items-center h-16">
+        <Appbar flavor="default" variant="default">
           <AppbarLeading className="gap-2 items-center">
             <AppLogo className="h-6 w-6"/>
             <AppbarTitle>scsys</AppbarTitle>
@@ -80,7 +80,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
               ))}
             </div>
           </AppbarContent>
-          <AppbarTrailing>
+          <AppbarTrailing className="inline-flex items-center justify-end gap-2 ml-auto">
             <ThemeButton />
             <MenuLink
               href="https://workout.scsys.io/auth/login"
