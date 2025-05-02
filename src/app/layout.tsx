@@ -53,7 +53,7 @@ export default async function RootLayout({
 }
 
 export const metadata: Metadata = {
-  applicationName: 'Puzzled Fitness',
+  applicationName: 'Scattered-Systems',
   authors: [
     {
       name: 'Joe McCain III',
@@ -64,8 +64,8 @@ export const metadata: Metadata = {
       url: 'https://scsys.io',
     },
   ],
-  category: 'Fitness',
-  classification: 'application',
+  category: 'Technology',
+  classification: 'website',
   creator: 'FL03',
   description:
     'A fitness planner and workout management platform equipped with a variety of tools to help you achieve your fitness goals and maintain a healthy lifestyle.',
@@ -106,28 +106,28 @@ export const metadata: Metadata = {
       type: 'image/x-svg',
     },
   ],
-  keywords: ['platform', 'fitness', 'workout', 'management'],
+  keywords: ['technology', 'network', 'platform', 'virtualization'],
   publisher: 'Scattered-Systems, LLC',
-  title: { absolute: 'Puzzled Fitness', template: 'pzzld (%s)' },
+  title: { absolute: 'Scattered-Systems', template: 'scsys (%s)' },
   twitter: {
     card: 'summary',
     creator: '@jo3mccain',
-    site: '@workout.scsys.io',
+    site: '@scsys.io',
   },
   openGraph: {
     description:
-      'A fitness-centric platform equipped with a variety of tools to help you achieve your fitness goals and maintain a healthy lifestyle.',
-    siteName: 'scsys-io-workout',
+      'Scattered-Systems strives to design and develop innovative solutions that empower individuals and organizations to achieve their goals.',
+    siteName: 'scsys-io',
     locale: 'en_US',
     title: 'Puzzled Fitness',
     type: 'website',
-    url: 'https://workout.scsys.io',
+    url: 'https://scsys.io',
     images: [
       {
         url: '/logo.svg',
         width: 1200,
         height: 630,
-        alt: 'Puzzled Fitness Logo',
+        alt: 'Scattered-Systems',
       },
     ],
   },
