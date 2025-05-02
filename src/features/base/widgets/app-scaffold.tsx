@@ -80,7 +80,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
               ))}
             </div>
           </AppbarContent>
-          <AppbarTrailing className="inline-flex items-center justify-end gap-2 ml-auto">
+          <AppbarTrailing className="inline-flex flex-nowrap items-center justify-end gap-2 ml-auto">
             <ThemeButton />
             <MenuLink
               href="https://workout.scsys.io/auth/login"
