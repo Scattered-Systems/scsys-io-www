@@ -1,6 +1,7 @@
+// loading.tsx
 'use client';
 // imports
-import Spinner } from '@/components/common/loaders';
+import { Spinner } from '@/components/common/loaders';
 
 export default function Page() {
   return (
