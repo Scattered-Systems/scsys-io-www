@@ -1,11 +1,13 @@
-/*
-  Appellation: black-hole-canvas <module>
-  Contrib: @FL03
-*/
+/**
+ * Created At: 2025.05.02:01:59:23
+ * @author - @FL03
+ * @file - view.tsx
+ */
 'use client';
 // imports
 import * as React from 'react';
 import dynamic from 'next/dynamic';
+// project
 import { cn } from '@/lib/utils';
 
 

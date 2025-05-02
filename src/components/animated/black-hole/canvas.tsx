@@ -1,16 +1,16 @@
-
+// canvas.tsx
 'use client';
-
+// imports
 import * as React from 'react';
-import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { cn } from '@/lib/utils';
 import * as THREE from 'three';
+// project
+import { cn } from '@/lib/utils';
 
 export const BlackHoleParticles: React.FC<{ particles?: number }> = ({ particles = 4500 }) => {
-  const particlesRef = useRef<THREE.Points>(null!);
+  const particlesRef = React.useRef<THREE.Points>(null!);
 
-  const [positions, colors] = useMemo(() => {
+  const [positions, colors] = React.useMemo(() => {
     const positions = new Float32Array(particles * 3);
     const colors = new Float32Array(particles * 3);
     const color = new THREE.Color();
