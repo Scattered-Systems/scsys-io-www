@@ -171,7 +171,7 @@ export const AppbarLogo = React.forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn('h-6 w-6 my-auto border-none ring-none', className)}
+      className={cn('h-4 w-4 m-auto border-none ring-none', className)}
       {...props}
     />
   );
