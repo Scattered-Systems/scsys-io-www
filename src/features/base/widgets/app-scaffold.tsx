@@ -7,14 +7,12 @@
 import * as React from 'react';
 import Link from 'next/link';
 // project
-import { Url } from '@/types';
 import { cn } from '@/lib/utils';
 // components
 import {
   Appbar,
   AppbarContent,
   AppbarLeading,
-  AppbarLogo,
   AppbarTitle,
   AppbarTrailing,
 } from '@/common/appbar';
@@ -25,7 +23,7 @@ import { Button } from '@/ui/button';
 const MenuLink: React.FC<
   React.ComponentProps<typeof Button> & {
     description?: string;
-    href: Url;
+    href: React.ComponentProps<typeof Link>['href'];
     icon?: React.ReactNode;
     name?: React.ReactNode;
   }
@@ -72,9 +70,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
       <header className="w-full max-h-[10%]">
         <Appbar>
           <AppbarLeading className="gap-2">
-            <AppbarLogo>
-              <AppLogo />
-            </AppbarLogo>
+            <AppLogo className="h-4 w-4"/>
             <AppbarTitle>scsys</AppbarTitle>
           </AppbarLeading>
           <AppbarContent>
