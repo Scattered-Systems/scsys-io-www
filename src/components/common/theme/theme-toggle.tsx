@@ -1,5 +1,5 @@
 /*
-  Appellation: theme_toggle <common>
+  Appellation: theme-button <common>
   Contrib: FL03 <jo3mccain@icloud.com>
 */
 'use client';
@@ -9,23 +9,21 @@ import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 // project
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils/cn';
 // components
-import { Button } from '@/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/ui/tooltip';
+} from '@/components/ui/tooltip';
 
-interface ThemeToggleProps {
-  lightIcon?: any;
-  darkIcon?: any;
-}
-
-export const ThemeToggle: React.FC<
-  React.ComponentProps<typeof Button> & ThemeToggleProps
+export const ThemeButton: React.FC<
+  React.ComponentProps<typeof Button> & {
+    lightIcon?: React.ReactNode;
+    darkIcon?: React.ReactNode;
+  }
 > = ({
   className,
   size = 'icon',
@@ -48,8 +46,8 @@ export const ThemeToggle: React.FC<
 
   // useEffect only runs on the client, so now we can safely show the UI
   React.useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!mounted) setMounted(true);
+  }, [mounted, setMounted]);
 
   if (!mounted || !resolvedTheme) return null;
 
@@ -75,6 +73,6 @@ export const ThemeToggle: React.FC<
     </TooltipProvider>
   );
 };
-ThemeToggle.displayName = 'ThemeToggle';
+ThemeButton.displayName = 'ThemeButton';
 
-export default ThemeToggle;
+export default ThemeButton;

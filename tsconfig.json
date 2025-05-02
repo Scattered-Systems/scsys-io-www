@@ -30,7 +30,16 @@
       ],
       "@/public/*": [
         "./public/*"
-      ]
+      ],
+      "@/content/*": [
+        "./assets/content/*"
+      ],
+      "@/utils/*": [
+        "./lib/utils/*"
+      ],
+      "@/root/*": [
+        "./*"
+      ],
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

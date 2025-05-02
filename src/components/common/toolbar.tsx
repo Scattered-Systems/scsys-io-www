@@ -1,12 +1,9 @@
-/*
-    Appellation: toolbar <nav>
-    Contrib: @FL03
-*/
+// toolbar.tsx
 'use client';
 
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils/cn';
 
 const toolbarVariants = cva(
   'w-full flex flex-row flex-nowrap gap-2 lg:gap-4 items-center mt-4 px-4 py-2 transform inset-1',
@@ -17,7 +14,8 @@ const toolbarVariants = cva(
         top: 'sticky top-0 mt-4',
         topCenter: 'sticky top-0 container mx-auto mt-4',
         bottom: 'sticky bottom-0',
-        bottomCenter: 'sticky bottom-0 container mx-auto rounded-full -translate-y-1/4 max-w-[90%]',
+        bottomCenter:
+          'sticky bottom-0 container mx-auto rounded-full -translate-y-1/4 max-w-[90%]',
       },
     },
     defaultVariants: {
@@ -28,7 +26,6 @@ const toolbarVariants = cva(
 
 type ToolbarContext = {
   centerTitle: boolean;
-
 } & Partial<VariantProps<typeof toolbarVariants>>;
 
 const ToolbarContext = React.createContext<ToolbarContext>({
@@ -45,8 +42,11 @@ export const useToolbar = () => {
 
 export const ToolbarProvider: React.FC<
   React.PropsWithChildren<Partial<ToolbarContext>>
-> = ({ centerTitle = false,  variant, children }) => {
-  const ctx = React.useMemo(() => ({ centerTitle, variant, }), [centerTitle, variant,]);
+> = ({ centerTitle = false, variant, children }) => {
+  const ctx = React.useMemo(
+    () => ({ centerTitle, variant }),
+    [centerTitle, variant]
+  );
   return (
     <ToolbarContext.Provider value={ctx}>{children}</ToolbarContext.Provider>
   );
@@ -56,63 +56,37 @@ export const Toolbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> &
     VariantProps<typeof toolbarVariants> & { centerTitle?: boolean }
->(
-  (
-    {
-      centerTitle = false,
-      className,
-      variant,
-      ...props
-    },
-    ref
-  ) => {
-
-
-    return (
-      <ToolbarProvider centerTitle={centerTitle} variant={variant}>
-        <div
-          ref={ref}
-          className={cn(
-            toolbarVariants({ variant }),
-            'focus:outline-none',
-            'mx-auto',
-            className
-          )}
-          {...props}
-        />
-      </ToolbarProvider>
-    );
-  }
-);
+>(({ centerTitle = false, className, variant, ...props }, ref) => {
+  return (
+    <ToolbarProvider centerTitle={centerTitle} variant={variant}>
+      <div
+        ref={ref}
+        className={cn(
+          toolbarVariants({ variant }),
+          'focus:outline-none',
+          'mx-auto',
+          className
+        )}
+        {...props}
+      />
+    </ToolbarProvider>
+  );
+});
 Toolbar.displayName = 'Toolbar';
 
 export const ToolbarWrapper = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> &
     VariantProps<typeof toolbarVariants> & { centerTitle?: boolean }
->(
-  (
-    {
-      className,
-      variant,
-      ...props
-    },
-    ref
-  ) => {
-
-    return (
-        <div
-          ref={ref}
-          className={cn(
-            toolbarVariants({ variant }),
-            'mx-auto',
-            className
-          )}
-          {...props}
-        />
-    );
-  }
-);
+>(({ className, variant, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(toolbarVariants({ variant }), 'mx-auto', className)}
+      {...props}
+    />
+  );
+});
 ToolbarWrapper.displayName = 'ToolbarWrapper';
 
 // Toolbar Action
