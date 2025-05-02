@@ -6,7 +6,9 @@ import createMDX from '@next/mdx';
 
 const nextConfig: import('next').NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  turbo: {},
+  turbopack: {
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+  },
 };
 
 if (
