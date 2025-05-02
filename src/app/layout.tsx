@@ -13,7 +13,7 @@ import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 // stylesheet
-import 'globals.css';
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
