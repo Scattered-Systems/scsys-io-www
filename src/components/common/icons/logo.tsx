@@ -4,7 +4,7 @@
  * @description: the project logo component
  * @file: logo.tsx
  */
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import * as React from 'react';
 
 type LogoProps = {

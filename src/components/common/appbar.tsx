@@ -10,7 +10,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 // project
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 const appBarVariants = cva('sticky-top w-full', {
   variants: {
@@ -169,7 +169,11 @@ export const AppbarLogo = React.forwardRef<
 >(({ className, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : 'div';
   return (
-    <Comp ref={ref} className={cn('h-6 w-6 my-auto border-none ring-none', className)} {...props} />
+    <Comp
+      ref={ref}
+      className={cn('h-6 w-6 my-auto border-none ring-none', className)}
+      {...props}
+    />
   );
 });
 AppbarLogo.displayName = 'AppbarLogo';

@@ -11,7 +11,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 // project
 import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 // variants
 const scaffoldVariants = cva('gap-2 relative w-full', {
@@ -63,7 +63,11 @@ export const ScaffoldProvider = React.forwardRef<
   const ctx = React.useMemo(() => ({ isMobile }), [isMobile]);
   return (
     <ScaffoldContext.Provider value={ctx}>
-      <div ref={ref} className={cn('flex-1 h-full w-full', className)} {...props}>
+      <div
+        ref={ref}
+        className={cn('flex-1 h-full w-full', className)}
+        {...props}
+      >
         {children}
       </div>
     </ScaffoldContext.Provider>

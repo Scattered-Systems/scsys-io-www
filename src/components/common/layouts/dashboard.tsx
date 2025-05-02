@@ -5,7 +5,7 @@
 // imports
 import * as React from 'react';
 // project
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 // components
 import { RefreshButton } from '@/components/common/buttons';
 import {
@@ -36,7 +36,6 @@ export const DashboardScaffold: React.FC<
   onRefresh,
   ...props
 }) => {
-
   return (
     <Scaffold className={cn('relative h-full w-full', className)} {...props}>
       <ScaffoldHeader className="flex flex-nowrap items-start gap-4 lg:gap-6">
@@ -53,9 +52,7 @@ export const DashboardScaffold: React.FC<
         {/* Dashboard Actions */}
         <ActionGroup variant="inline" className="ml-auto justify-end">
           <ActionGroupItem>
-            <RefreshButton
-              onRefresh={onRefresh}
-            />
+            <RefreshButton onRefresh={onRefresh} />
           </ActionGroupItem>
         </ActionGroup>
       </ScaffoldHeader>

@@ -9,7 +9,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Loader2Icon } from 'lucide-react';
 // project
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 export const PulseLabel: React.FC<
   React.ComponentPropsWithRef<'span'> & { asChild?: boolean }

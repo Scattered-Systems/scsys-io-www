@@ -8,7 +8,7 @@ import * as React from 'react';
 import Link from 'next/link';
 // project
 import { Url } from '@/types';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 // components
 import {
   Appbar,
@@ -46,7 +46,11 @@ const MenuLink: React.FC<
       variant={variant}
       {...props}
     >
-      <Link href={href} about={description} className="inline-flex items-center px-2">
+      <Link
+        href={href}
+        about={description}
+        className="inline-flex items-center px-2"
+      >
         <span>{name}</span>
       </Link>
     </Button>
@@ -82,7 +86,12 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           </AppbarContent>
           <AppbarTrailing>
             <ThemeButton />
-            <MenuLink href="https://workout.scsys.io/auth/login" name="Login" variant="link" className="hover:bg-primary/80 hover:text-primary/80"/>
+            <MenuLink
+              href="https://workout.scsys.io/auth/login"
+              name="Login"
+              variant="link"
+              className="hover:bg-primary/80 hover:text-primary/80"
+            />
           </AppbarTrailing>
         </Appbar>
       </header>

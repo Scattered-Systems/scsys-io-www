@@ -10,21 +10,24 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, VariantProps } from 'class-variance-authority';
 // project
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 // components
 import { Button } from '@/components/ui/button';
 
-const actionGroupVariants = cva('flex-nowrap gap-4 lg:gap-6 items-center list-none', {
-  defaultVariants: {
-    variant: 'default',
-  },
-  variants: {
-    variant: {
-      default: 'flex flex-1 w-full',
-      inline: 'inline-flex',
+const actionGroupVariants = cva(
+  'flex-nowrap gap-4 lg:gap-6 items-center list-none',
+  {
+    defaultVariants: {
+      variant: 'default',
     },
-  },
-});
+    variants: {
+      variant: {
+        default: 'flex flex-1 w-full',
+        inline: 'inline-flex',
+      },
+    },
+  }
+);
 
 type ActionGroupVariants = VariantProps<typeof actionGroupVariants>;
 
