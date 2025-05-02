@@ -47,7 +47,7 @@ const MenuLink: React.FC<
       <Link
         href={href}
         about={description}
-        className="inline-flex items-center px-2"
+        className="inline-flex flex-nowrap items-center gap-2"
       >
         <span>{name}</span>
       </Link>
