@@ -23,8 +23,8 @@
     "start": "next start",
     "lint": "next lint",
     "cf:build": "opennextjs-cloudflare",
-    "preview": "opennextjs-cloudflare && npm run wrangler dev",
-    "deploy": "opennextjs-cloudflare && npm run wrangler deploy",
+    "preview": "opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare upload && npm run wrangler deploy",
     "wrangler": "npx wrangler@latest",
     "cf-typegen": "npx wrangler@latest types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
