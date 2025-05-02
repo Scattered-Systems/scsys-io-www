@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 import * as THREE from 'three';
 
 export const BlackHoleParticles: React.FC<{ particles?: number }> = ({ particles = 4500 }) => {

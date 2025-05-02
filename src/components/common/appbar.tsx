@@ -10,7 +10,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 // project
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 
 const appBarVariants = cva('sticky-top w-full', {
   variants: {

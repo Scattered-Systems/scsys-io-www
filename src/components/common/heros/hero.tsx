@@ -4,7 +4,7 @@
 */
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 const heroVariants = cva('flex flex-col flex-1 w-full px-4 py-2', {
   variants: {

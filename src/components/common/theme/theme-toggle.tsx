@@ -9,7 +9,7 @@ import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 // project
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 // components
 import { Button } from '@/components/ui/button';
 import {

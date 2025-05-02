@@ -34,9 +34,6 @@
       "@/content/*": [
         "./assets/content/*"
       ],
-      "@/utils/*": [
-        "./lib/utils/*"
-      ],
       "@/root/*": [
         "./*"
       ],

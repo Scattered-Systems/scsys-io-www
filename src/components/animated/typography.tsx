@@ -4,7 +4,7 @@
 */
 import * as React from 'react';
 import { motion, useMotionValue, useTransform, HTMLMotionProps } from 'motion/react';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 export const AnimatedTitle = React.forwardRef<HTMLHeadingElement, HTMLMotionProps<'h1'>>(({
   className,

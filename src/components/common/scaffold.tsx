@@ -11,7 +11,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 // project
 import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 
 // variants
 const scaffoldVariants = cva('gap-2 relative w-full', {

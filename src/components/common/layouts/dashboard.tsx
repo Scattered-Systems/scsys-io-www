@@ -5,7 +5,7 @@
 // imports
 import * as React from 'react';
 // project
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 // components
 import { RefreshButton } from '@/components/common/buttons';
 import {

@@ -6,7 +6,7 @@
 
 import * as React from 'react';
 import { useTheme } from 'next-themes';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 
 // ThemeSelector
 export const ThemeSelector = React.forwardRef<

@@ -6,7 +6,7 @@
 // imports
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 
 export const BlackHoleView: React.FC<Omit<React.ComponentProps<"div">, "children">> = ({ className, ...props }) => {

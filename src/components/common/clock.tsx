@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/ui/tooltip';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 interface ClockProps {
   key?: any;

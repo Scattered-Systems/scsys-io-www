@@ -10,7 +10,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, VariantProps } from 'class-variance-authority';
 // project
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 // components
 import { Button } from '@/components/ui/button';
 

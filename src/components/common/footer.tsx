@@ -4,7 +4,7 @@
 */
 import * as React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 // FooterVariant
 const footerVariant = cva('flex px-4 py-2', {

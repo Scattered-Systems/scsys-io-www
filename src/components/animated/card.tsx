@@ -7,7 +7,7 @@
 import * as React from 'react';
 import { motion, SpringOptions, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Card } from '@/components/ui/card';
-import { cn } from '@/utils';
+import { cn } from '@/lib/utils';
 
 type CardProps = {
   sensitivity?: number;
