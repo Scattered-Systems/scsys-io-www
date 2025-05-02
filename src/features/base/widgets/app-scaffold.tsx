@@ -67,7 +67,6 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
   ];
   return (
     <div className={cn('relative flex flex-col flex-1 w-full min-h-full', className)}>
-      <header className="flex flex-nowrap w-full items-center h-16">
         <Appbar flavor="default" variant="default">
           <AppbarLeading className="gap-2 items-center">
             <AppLogo className="h-6 w-6"/>
@@ -90,7 +89,6 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
             />
           </AppbarTrailing>
         </Appbar>
-      </header>
       <main className="min-h-full w-full p-2 flex flex-col flex-1">{children}</main>
     </div>
   );
