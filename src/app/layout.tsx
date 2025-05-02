@@ -107,6 +107,7 @@ export const metadata: Metadata = {
     },
   ],
   keywords: ['technology', 'network', 'platform', 'virtualization'],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://scsys.io'),
   publisher: 'Scattered-Systems, LLC',
   title: { absolute: 'Scattered-Systems', template: 'scsys (%s)' },
   twitter: {
