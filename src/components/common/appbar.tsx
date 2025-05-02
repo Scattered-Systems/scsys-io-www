@@ -12,7 +12,12 @@ import { Slot } from '@radix-ui/react-slot';
 // project
 import { cn } from '@/lib/utils';
 
-const appBarVariants = cva('sticky-top w-full', {
+const appBarVariants = cva('flex flex-row flex-nowrap items-center w-full ', {
+  defaultVariants: {
+    flavor: 'default',
+    position: 'default',
+    variant: 'default',
+  },
   variants: {
     flavor: {
       default: 'bg-background text-foreground',
@@ -22,14 +27,14 @@ const appBarVariants = cva('sticky-top w-full', {
       secondary: 'bg-secondary text-secondary-foreground',
       transparent: 'bg-transparent text-foreground',
     },
+    position: {
+      default: 'sticky top-0',
+      stickyBottom: 'sticky bottom-0',
+    },
     variant: {
       default: '',
       rounded: 'rounded-full mx-auto ',
     },
-  },
-  defaultVariants: {
-    flavor: 'default',
-    variant: 'default',
   },
 });
 
@@ -81,6 +86,7 @@ export const Appbar = React.forwardRef<
       className,
       asChild = false,
       flavor = 'default',
+      position = 'default',
       variant = 'default',
       ...props
     },
@@ -92,9 +98,9 @@ export const Appbar = React.forwardRef<
       <Comp
         ref={ref}
         className={cn(
-          appBarVariants({ flavor, variant }),
-          'flex flex-row flex-nowrap items-center gap-2 lg:gap-4 px-4 py-2 w-full',
-          'bg-background text-foreground inner-shadow',
+          appBarVariants({ flavor, position, variant }),
+          'gap-2 lg:gap-4 px-4 py-2 z-50',
+          'ring-none inner-shadow',
           className
         )}
         {...props}

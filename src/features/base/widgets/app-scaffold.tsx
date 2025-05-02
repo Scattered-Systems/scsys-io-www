@@ -66,7 +66,7 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
     { href: '/about', name: 'About', label: 'about' },
   ];
   return (
-    <div className={cn('relative h-full w-full', className)}>
+    <div className={cn('relative flex flex-col flex-1 w-full min-h-full', className)}>
       <header className="flex flex-nowrap w-full items-center h-16 px-2">
         <Appbar>
           <AppbarLeading className="gap-2 items-center">
