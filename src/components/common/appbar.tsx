@@ -159,7 +159,6 @@ export const AppbarTrailing = React.forwardRef<
       ref={ref}
       className={cn(
         'ml-auto inline-flex flex-nowrap gap-2 lg:gap-4 items-center justify-end',
-        '',
         className
       )}
       {...props}
