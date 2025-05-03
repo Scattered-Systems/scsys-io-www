@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 // project
-import { Url } from '@/types';
+import { Url } from '@/lib/types';
 
 type Props = {
   asChild?: boolean;

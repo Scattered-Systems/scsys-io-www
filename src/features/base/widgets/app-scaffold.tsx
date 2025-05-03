@@ -37,21 +37,7 @@ const MenuLink: React.FC<
   ...props
 }) => {
   return (
-    <Button
-      asChild
-      className={cn('transition-colors hover:underline', className)}
-      size={size}
-      variant={variant}
-      {...props}
-    >
-      <Link
-        href={href}
-        about={description}
-        className="inline-flex flex-nowrap items-center gap-2"
-      >
-        <span>{name}</span>
-      </Link>
-    </Button>
+    
   );
 };
 MenuLink.displayName = 'MenuLink';
@@ -82,14 +68,27 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
           <AppbarTrailing className="inline-flex flex-nowrap items-center justify-end gap-2 ml-auto">
             <ThemeButton />
             <MenuLink
-              href="https://workout.scsys.io/auth/login"
               name="Login"
               variant="link"
               className="hover:bg-primary/80 hover:text-primary/80"
             />
+            <Button
+              asChild
+              className={cn('transition-colors hover:underline', className)}
+              size="sm"
+              variant="link"
+              {...props}
+            >
+              <Link
+              href="https://workout.scsys.io/auth/login"
+                className="inline-flex flex-nowrap items-center gap-2"
+              >
+                <span>Login</span>
+              </Link>
+            </Button>
           </AppbarTrailing>
         </Appbar>
-      <main className="min-h-full w-full p-2 flex flex-col flex-1">{children}</main>
+      <main className="min-h-full w-full flex flex-col flex-1 container mx-auto px-4 py-2">{children}</main>
     </div>
   );
 };

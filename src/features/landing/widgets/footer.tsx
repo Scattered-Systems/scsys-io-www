@@ -6,9 +6,9 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Footer, FooterContent, FooterLeading, FooterTrailing } from '@/components/common/footer';
 
-export const HomeFooter: React.FC = () => {
+export const LandingFooter: React.FC<React.ComponentPropsWithRef<typeof Footer>> = ({ ref, className, flavor = 'secondary', ...props }) => {
   return (
-    <Footer flavor="secondary">
+    <Footer ref={ref} className={className('', className)} flavor={flavor}>
       <div className="container mx-auto flex flex-row flex-nowrap px-4 py-2">
         <FooterLeading>
           <div className="font-semibold transition-all">

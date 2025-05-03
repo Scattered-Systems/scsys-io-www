@@ -36,7 +36,7 @@ export const AppLogo = React.forwardRef<
       <svg
         ref={ref}
         className={cn(
-          'h-8 w-8 rounded-full transition-all duration-200 ease-in-out',
+          'h-8 w-8 rounded-full transition-all duration-200 ease-in-out tracking-tight',
           'hover:opacity-80 object-cover border-none',
           className
         )}
