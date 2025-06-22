@@ -67,8 +67,7 @@ export const metadata: Metadata = {
   category: 'Technology',
   classification: 'website',
   creator: 'FL03',
-  description:
-    'A fitness planner and workout management platform equipped with a variety of tools to help you achieve your fitness goals and maintain a healthy lifestyle.',
+  description: "Empowering the next generation of internet-based experiences",
   icons: [
     {
       url: '/logo.svg',
@@ -109,7 +108,7 @@ export const metadata: Metadata = {
   keywords: ['technology', 'network', 'platform', 'virtualization'],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://scsys.io'),
   publisher: 'Scattered-Systems, LLC',
-  title: { absolute: 'Scattered-Systems', template: 'scsys (%s)' },
+  title: { absolute: 'Scattered-Systems', template: '%s | scsys-io' },
   twitter: {
     card: 'summary',
     creator: '@jo3mccain',
@@ -120,7 +119,7 @@ export const metadata: Metadata = {
       'Scattered-Systems strives to design and develop innovative solutions that empower individuals and organizations to achieve their goals.',
     siteName: 'scsys-io',
     locale: 'en_US',
-    title: 'Puzzled Fitness',
+    title: 'Scattered-Systems, LLC',
     type: 'website',
     url: 'https://scsys.io',
     images: [
