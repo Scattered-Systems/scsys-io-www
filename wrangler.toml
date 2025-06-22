@@ -20,13 +20,13 @@ NEXT_TELEMETRY_DISABLED = 1
 NODE_ENV = "production"
 NODE_VERSION = 24
 
-[[routes]]
-custom_domain = true
-pattern = "www.scsys.io"
-zone_id = "scsys.io"
+# [[routes]]
+# custom_domain = true
+# pattern = "www.scsys.io"
+# zone_id = "scsys.io"
 
-[[routes]]
-custom_domain = true
-pattern = "scsys.io"
-zone_id = "scsys.io"
+# [[routes]]
+# custom_domain = true
+# pattern = "scsys.io"
+# zone_id = "scsys.io"
 

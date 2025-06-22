@@ -34,37 +34,13 @@ permissions:
   deployments: write
 
 jobs:
-  preview:
+  publish:
     runs-on: ubuntu-latest
+    env:
+      STAGE: ${{ inputs.environment || 'preview' }}
     outputs:
-      environment: ${{ steps.preview.outputs.pages-environment }}
-      url: ${{ steps.preview.outputs.deployment-url }}
-    steps:
-      - 
-        name: Checkout
-        uses: actions/checkout@v4
-      - 
-        name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-      - 
-        id: preview
-        name: Build & Deploy Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: ${{ env.WRANGLER_VERSION }}
-          environment: preview
-          preCommands: npm run cf:build
-  production:
-    if: inputs.environment == 'production' || github.event_name == 'push'
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.production.outputs.pages-environment }}
-      url: ${{ steps.production.outputs.deployment-url }}
+      environment: ${{ steps.publish.outputs.pages-environment }}
+      url: ${{ steps.publish.outputs.deployment-url }}
     steps:
       - 
         name: Checkout the source code
@@ -76,12 +52,12 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       - 
-        id: production
+        id: publish
         name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: ${{ env.WRANGLER_VERSION }}
-          environment: production
+          environment: ${{ env.STAGE }}
           command: npm run cf:deploy
