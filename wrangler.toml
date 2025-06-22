@@ -22,9 +22,11 @@ NODE_VERSION = 24
 
 [[routes]]
 custom_domain = true
+pattern = "www.scsys.io"
+zone_id = "scsys.io"
+
+[[routes]]
+custom_domain = true
 pattern = "scsys.io"
 zone_id = "scsys.io"
 
-[env.preview]
-
-[env.production]
