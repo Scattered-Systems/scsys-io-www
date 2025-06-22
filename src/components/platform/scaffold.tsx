@@ -80,9 +80,14 @@ export const AppScaffold: React.FC<
         </AppbarLeading>
         <AppbarContent>
           <div className="inline-flex items-center gap-2">
-            {links.map((props, index) => (
-              <MenuLink key={index} id={props.name} {...props} />
-            ))}
+            {links.map((props, index) => {
+              const { label, name, ...rest } = props;
+              return (
+                <MenuLink key={index} id={label} {...props}>
+                  {name}
+                </MenuLink>
+              );
+            })}
           </div>
         </AppbarContent>
         <AppbarTrailing className="inline-flex flex-nowrap items-center justify-end gap-2 ml-auto">
