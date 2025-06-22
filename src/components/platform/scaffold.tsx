@@ -5,6 +5,7 @@
 'use client';
 // imports
 import * as React from 'react';
+import { UserIcon } from 'lucide-react';
 import Link from 'next/link';
 // project
 import { cn } from '@/lib/utils';
@@ -80,10 +81,9 @@ export const AppScaffold: React.FC<
         </AppbarLeading>
         <AppbarContent>
           <div className="inline-flex items-center gap-2">
-            {links.map((props, index) => {
-              const { label, name, ...rest } = props;
+            {links.map(({ href, label, name }, index) => {
               return (
-                <MenuLink key={index} id={label} {...props}>
+                <MenuLink key={index} id={label} href={href}>
                   {name}
                 </MenuLink>
               );
@@ -99,9 +99,10 @@ export const AppScaffold: React.FC<
             variant="link"
           >
             <Link
-              href="https://workout.scsys.io/auth/login"
+              href="https://app.scsys.io/auth/register"
               className="inline-flex flex-nowrap items-center gap-2"
             >
+              <UserIcon className="h-4 w-4"/>
               <span>Login</span>
             </Link>
           </Button>
