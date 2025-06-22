@@ -1,0 +1,79 @@
+name: Clouflare Worker
+
+concurrency:   
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  NEXT_TELEMTRY_DISABLED: 1
+  NODE_VERSION: 24
+  WRANGLER_VERSION: 4.15.2
+  STAGE: ${{ github.event.inputs.environment || 'preview' }}
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    types: [ opened, reopened, synchronize ]
+  push:
+    branches: [ main, master ]
+    tags: [ v*.*.*, "*-alpha", "*-beta", "*-canary", "*-nightly" ]
+  release:
+    types: [ published ]
+  repository_dispatch:
+    types: [ cloudflare, deploy ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Which environment would you like to deploy to?'
+        required: true
+        default: preview
+        type: environment
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout the source code
+        uses: actions/checkout@v4
+      - 
+        name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - 
+        id: production
+        name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          wranglerVersion: ${{ env.WRANGLER_VERSION }}
+          environment: preview
+  production:
+    if: github.env.STAGE == 'production' || inputs.environment == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout the source code
+        uses: actions/checkout@v4
+      - 
+        name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - 
+        id: production
+        name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          wranglerVersion: ${{ env.WRANGLER_VERSION }}
+          environment: production
