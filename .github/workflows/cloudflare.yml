@@ -10,9 +10,17 @@ env:
   WRANGLER_VERSION: 4.15.2
   STAGE: ${{ github.event.inputs.environment || 'preview' }}
 
-on:
+on:  
+  pull_request:
+    branches: [ main, master ]
+    types: [ opened, reopened, synchronize ]
+  push:
+    branches: [ main, master ]
+    tags: [ v*.*.*, "*-alpha", "*-beta", "*-canary", "*-nightly" ]
+  release:
+    types: [ published ]
   repository_dispatch:
-    types: [ deploy ]
+    types: [ cf-deploy, preview, production ]
   workflow_dispatch:
     inputs:
       environment:
