@@ -2,11 +2,18 @@
   Appellation: middleware <module>
   Contrib: @FL03
 */
-
+// imports
 import { NextRequest, NextResponse } from 'next/server';
+// project
+import { logger } from '@/lib/logger';
 
 export const middleware = async (request: NextRequest) => {
-  let response = NextResponse.next();
+  // deconstruct the request
+  const { url: requestUrl,} = request;
+  // log the request url
+  logger.trace(request, 'applying middleware for request: %s', requestUrl);
+
+  const response = NextResponse.next();
   // Set the response headers
   response.headers.set('x-content-type-options', 'nosniff');
   response.headers.set('x-frame-options', 'DENY');
