@@ -10,8 +10,6 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'sonner';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 // stylesheet
 import './globals.css';
 
@@ -34,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-svh`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-svh m-0 p-0`}
       >
         <ThemeProvider
           enableColorScheme
@@ -43,8 +41,6 @@ export default async function RootLayout({
           defaultTheme={defaultTheme}
         >
           {children}
-          <Analytics />
-          <SpeedInsights />
           <Toaster />
         </ThemeProvider>
       </body>
