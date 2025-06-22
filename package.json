@@ -26,7 +26,7 @@
     "url": "https://github.com/scattered-systems/scsys-io"
   },
   "scripts": {
-    "build": "npm run cf:build",
+    "build": "next build",
     "deploy": "npm run cf:deploy",
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
