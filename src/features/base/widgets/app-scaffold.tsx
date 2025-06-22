@@ -21,23 +21,25 @@ import { ThemeButton } from '@/common/theme/theme-toggle';
 import { Button } from '@/ui/button';
 
 const MenuLink: React.FC<
-  React.ComponentProps<typeof Button> & {
-    description?: string;
+  Omit<React.ComponentPropsWithRef<typeof Button>, "asChild" | "title"> & React.PropsWithChildren<{
     href: React.ComponentProps<typeof Link>['href'];
     icon?: React.ReactNode;
-    name?: React.ReactNode;
-  }
+  }>
 > = ({
   className,
-  description,
   href,
-  name = '',
+  icon,
   size = 'default',
   variant = 'link',
   ...props
 }) => {
   return (
-    
+    <Button  {...props} asChild ref={ref} className={cn('', className)} size={size} variant={variant}>
+      <Link href={ref} className="inline-flex flex-nowrap items-center gap-2">
+        {icon && <div className="h-4 w-4 tracking-tight leading-none">{icon}</div>}
+        {children && <span className="text-sm font-medium">{children}</span>}
+      </Link>
+    </Button>
   );
 };
 MenuLink.displayName = 'MenuLink';
