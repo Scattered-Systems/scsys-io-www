@@ -8,7 +8,7 @@ import * as React from 'react';
 // components
 import {
   AppScaffold
-} from '@/features/base';
+} from '@/components/platform';
 
 export default function Layout({
   children,

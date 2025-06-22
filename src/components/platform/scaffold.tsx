@@ -56,17 +56,18 @@ const MenuLink: React.FC<
 };
 MenuLink.displayName = 'MenuLink';
 
-export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
-  children,
-  className,
-  ...props
-}) => {
+/** The scaffold, or layout, of the platform. */
+export const AppScaffold: React.FC<
+  Omit<React.ComponentPropsWithRef<'div'>, 'title'>
+> = ({ ref, children, className, ...props }) => {
   const links = [
     { href: '/', name: 'Home', label: 'home' },
     { href: '/about', name: 'About', label: 'about' },
   ];
   return (
     <div
+      {...props}
+      ref={ref}
       className={cn(
         'relative flex flex-col flex-1 w-full min-h-full',
         className
@@ -91,7 +92,6 @@ export const AppScaffold: React.FC<React.ComponentProps<'div'>> = ({
             className={cn('transition-colors hover:underline', className)}
             size="sm"
             variant="link"
-            {...props}
           >
             <Link
               href="https://workout.scsys.io/auth/login"
