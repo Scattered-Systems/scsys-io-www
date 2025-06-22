@@ -1,4 +1,5 @@
-# Language Specific
+
+# Languages
 
 ## Node.js
 **/.DS_STORE
@@ -7,22 +8,25 @@
 
 **/*.tsbuildinfo
 
-### Dependencies
-**/.pnp
-**/.pnp.*
+### JavaScript / TypeScript
 
 **/.yarn/install-state.gz
 
+**/.pnp
+**/.pnp.*
+
+**/yarn-error.log
+
 ### Frameworks
 
-#### Next.js
+#### NextJS
 **/.next
 **/out
 
 **/next-env.d.ts
 
-### Package Manager
-**/yarn-error.log
+#### OpenNext 
+.open-next
 
 ## Python
 **/__pycache__
@@ -37,13 +41,19 @@
 **/*.rs.bk
 **/*.rs.bk.*
 
+# Integrations
+
+#### Supabase
+**/supabase/temp
+
+#### Vercel
+**/.vercel
+
 # Miscellaneous
 
 ## Development
 
-### Configuration
-
-#### Custom Configurations
+## Configuration
 **/.config/*.config.*
 
 #### dotenv
@@ -77,14 +87,6 @@
 
 !**/.vscode/settings.json
 
-### Integrations
-
-#### Supabase
-**/supabase/temp
-
-#### Vercel
-**/.vercel
-
 ## Directories
 **/build
 **/debug
@@ -102,9 +104,6 @@
 **/*.bk.*
 
 **/*.db
-
-**/*.lock
-**/*-lock.json
 
 **/*.log
 **/*.log.*
@@ -126,6 +125,3 @@
 
 #### Windows Subsystem for Linux (WSL)
 **/*:Zone.identifier
-
-# OpenNext build output
-.open-next
