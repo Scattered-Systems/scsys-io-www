@@ -58,6 +58,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: ${{ env.WRANGLER_VERSION }}
           environment: preview
+          command: npm rn cf:build && wrangler deploy --env preview
   production:
     if: inputs.environment == 'production' || github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -83,3 +84,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: ${{ env.WRANGLER_VERSION }}
           environment: production
+          command: npm rn cf:deploy
