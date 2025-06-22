@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "name": "@scsys/scsys-io",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "scsys",
     "email": "support@scsys.io",
