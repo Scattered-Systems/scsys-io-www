@@ -80,15 +80,17 @@ export const AppScaffold: React.FC<
           <AppbarTitle>scsys</AppbarTitle>
         </AppbarLeading>
         <AppbarContent>
-          <div className="inline-flex items-center gap-2">
+          <ul className="inline-flex flex-nowrap items-center gap-2">
             {links.map(({ href, label, name }, index) => {
               return (
-                <MenuLink key={index} id={label} href={href}>
-                  {name}
-                </MenuLink>
+                <li key={index}>
+                  <MenuLink id={label} href={href}>
+                    {name}
+                  </MenuLink>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </AppbarContent>
         <AppbarTrailing className="inline-flex flex-nowrap items-center justify-end gap-2 ml-auto">
           <ThemeButton />
