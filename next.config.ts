@@ -3,20 +3,29 @@
   Contrib: @FL03
 */
 import createMDX from '@next/mdx';
+import { NextConfig } from 'next';
 
-const nextConfig: import('next').NextConfig = {
+const buildOutput = (): NextConfig['output'] => {
+  for (const i in ['NEXT_PUBLIC_BUILD_OUTPUT_TYPE', 'BUILD_OUTPUT']) {
+    const envVar = process.env[i];
+    switch (envVar) {
+      case 'standalone':
+        case 'output':
+          return envVar as NextConfig['output'];
+      default:
+        continue;
+    }
+  }
+  return undefined;
+}
+
+const nextConfig: NextConfig  = {
+  output: buildOutput(),
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   turbopack: {
     resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
   },
 };
-
-if (
-  process.env.NEXT_PUBLIC_BUILD_OUTPUT_TYPE === 'standalone' ||
-  process.env.NEXT_PUBLIC_BUILD_OUTPUT_TYPE === 'docker'
-) {
-  nextConfig.output = 'standalone';
-}
 
 const withMDX = createMDX({
   // Add markdown plugins here, as desired

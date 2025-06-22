@@ -50,7 +50,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "latest",
-    "motion": "^0.12.10",
+    "motion": "^12.18.1",
     "next": "^15.3.4",
     "next-themes": "^0.4.6",
     "pino": "latest",
@@ -60,8 +60,8 @@
     "react-resizable-panels": "^3.0.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
-    "tailwindcss-animate": "latest",
-    "three": "latest",
+    "tailwindcss-animate": "^1.0.7",
+    "three": "0.177.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {

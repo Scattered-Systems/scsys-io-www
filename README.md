@@ -1,3 +1,9 @@
+# scsys-io
+
+[![GitHub deployments](https://img.shields.io/github/deployments/scattered-systems/scsys-io-www/production?style=for-the-badge&logo=github&label=Prod&labelColor=000000)](https://github.com/scattered-systems/scsys-io-www/deployments/activity_log?environment=production)
+
+***
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
