@@ -36,6 +36,9 @@ permissions:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.preview.outputs.pages-environment }}
+      url: ${{ steps.preview.outputs.deployment-url }}
     steps:
       - 
         name: Checkout the source code
@@ -47,7 +50,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       - 
-        id: production
+        id: preview
         name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
@@ -56,8 +59,11 @@ jobs:
           wranglerVersion: ${{ env.WRANGLER_VERSION }}
           environment: preview
   production:
-    if: github.env.STAGE == 'production' || inputs.environment == 'production'
+    if: inputs.environment == 'production' || github.event_name == 'push'
     runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.production.outputs.pages-environment }}
+      url: ${{ steps.production.outputs.deployment-url }}
     steps:
       - 
         name: Checkout the source code
