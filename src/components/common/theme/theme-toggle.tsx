@@ -1,11 +1,11 @@
-/*
-  Appellation: theme-button <common>
-  Contrib: FL03 <jo3mccain@icloud.com>
-*/
+/**
+ * Created At: 2025.06.22:14:03:57
+ * @author - @FL03
+ * @file - theme-toggle.tsx
+ */
 'use client';
-
-import * as React from 'react';
 // imports
+import * as React from 'react';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 // project
@@ -15,9 +15,13 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 export const ThemeButton: React.FC<
-  Omit<React.ComponentPropsWithRef<typeof Button>, "children" | "title" | "onClick"> & {
+  Omit<
+    React.ComponentPropsWithRef<typeof Button>,
+    'children' | 'title' | 'onClick'
+  > & {
     lightIcon?: React.ReactNode;
     darkIcon?: React.ReactNode;
+    showLabel?: boolean;
   }
 > = ({
   ref,
@@ -26,6 +30,7 @@ export const ThemeButton: React.FC<
   variant = 'ghost',
   darkIcon = <MoonIcon />,
   lightIcon = <SunIcon />,
+  showLabel,
   ...props
 }) => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -40,7 +45,7 @@ export const ThemeButton: React.FC<
       default:
         return lightIcon;
     }
-  }
+  };
 
   function handleOnChange() {
     setTheme(isDark() ? 'light' : 'dark');
@@ -73,8 +78,8 @@ export const ThemeButton: React.FC<
       size={size}
       variant={variant}
     >
-      {renderIcon()}
-      <span className="sr-only">Theme</span>
+      <div className="leading-none tracking-tight h-4 w-4">{renderIcon()}</div>
+      <span className={showLabel ? 'not-sr-only' : 'sr-only'}>Theme</span>
     </Button>
   );
 };
