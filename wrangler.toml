@@ -1,0 +1,32 @@
+compatibility_date = "2025-06-22"
+compatibility_flags = ["nodejs_compat"]
+main = ".open-next/worker.js"
+name = "scsys-io"
+workers_dev = true 
+
+# [build]
+# command = "npm run cf:build"
+
+[assets]
+binding = "ASSETS"
+directory = ".open-next/assets"
+
+[observability.logs]
+enabled = true
+
+[vars]
+NEXT_PUBLIC_SITE_URL = "https://scsys.io"
+NEXT_TELEMETRY_DISABLED = 1
+NODE_ENV = "production"
+NODE_VERSION = 24
+
+# [[routes]]
+# custom_domain = true
+# pattern = "www.scsys.io"
+# zone_id = "scsys.io"
+
+# [[routes]]
+# custom_domain = true
+# pattern = "scsys.io"
+# zone_id = "scsys.io"
+

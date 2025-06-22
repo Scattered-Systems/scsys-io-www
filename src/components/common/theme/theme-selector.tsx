@@ -1,7 +1,8 @@
-/*
-  Appellation: theme_selector <module>
-  Contrib: @FL03
-*/
+/**
+ * Created At: 2025.06.22:14:04:12
+ * @author - @FL03
+ * @file - theme-selector.tsx
+ */
 'use client';
 
 import * as React from 'react';

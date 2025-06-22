@@ -3,14 +3,16 @@
   Contrib: @FL03
 */
 'use client';
-
+// imports
 import * as React from 'react';
+// components
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/ui/tooltip';
+// project
 import { cn } from '@/lib/utils';
 
 interface ClockProps {

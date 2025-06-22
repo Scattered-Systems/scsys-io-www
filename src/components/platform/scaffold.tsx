@@ -1,0 +1,121 @@
+/*
+  Appellation: layout <(home)>
+  Contrib: @FL03
+*/
+'use client';
+// imports
+import * as React from 'react';
+import { UserIcon } from 'lucide-react';
+import Link from 'next/link';
+// project
+import { cn } from '@/lib/utils';
+// components
+import {
+  Appbar,
+  AppbarContent,
+  AppbarLeading,
+  AppbarTitle,
+  AppbarTrailing,
+} from '@/common/appbar';
+import { AppLogo } from '@/common/icons';
+import { ThemeButton } from '@/common/theme/theme-toggle';
+import { Button } from '@/ui/button';
+
+const MenuLink: React.FC<
+  Omit<React.ComponentPropsWithRef<typeof Button>, 'asChild' | 'title'> &
+    React.PropsWithChildren<{
+      href: React.ComponentProps<typeof Link>['href'];
+      icon?: React.ReactNode;
+    }>
+> = ({
+  ref,
+  className,
+  children,
+  href,
+  icon,
+  size = 'default',
+  variant = 'link',
+  ...props
+}) => {
+  return (
+    <Button
+      {...props}
+      asChild
+      ref={ref}
+      className={cn('', className)}
+      size={size}
+      variant={variant}
+    >
+      <Link href={href} className="inline-flex flex-nowrap items-center gap-2">
+        {icon && (
+          <div className="h-4 w-4 tracking-tight leading-none">{icon}</div>
+        )}
+        {children && <span className="text-sm font-medium">{children}</span>}
+      </Link>
+    </Button>
+  );
+};
+MenuLink.displayName = 'MenuLink';
+
+/** The scaffold, or layout, of the platform. */
+export const AppScaffold: React.FC<
+  Omit<React.ComponentPropsWithRef<'div'>, 'title'>
+> = ({ ref, children, className, ...props }) => {
+  const links = [
+    { href: '/', name: 'Home', label: 'home' },
+    { href: '/about', name: 'About', label: 'about' },
+  ];
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={cn(
+        'relative flex flex-col flex-1 w-full min-h-full',
+        className
+      )}
+    >
+      <Appbar flavor="default" variant="default">
+        <AppbarLeading className="gap-2 items-center">
+          <AppLogo className="h-6 w-6" />
+          <AppbarTitle>scsys</AppbarTitle>
+        </AppbarLeading>
+        <AppbarContent>
+          <ul className="inline-flex flex-nowrap items-center gap-2">
+            {links.map(({ href, label, name }, index) => {
+              return (
+                <li key={index}>
+                  <MenuLink id={label} href={href}>
+                    {name}
+                  </MenuLink>
+                </li>
+              );
+            })}
+          </ul>
+        </AppbarContent>
+        <AppbarTrailing className="inline-flex flex-nowrap items-center justify-end gap-2 ml-auto">
+          <ThemeButton />
+          <Button
+            asChild
+            className={cn('transition-colors hover:underline', className)}
+            size="sm"
+            variant="link"
+          >
+            <Link
+              href="https://app.scsys.io/auth/register"
+              className="inline-flex flex-nowrap items-center gap-2"
+            >
+              <UserIcon className="h-4 w-4"/>
+              <span>Login</span>
+            </Link>
+          </Button>
+        </AppbarTrailing>
+      </Appbar>
+      <main className="min-h-full w-full flex flex-col flex-1 container mx-auto px-4 py-2">
+        {children}
+      </main>
+    </div>
+  );
+};
+AppScaffold.displayName = 'AppScaffold';
+
+export default AppScaffold;

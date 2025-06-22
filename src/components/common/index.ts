@@ -3,8 +3,8 @@
   Contrib: @FL03
 */
 export * from './appbar';
+export * from './buttons';
 export * from './clock';
-export * from './heros';
 export * from './icons';
 export * from './layouts';
 export * from './loading';

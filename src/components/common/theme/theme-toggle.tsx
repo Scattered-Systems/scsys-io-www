@@ -1,35 +1,36 @@
-/*
-  Appellation: theme-button <common>
-  Contrib: FL03 <jo3mccain@icloud.com>
-*/
+/**
+ * Created At: 2025.06.22:14:03:57
+ * @author - @FL03
+ * @file - theme-toggle.tsx
+ */
 'use client';
-
-import * as React from 'react';
 // imports
-import { Moon, Sun } from 'lucide-react';
+import * as React from 'react';
+import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 // project
+import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
 // components
 import { Button } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 
 export const ThemeButton: React.FC<
-  React.ComponentProps<typeof Button> & {
+  Omit<
+    React.ComponentPropsWithRef<typeof Button>,
+    'children' | 'title' | 'onClick'
+  > & {
     lightIcon?: React.ReactNode;
     darkIcon?: React.ReactNode;
+    showLabel?: boolean;
   }
 > = ({
+  ref,
   className,
   size = 'icon',
   variant = 'ghost',
-  darkIcon = <Moon />,
-  lightIcon = <Sun />,
+  darkIcon = <MoonIcon />,
+  lightIcon = <SunIcon />,
+  showLabel,
   ...props
 }) => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -37,10 +38,27 @@ export const ThemeButton: React.FC<
 
   const isDark = () => resolvedTheme === 'dark';
 
-  const icon = (mode?: string) =>
-    mode === 'system' || mode === 'dark' ? darkIcon : lightIcon;
+  const renderIcon = () => {
+    switch (resolvedTheme) {
+      case 'dark':
+        return darkIcon;
+      default:
+        return lightIcon;
+    }
+  };
 
-  function onClick() {
+  function handleOnChange() {
+    setTheme(isDark() ? 'light' : 'dark');
+    // log the theme change
+    logger.debug(`Theme changed to ${isDark() ? 'light' : 'dark'}`);
+  }
+
+  function onClick(event?: React.BaseSyntheticEvent) {
+    // prevent the default behavior of the event
+    event?.preventDefault();
+    // stop the event from propagating up to parent elements
+    event?.stopPropagation();
+    // trigger the theme change
     setTheme(isDark() ? 'light' : 'dark');
   }
 
@@ -52,25 +70,17 @@ export const ThemeButton: React.FC<
   if (!mounted || !resolvedTheme) return null;
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            className={cn('relative w-full', className)}
-            onClick={onClick}
-            size={size}
-            variant={variant}
-            {...props}
-          >
-            {icon(resolvedTheme)}
-            <span className="sr-only">Theme mode toggle</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Toggle the theme mode ({resolvedTheme})</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      {...props}
+      ref={ref}
+      className={cn('relative w-full', className)}
+      onClick={onClick}
+      size={size}
+      variant={variant}
+    >
+      <div className="leading-none tracking-tight h-4 w-4">{renderIcon()}</div>
+      <span className={showLabel ? 'not-sr-only' : 'sr-only'}>Theme</span>
+    </Button>
   );
 };
 ThemeButton.displayName = 'ThemeButton';
