@@ -13,7 +13,7 @@ import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 import { AppScaffold, PlatformProvider } from "@/features/platform";
 // stylesheet
-import "./globals.css";
+import "@/public/styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,16 +35,16 @@ export default async function RootLayout({
     <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body
         className={cn(
-          "antialiased bg-background text-foreground min-h-svh m-0 p-0 flex flex-1 flex-col",
+          "flex flex-1 flex-col min-h-screen w-full relative z-0 m-0 p-0",
+          "antialiased bg-background text-foreground border-none",
           geistMono.variable,
           geistSans.variable,
         )}
       >
         <PlatformProvider defaultTheme={defaultTheme}>
-        
-    <AppScaffold>  
-          {children}
-    </AppScaffold>
+          <AppScaffold>
+            {children}
+          </AppScaffold>
           <Toaster />
         </PlatformProvider>
       </body>
