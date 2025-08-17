@@ -1,13 +1,15 @@
 // canvas.tsx
-'use client';
+"use client";
 // imports
-import * as React from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import * as React from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 // project
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
-export const BlackHoleParticles: React.FC<{ particles?: number }> = ({ particles = 4500 }) => {
+export const BlackHoleParticles: React.FC<{ particles?: number }> = (
+  { particles = 4500 },
+) => {
   const particlesRef = React.useRef<THREE.Points>(null!);
 
   const [positions, colors] = React.useMemo(() => {
@@ -92,19 +94,27 @@ export const BlackHoleParticles: React.FC<{ particles?: number }> = ({ particles
     </points>
   );
 };
-BlackHoleParticles.displayName = 'BlackHoleParticles';
+BlackHoleParticles.displayName = "BlackHoleParticles";
 
-export const BlackHoleAnimation: React.FC<React.ComponentProps<"div">> = ({ className, ...props }) => {
-  return (
-    <div className={cn("fixed inset-0 w-full h-full dark:bg-primary/10", className)} {...props}>
-      <Canvas camera={{ position: [0, 0, 3], fov: 75 }}>
+export const BlackHoleAnimation: React.FC<React.ComponentPropsWithoutRef<typeof Canvas>> =
+  (
+    { className, ...props },
+  ) => {
+    return (
+      <Canvas
+        className={cn(
+          "fixed inset-0 w-full h-full dark:bg-primary/10",
+          className,
+        )}
+        camera={{ position: [0, 0, 3], fov: 75 }}
+        {...props}
+      >
         <React.Suspense fallback={null}>
           <BlackHoleParticles />
         </React.Suspense>
       </Canvas>
-    </div>
-  );
-};
-BlackHoleAnimation.displayName = 'BlackHoleAnimation';
+    );
+  };
+BlackHoleAnimation.displayName = "BlackHoleAnimation";
 
 export default BlackHoleAnimation;
