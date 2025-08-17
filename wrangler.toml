@@ -4,8 +4,8 @@ main = ".open-next/worker.js"
 name = "scsys-io-www"
 workers_dev = true
 
-# [build]
-# command = "opennextjs-cloudflare build"
+[build]
+command = "opennextjs-cloudflare build"
 
 [assets]
 binding = "ASSETS"
