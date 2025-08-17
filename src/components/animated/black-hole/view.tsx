@@ -17,7 +17,10 @@ export const BlackHoleView: React.FC<
     ssr: false,
   });
   return (
-    <div className={cn("w-full h-full", className)} {...props}>
+    <div
+      className={cn("relative z-0 flex-1 h-full w-full", className)}
+      {...props}
+    >
       <Canvas />
     </div>
   );

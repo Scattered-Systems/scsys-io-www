@@ -96,25 +96,26 @@ export const BlackHoleParticles: React.FC<{ particles?: number }> = (
 };
 BlackHoleParticles.displayName = "BlackHoleParticles";
 
-export const BlackHoleAnimation: React.FC<React.ComponentPropsWithoutRef<typeof Canvas>> =
-  (
-    { className, ...props },
-  ) => {
-    return (
-      <Canvas
-        className={cn(
-          "fixed z-0 h-full w-full bg-primary/10",
-          className,
-        )}
-        camera={{ position: [0, 0, 3], fov: 75 }}
-        {...props}
-      >
-        <React.Suspense fallback={null}>
-          <BlackHoleParticles />
-        </React.Suspense>
-      </Canvas>
-    );
-  };
+export const BlackHoleAnimation: React.FC<
+  React.ComponentPropsWithoutRef<typeof Canvas>
+> = (
+  { className, ...props },
+) => {
+  return (
+    <Canvas
+      className={cn(
+        "fixed z-0 h-full w-full bg-primary/10",
+        className,
+      )}
+      camera={{ position: [0, 0, 3], fov: 75 }}
+      {...props}
+    >
+      <React.Suspense fallback={null}>
+        <BlackHoleParticles />
+      </React.Suspense>
+    </Canvas>
+  );
+};
 BlackHoleAnimation.displayName = "BlackHoleAnimation";
 
 export default BlackHoleAnimation;
