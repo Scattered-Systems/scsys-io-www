@@ -17,10 +17,11 @@
   ],
   "license": "Apache-2.0",
   "private": true,
-  "name": "@scsys/scsys-io",
+  "name": "@scsys/scsys-io-www",
+  "readme": "README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scattered-systems/scsys-io"
+    "url": "git+https://github.com/scattered-systems/scsys-io.git"
   },
   "version": "0.0.7",
   "scripts": {
