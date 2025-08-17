@@ -103,7 +103,7 @@ export const BlackHoleAnimation: React.FC<React.ComponentPropsWithoutRef<typeof 
     return (
       <Canvas
         className={cn(
-          "fixed inset-0 w-full h-full dark:bg-primary/10",
+          "fixed z-0 h-full w-full bg-primary/10",
           className,
         )}
         camera={{ position: [0, 0, 3], fov: 75 }}
