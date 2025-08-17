@@ -20,11 +20,9 @@ const buildOutput = (): NextConfig['output'] => {
 }
 
 const nextConfig: NextConfig  = {
+  compact: true,
   output: buildOutput(),
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  turbopack: {
-    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
-  },
 };
 
 const withMDX = createMDX({

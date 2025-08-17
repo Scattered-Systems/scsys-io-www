@@ -39,21 +39,29 @@ type TurnstileProps = {
   onSuccess?: (token: string) => void;
 };
 
+const cloudflareTurnstileSiteKey = () => {
+  return (
+    process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY ||
+    process.env.CF_TURNSTILE_SITE_KEY ||
+    process.env.CF_TURNSTILE_PUBLIC_KEY
+  );
+};
+
+
 export const CloudflareTurnstile: React.FC<
   Omit<React.ComponentPropsWithRef<'div'>, 'id'> & TurnstileProps
 > = ({
   ref,
-  className,
   action = 'submit',
   siteKey: siteKeyProp,
-  onSuccess,
   onError,
   onExpire,
+  onSuccess,
   ...props
 }) => {
   const [widgetId, setWidgetId] = React.useState<string | null>(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
-  const siteKey = siteKeyProp ?? process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY;
+  const siteKey = siteKeyProp ?? cloudflareTurnstileSiteKey();
 
   if (!siteKey) {
     logger.error('CfTurnstil: Missing NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY');
@@ -83,16 +91,16 @@ export const CloudflareTurnstile: React.FC<
     }
   }, [widgetId, isLoaded, setWidgetId, handleRender]);
 
-    React.useEffect(() => {
-      if (window?.turnstile) setIsLoaded(true);
+  React.useEffect(() => {
+    if (window?.turnstile) setIsLoaded(true);
 
-      return () => {
-        // Clean up the widget when component unmounts
-        if (widgetId) {
-          window?.turnstile?.remove(widgetId);
-        }
-      };
-    }, [widgetId, setIsLoaded]);
+    return () => {
+      // Clean up the widget when component unmounts
+      if (widgetId) {
+        window?.turnstile?.remove(widgetId);
+      }
+    };
+  }, [widgetId, setIsLoaded]);
 
   return (
     <React.Suspense fallback={<LoaderIcon className="w-4 h-4 animate-spin" />}>

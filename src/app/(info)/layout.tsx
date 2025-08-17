@@ -1,19 +1,9 @@
-/*
-  Appellation: layout <(info)>
-  Contrib: @FL03
-*/
-'use client';
-// imports
-import * as React from 'react';
-import { useRouter, useParams } from 'next/navigation';
+// (info)/layout.tsx
+import { PropsWithChildren } from "react";
 
-export default function Layout({ children }: Readonly<React.PropsWithChildren>) {
-  const { alias } = useParams<{ alias: string }>();
-  const router = useRouter();
-
-  if (alias === 'undefined') {
-    router.replace('/auth/login');
-  }
-  return <>{children}</>;
+export default function Layout({ children }: Readonly<PropsWithChildren>) {
+  return (
+    <div className="container mx-auto flex-1 h-full w-full">{children}</div>
+  );
 }
-Layout.displayName = 'InfoLayout';
+Layout.displayName = "InfoLayout";
