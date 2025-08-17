@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="h-screen w-screen relative z-0">
+    <div className="h-screen w-full fixed z-0 top-0 bottom-0 left-0 right-0">
       <BlackHoleView />
     </div>
   );

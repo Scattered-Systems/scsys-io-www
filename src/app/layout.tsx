@@ -42,7 +42,7 @@ export default async function RootLayout({
         )}
       >
         <PlatformProvider defaultTheme={defaultTheme}>
-          <AppScaffold>
+          <AppScaffold fullWidth>
             {children}
           </AppScaffold>
           <Toaster />

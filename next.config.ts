@@ -9,7 +9,6 @@ import createMDX from '@next/mdx';
 // plugins
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
-import remarkMdx from "remark-mdx";
 
 const nextBuildOutput = (): NextConfig["output"] => {
   const value = process.env["NEXT_PUBLIC_BUILD_OUTPUT"] ??
@@ -32,7 +31,7 @@ const nextConfig: NextConfig  = {
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
-    remarkPlugins: [remarkFrontmatter, remarkGfm, remarkMdx],
+    remarkPlugins: [remarkFrontmatter, remarkGfm],
   },
 });
 
