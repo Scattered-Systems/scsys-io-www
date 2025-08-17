@@ -1,26 +1,29 @@
-/*
-  Appellation: page <about>
-  Contrib: @FL03
-*/
-'use client';
-import About from '@/features/about/data/about.mdx';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-
+/**
+ * Created At: 2025.08.17:15:46:07
+ * @author - @FL03
+ * @file - blog/page.tsx
+ */
+"use client";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Page() {
   return (
     <>
-      <Card className="flex flex-col flex-1 w-full">
+      <Card className="flex flex-col flex-1 h-full w-full">
         <CardHeader>
-          <CardTitle>About</CardTitle>
-          <CardDescription>A little bit about us!</CardDescription>
+          <CardTitle>Blog</CardTitle>
+          <CardDescription>
+            Stay updated and informed about major changes, proposals, releases,
+            and more!
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <About />
-        </CardContent>
-        <CardFooter></CardFooter>
       </Card>
     </>
   );
 }
-Page.displayName = 'AboutPage';
+Page.displayName = "BlogPage";
