@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 // project
 import { cn } from "@/lib/utils";
 
-export const BlackHoleView: React.FC<
+export const CollapsingParticleAnimation: React.FC<
   Omit<React.ComponentProps<"div">, "children">
 > = ({ className, ...props }) => {
   const Canvas = dynamic(async () => await import("./canvas"), {
@@ -25,6 +25,6 @@ export const BlackHoleView: React.FC<
     </div>
   );
 };
-BlackHoleView.displayName = "BlackHoleView";
+CollapsingParticleAnimation.displayName = "CollapsingParticleAnimation";
 
-export default BlackHoleView;
+export default CollapsingParticleAnimation;

@@ -18,7 +18,7 @@ function randomSpherePoint(radius: number) {
 
 const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
-export const BlackHoleParticles: React.FC<{ particles?: number, timeScale?: number }> = ({
+export const CollapsingParticleSystem: React.FC<{ particles?: number, timeScale?: number }> = ({
   particles = 3500,
   timeScale = DEFAULT_TIME_SCALE,
 }) => {
@@ -150,9 +150,9 @@ export const BlackHoleParticles: React.FC<{ particles?: number, timeScale?: numb
     </points>
   );
 };
-BlackHoleParticles.displayName = "BlackHoleParticles";
+CollapsingParticleSystem.displayName = "BlackHoleParticles";
 
-export const BlackHoleAnimation: React.FC<
+export const CollapsingParticleCanvas: React.FC<
   Omit<React.ComponentPropsWithoutRef<typeof Canvas>, "children">
 > = ({ className, ...props }) => (
   <Canvas
@@ -164,10 +164,10 @@ export const BlackHoleAnimation: React.FC<
     {...props}
   >
     <React.Suspense fallback={null}>
-      <BlackHoleParticles />
+      <CollapsingParticleSystem />
     </React.Suspense>
   </Canvas>
 );
-BlackHoleAnimation.displayName = "BlackHoleAnimation";
+CollapsingParticleCanvas.displayName = "CollapsingParticleCanvas";
 
-export default BlackHoleAnimation;
+export default CollapsingParticleCanvas;
