@@ -3,15 +3,12 @@
  * @author - @FL03
  * @file - loading.tsx
  */
-"use client";
-// imports
 import { Spinner } from "@/components/common/loaders";
 
-export default function Page() {
+export default function Loading() {
   return (
     <div className="flex flex-1 h-full w-full items-center justify-center relative z-50">
       <Spinner showLabel />
     </div>
   );
 }
-Page.displayName = "LoadingPage";
