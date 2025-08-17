@@ -1,9 +1,10 @@
-/*
-    Appellation: days <types>
-    Contrib: @FL03
-*/
+/**
+ * Created At: 2025.08.17:14:17:29
+ * @author - @FL03
+ * @file - datetime.ts
+ */
 
-export type Day =
+export type DayLiteral =
   | 'Sunday'
   | 'Monday'
   | 'Tuesday'
