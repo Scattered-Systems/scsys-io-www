@@ -11,7 +11,7 @@ import { cookies } from "next/headers";
 import { Toaster } from "sonner";
 // project
 import { cn } from "@/lib/utils";
-import { PlatformProvider } from "@/features/platform";
+import { AppScaffold, PlatformProvider } from "@/features/platform";
 // stylesheet
 import "./globals.css";
 
@@ -41,7 +41,10 @@ export default async function RootLayout({
         )}
       >
         <PlatformProvider defaultTheme={defaultTheme}>
+        
+    <AppScaffold>  
           {children}
+    </AppScaffold>
           <Toaster />
         </PlatformProvider>
       </body>

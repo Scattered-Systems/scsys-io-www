@@ -2,22 +2,14 @@
   Appellation: layout <(home)>
   Contrib: @FL03
 */
-'use client';
+"use client";
 // imports
-import * as React from 'react';
+import * as React from "react";
 // components
-import {
-  AppScaffold
-} from '@/features/platform';
 
 export default function Layout({
   children,
 }: Readonly<React.PropsWithChildren>) {
-  
-  return (
-    <AppScaffold>
-      {children}
-    </AppScaffold>
-  );
+  return { children };
 }
-Layout.displayName = 'PageLayout';
+Layout.displayName = "PageLayout";
