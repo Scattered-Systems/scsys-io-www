@@ -16,10 +16,11 @@ function randomSpherePoint(radius: number) {
   return [x, y, z];
 }
 
-const TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
+const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
-export const BlackHoleParticles: React.FC<{ particles?: number }> = ({
-  particles = 4500,
+export const BlackHoleParticles: React.FC<{ particles?: number, timeScale?: number }> = ({
+  particles = 3500,
+  timeScale = DEFAULT_TIME_SCALE,
 }) => {
   const particlesRef = React.useRef<THREE.Points>(null);
   const geometryRef = React.useRef<THREE.BufferGeometry>(null);
@@ -125,9 +126,9 @@ export const BlackHoleParticles: React.FC<{ particles?: number }> = ({
       vel[i3 + 2] *= 0.995;
 
       // Update positions
-      pos[i3] += vel[i3] * delta * TIME_SCALE;
-      pos[i3 + 1] += vel[i3 + 1] * delta * TIME_SCALE;
-      pos[i3 + 2] += vel[i3 + 2] * delta * TIME_SCALE;
+      pos[i3] += vel[i3] * delta * timeScale;
+      pos[i3 + 1] += vel[i3 + 1] * delta * timeScale;
+      pos[i3 + 2] += vel[i3 + 2] * delta * timeScale;
     }
 
     // Update geometry buffer directly
