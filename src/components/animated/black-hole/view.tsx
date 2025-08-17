@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export const BlackHoleView: React.FC<
   Omit<React.ComponentProps<"div">, "children">
 > = ({ className, ...props }) => {
-  const Canvas = dynamic(() => import("./canvas"), {
+  const Canvas = dynamic(async () => await import("./canvas"), {
     ssr: false,
   });
   return (
