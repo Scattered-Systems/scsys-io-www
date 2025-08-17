@@ -1,5 +1,4 @@
-
-import { Days } from '@/lib/types/datetime';
+import { Days } from "@/types/datetime";
 
 export const isDay = (day: number): day is Days => {
   return Object.values(Days).includes(day as Days);
@@ -7,19 +6,19 @@ export const isDay = (day: number): day is Days => {
 
 export const stringToDay = (day: string): Days | null => {
   switch (day.toLowerCase()) {
-    case 'sunday':
+    case "sunday":
       return Days.Sunday;
-    case 'monday':
+    case "monday":
       return Days.Monday;
-    case 'tuesday':
+    case "tuesday":
       return Days.Tuesday;
-    case 'wednesday':
+    case "wednesday":
       return Days.Wednesday;
-    case 'thursday':
+    case "thursday":
       return Days.Thursday;
-    case 'friday':
+    case "friday":
       return Days.Friday;
-    case 'saturday':
+    case "saturday":
       return Days.Saturday;
 
     default:
