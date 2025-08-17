@@ -1,7 +1,6 @@
-/*
-  Appellation: index <module>
-  Contrib: @FL03
-*/
-
-export * from './canvas';
-export * from './view';
+/**
+ * Created At: 2025.08.17:16:16:43
+ * @author - @FL03
+ * @file - black-hole/index.ts
+ */
+export * from "./view";
