@@ -6,8 +6,8 @@
 "use client";
 // imports
 import * as React from "react";
-import { UserIcon } from "lucide-react";
 import Link from "next/link";
+import { UserPlusIcon } from "lucide-react";
 // hooks
 import { useIsMobile } from "@/hooks/use-mobile";
 // project
@@ -50,7 +50,7 @@ export const PlatformBanner: React.FC<
       )}
       href={href}
     >
-      <AppLogo className={cn("h-6 w-6", className)} />
+      <AppLogo className={cn("h-6 w-6", iconClassName)} />
       <span
         className={cn(
           "text-sm text-semibold",
@@ -58,7 +58,7 @@ export const PlatformBanner: React.FC<
           showLabel ? "not-sr-only" : "sr-only",
         )}
       >
-        pzzld
+        scsys
       </span>
     </Link>
   );
@@ -106,10 +106,10 @@ export const PlatformAppBar: React.FC<
             >
               <Link
                 href="https://app.scsys.io/auth/register"
-                className="inline-flex flex-nowrap items-center gap-2"
+                className="inline-flex flex-nowrap items-center gap-1"
               >
-                <UserIcon className="h-4 w-4" />
-                <span>Login</span>
+                <UserPlusIcon className="h-4 w-4" />
+                <span>Register</span>
               </Link>
             </Button>
           </AppBarAction>
