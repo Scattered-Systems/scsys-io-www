@@ -25,7 +25,7 @@
   "version": "0.0.7",
   "scripts": {
     "build": "next build",
-    "deploy": "npm run cf:deploy",
+    "deploy": "npx wrangler@latest deploy",
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
     "lint": "next lint",
@@ -43,7 +43,7 @@
     "shadcn:init": "npx shadcn@latest init",
     "vercel:pull-env": "npx vercel@latest env pull",
     "cf:build": "opennextjs-cloudflare build",
-    "cf:deploy": "opennextjs-cloudflare build && npm run wrangler deploy",
+    "cf:deploy": "npx wrangler@latest deploy",
     "cf:preview": "opennextjs-cloudflare preview",
     "wrangler": "npx wrangler@latest",
     "wrangler:typegen": "npx wrangler@latest types --env-interface CloudflareEnv cloudflare-env.d.ts"
