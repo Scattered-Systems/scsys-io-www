@@ -1,6 +1,6 @@
-/*
-  Appellation: animated <module>
-  Contrib: @FL03
-*/
-export * from './collapsing-particles';
-export * from './scroll-indicator';
+/**
+ * Created At: 2025.08.19:00:41:26
+ * @author - @FL03
+ * @file - animated/index.ts
+ */
+export * from "./collapsing-particles";
