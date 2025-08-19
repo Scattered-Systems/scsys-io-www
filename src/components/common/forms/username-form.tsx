@@ -25,6 +25,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 
 export const usernameSchema = z
   .object({
@@ -46,12 +47,13 @@ type UsernameFormProps = {
   onSubmit?: (data: UsernameFormValues) => void;
   defaultValues?: Partial<UsernameFormValues>;
   values?: UsernameFormValues;
+  showLabel?: boolean;
 };
 
 export const UsernameForm: React.FC<
   & UsernameFormProps
   & Omit<React.ComponentProps<"form">, "onSubmit" | "defaultValue">
-> = ({ className, onSubmit, defaultValues, values, ...props }) => {
+> = ({ className, onSubmit, defaultValues, values, showLabel, ...props }) => {
   // initialize the form
   const form = useForm<UsernameFormValues>({
     resolver: zodResolver(usernameSchema),
@@ -60,10 +62,10 @@ export const UsernameForm: React.FC<
   });
 
   // handle form submission
-  const handleSubmit = (data: UsernameFormValues) => {
-    onSubmit?.(data);
-    // log the form data
-    logger.debug("Form submitted with data:", data);
+  const handleSubmit = (formData: UsernameFormValues) => {
+    toast.promise(async () => {
+      if (onSubmit) onSubmit(formData);
+    }, { success: "Email submitted successfully!" });
     // reset the form after submission
     form.reset();
   };
@@ -80,14 +82,18 @@ export const UsernameForm: React.FC<
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your username"
-                  {...field}
-                  className="w-full"
-                />
-              </FormControl>
+              <div className="inline-flex flex-nowrap items-center gap-1">
+                <FormLabel className={showLabel ? "not-sr-only" : "sr-only"}>
+                  Username
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your username"
+                    {...field}
+                    className="w-full"
+                  />
+                </FormControl>
+              </div>
               <FormMessage />
             </FormItem>
           )}

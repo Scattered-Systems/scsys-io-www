@@ -55,11 +55,10 @@ export const EmailForm: React.FC<
 
   // handle form submission
   const handleSubmit = (formData: EmailFormValues) => {
-    if (onSubmit) onSubmit(formData);
-    // log the form data
-    logger.debug("Form submitted with data:", formData);
     // notify the user
-    toast.success("Email submitted successfully!");
+    toast.promise(async () => {
+      if (onSubmit) onSubmit(formData);
+    }, { success: "Email submitted successfully!" });
     // reset the form after submission
     form.reset();
   };
