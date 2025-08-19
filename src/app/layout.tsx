@@ -70,39 +70,13 @@ export const metadata: Metadata = {
   icons: [
     {
       url: "/logo.svg",
-      sizes: "16x16",
-      type: "image/x-svg",
+      sizes: "any",
+      type: "image/x-svg+xml",
     },
     {
-      url: "/logo.svg",
-      sizes: "32x32",
-      type: "image/x-svg",
-    },
-    {
-      url: "/logo.svg",
-      sizes: "48x48",
-      type: "image/x-svg",
-    },
-    {
-      url: "/logo.svg",
-      sizes: "64x64",
-      type: "image/x-svg",
-    },
-    {
-      url: "/logo.svg",
-      sizes: "128x128",
-      type: "image/x-svg",
-    },
-    {
-      url: "/logo.svg",
-      sizes: "256x256",
-      type: "image/x-svg",
-    },
-    {
-      url: "/logo.svg",
-      sizes: "512x512",
-      type: "image/x-svg",
-    },
+      url: "/favicon.ico",
+      sizes: "any",}
+    
   ],
   keywords: ["technology", "network", "platform", "virtualization"],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://scsys.io"),

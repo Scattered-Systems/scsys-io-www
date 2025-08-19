@@ -7,26 +7,24 @@
 // imports
 import * as React from "react";
 import dynamic from "next/dynamic";
-// project
-import { cn } from "@/lib/utils";
+
+type ViewPropsT = {
+  className?: string;
+  particles?: number;
+  timeScale?: number;
+};
 
 export const CollapsingParticleSystem: React.FC<
-  Omit<React.ComponentPropsWithoutRef<"div">, "children">
-> = ({ className, ...props }) => {
+  ViewPropsT
+> = ({ ...props }) => {
   const Comp = dynamic(
-    () => import("./canvas").then((mod) => mod.CollapsingParticleCanvas),
+    () =>
+      import("./collapsing-canvas").then((mod) => mod.CollapsingParticleSystem),
     {
       ssr: false,
     },
   );
-  return (
-    <div
-      className={cn("relative z-0 flex-1 h-full w-full", className)}
-      {...props}
-    >
-      <Comp />
-    </div>
-  );
+  return <Comp {...props} />;
 };
 CollapsingParticleSystem.displayName = "CollapsingParticleSystem";
 

@@ -1,8 +1,15 @@
+/**
+ * Created At: 2025.08.18:22:38:13
+ * @author - @FL03
+ * @file - collapsing-particles.tsx
+ */
 "use client";
+// imports
 import * as React from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { cn } from "@/lib/utils";
+import { useFrame } from "@react-three/fiber";
+
+const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
 // Utility to generate a random point on a sphere shell
 function randomSpherePoint(radius: number) {
@@ -15,8 +22,6 @@ function randomSpherePoint(radius: number) {
   const z = radius * Math.cos(phi);
   return [x, y, z];
 }
-
-const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
 export const CollapsingParticles: React.FC<
   { particles?: number; timeScale?: number }
@@ -153,27 +158,6 @@ export const CollapsingParticles: React.FC<
     </points>
   );
 };
-CollapsingParticles.displayName = "CollapsingParticleSystem";
+CollapsingParticles.displayName = "CollapsingParticles";
 
-export const CollapsingParticleCanvas: React.FC<
-  Omit<React.ComponentPropsWithoutRef<typeof Canvas>, "children"> & {
-    particles?: number;
-    timeScale?: number;
-  }
-> = ({ className, particles, timeScale, ...props }) => (
-  <Canvas
-    camera={{ position: [0, 0, 3], fov: 75 }}
-    className={cn(
-      "fixed z-0 h-full w-full bg-primary/10 top-0 left-0 right-0 bottom-0",
-      className,
-    )}
-    {...props}
-  >
-    <React.Suspense fallback={null}>
-      <CollapsingParticles particles={particles} timeScale={timeScale} />
-    </React.Suspense>
-  </Canvas>
-);
-CollapsingParticleCanvas.displayName = "CollapsingParticleCanvas";
-
-export default CollapsingParticleCanvas;
+export default CollapsingParticles;
