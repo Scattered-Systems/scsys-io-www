@@ -10,12 +10,15 @@ import dynamic from "next/dynamic";
 // project
 import { cn } from "@/lib/utils";
 
-export const CollapsingParticleAnimation: React.FC<
+export const CollapsingParticleSystem: React.FC<
   Omit<React.ComponentProps<"div">, "children">
 > = ({ className, ...props }) => {
-  const Canvas = dynamic(async () => await import("./canvas"), {
-    ssr: false,
-  });
+  const Canvas = dynamic(
+    () => import("./canvas").then((mod) => mod.CollapsingParticleCanvas),
+    {
+      ssr: false,
+    },
+  );
   return (
     <div
       className={cn("relative z-0 flex-1 h-full w-full", className)}
@@ -25,6 +28,6 @@ export const CollapsingParticleAnimation: React.FC<
     </div>
   );
 };
-CollapsingParticleAnimation.displayName = "CollapsingParticleAnimation";
+CollapsingParticleSystem.displayName = "CollapsingParticleSystem";
 
-export default CollapsingParticleAnimation;
+export default CollapsingParticleSystem;

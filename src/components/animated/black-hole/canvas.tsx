@@ -18,12 +18,12 @@ function randomSpherePoint(radius: number) {
 
 const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
-export const CollapsingParticleSystem: React.FC<{ particles?: number, timeScale?: number }> = ({
+export const CollapsingParticles: React.FC<{ particles?: number; timeScale?: number }> = ({
   particles = 3500,
   timeScale = DEFAULT_TIME_SCALE,
 }) => {
-  const particlesRef = React.useRef<THREE.Points>(null);
-  const geometryRef = React.useRef<THREE.BufferGeometry>(null);
+  const particlesRef = React.useRef<THREE.Points | null>(null);
+  const geometryRef = React.useRef<THREE.BufferGeometry | null>(null);
 
   // Mutable arrays for positions, velocities, and colors
   const positions = React.useRef<Float32Array | null>(null);
@@ -132,8 +132,12 @@ export const CollapsingParticleSystem: React.FC<{ particles?: number, timeScale?
     }
 
     // Update geometry buffer directly
-    geometryRef.current.attributes.position.needsUpdate = true;
-    particlesRef.current.rotation.y += delta * 0.08;
+    if (geometryRef.current?.attributes.position) {
+      geometryRef.current.attributes.position.needsUpdate = true;
+    }
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y += delta * 0.08;
+    }
   });
 
   return (
@@ -150,7 +154,7 @@ export const CollapsingParticleSystem: React.FC<{ particles?: number, timeScale?
     </points>
   );
 };
-CollapsingParticleSystem.displayName = "BlackHoleParticles";
+CollapsingParticles.displayName = "CollapsingParticles";
 
 export const CollapsingParticleCanvas: React.FC<
   Omit<React.ComponentPropsWithoutRef<typeof Canvas>, "children">
@@ -158,13 +162,13 @@ export const CollapsingParticleCanvas: React.FC<
   <Canvas
     camera={{ position: [0, 0, 3], fov: 75 }}
     className={cn(
-      "fixed z-0 h-full w-full bg-primary/10",
+      "fixed -z-0 h-full w-full bg-primary opacity-15",
       className,
     )}
     {...props}
   >
     <React.Suspense fallback={null}>
-      <CollapsingParticleSystem />
+      <CollapsingParticles />
     </React.Suspense>
   </Canvas>
 );
