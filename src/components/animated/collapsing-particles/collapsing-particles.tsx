@@ -8,6 +8,7 @@
 import * as React from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
+import { useTheme } from "next-themes";
 
 const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
@@ -29,6 +30,9 @@ export const CollapsingParticles: React.FC<
   particles = 3500,
   timeScale = DEFAULT_TIME_SCALE,
 }) => {
+  const { theme } = useTheme();
+  // Set particle color based on theme
+  const particleColor = theme === "light" ? new THREE.Color(0x000000) : new THREE.Color(0xffffff);
   const particlesRef = React.useRef<THREE.Points>(null);
   const geometryRef = React.useRef<THREE.BufferGeometry>(null);
 
@@ -54,7 +58,7 @@ export const CollapsingParticles: React.FC<
       vel[i * 3 + 1] = (Math.random() - 0.5) * 0.002;
       vel[i * 3 + 2] = (Math.random() - 0.5) * 0.002;
 
-      color.setHSL(0.6, 0.8, Math.random() * 0.3 + 0.7);
+      color.copy(particleColor);
       col[i * 3] = color.r;
       col[i * 3 + 1] = color.g;
       col[i * 3 + 2] = color.b;
