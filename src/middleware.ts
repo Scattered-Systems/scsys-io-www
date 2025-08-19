@@ -1,13 +1,14 @@
-/*
-  Appellation: middleware <module>
-  Contrib: @FL03
-*/
+/**
+ * Created At: 2025.08.17:15:17:07
+ * @author - @FL03
+ * @file - middleware.ts
+ */
 // imports
 import { NextRequest, NextResponse } from 'next/server';
 // project
 import { logger } from '@/lib/logger';
 
-export const middleware = async (request: NextRequest) => {
+export async function middleware(request: NextRequest): Promise<NextResponse> {
   // deconstruct the request
   const { url: requestUrl,} = request;
   // log the request url

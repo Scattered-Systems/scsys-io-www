@@ -1,34 +1,38 @@
-/*
-  Appellation: next.config <module>
-  Contrib: @FL03
-*/
-import createMDX from '@next/mdx';
+/**
+ * Created At: 2025.08.17:15:26:38
+ * @author - @FL03
+ * @file - next.config.ts
+ */
+// imports
 import { NextConfig } from 'next';
+import createMDX from '@next/mdx';
+// plugins
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
 
-const buildOutput = (): NextConfig['output'] => {
-  for (const i in ['NEXT_PUBLIC_BUILD_OUTPUT_TYPE', 'BUILD_OUTPUT']) {
-    const envVar = process.env[i];
-    switch (envVar) {
-      case 'standalone':
-        case 'output':
-          return envVar as NextConfig['output'];
-      default:
-        continue;
-    }
-  }
-  return undefined;
-}
+const nextBuildOutput = (): NextConfig["output"] => {
+  const value = process.env["NEXT_PUBLIC_BUILD_OUTPUT"] ??
+    process.env["BUILD_OUTPUT"];
+  return value === "export" || value === "standalone" ? value : undefined;
+};
 
 const nextConfig: NextConfig  = {
-  output: buildOutput(),
+  compress: true,
+  output: nextBuildOutput(),
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  experimental: {
+    mdxRs: false,
+  },
   turbopack: {
     resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
   },
 };
 
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
+  extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [remarkFrontmatter, remarkGfm],
+  },
 });
 
 // Merge MDX config with Next.js config

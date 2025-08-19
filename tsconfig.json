@@ -31,9 +31,6 @@
       "@/public/*": [
         "./public/*"
       ],
-      "@/content/*": [
-        "./assets/content/*"
-      ],
       "@/root/*": [
         "./*"
       ],
