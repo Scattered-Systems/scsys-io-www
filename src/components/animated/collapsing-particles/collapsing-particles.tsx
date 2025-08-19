@@ -148,12 +148,12 @@ export const CollapsingParticles: React.FC<
     <points ref={particlesRef}>
       <bufferGeometry ref={geometryRef} />
       <pointsMaterial
-        size={0.012}
-        vertexColors
-        transparent
-        opacity={0.85}
         sizeAttenuation
+        transparent
+        vertexColors
         depthWrite={false}
+        size={0.012}
+        opacity={0.85}
       />
     </points>
   );

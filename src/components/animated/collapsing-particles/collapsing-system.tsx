@@ -27,7 +27,7 @@ export const CollapsingParticleSystem: React.FC<
     <Canvas
       camera={{ position: [0, 0, 3], fov: 75 }}
       className={cn(
-        "fixed z-0 h-full w-full bg-primary/10 top-0 left-0 right-0 bottom-0",
+        "fixed z-0 h-full w-full bg-primary/10 text-primary-foreground top-0 left-0 right-0 bottom-0",
         className,
       )}
       {...props}
