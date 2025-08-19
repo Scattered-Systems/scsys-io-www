@@ -11,9 +11,9 @@ import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
 
 export const CollapsingParticleSystem: React.FC<
-  Omit<React.ComponentProps<"div">, "children">
+  Omit<React.ComponentPropsWithoutRef<"div">, "children">
 > = ({ className, ...props }) => {
-  const Canvas = dynamic(
+  const Comp = dynamic(
     () => import("./canvas").then((mod) => mod.CollapsingParticleCanvas),
     {
       ssr: false,
@@ -21,10 +21,10 @@ export const CollapsingParticleSystem: React.FC<
   );
   return (
     <div
-      className={cn("relative z-0 flex-1 h-full w-full", className)}
+      className={cn("flex-1 h-full w-full fixed -z-10 right-0 left-0 top-0 bottom-0", className)}
       {...props}
     >
-      <Canvas />
+      <Comp />
     </div>
   );
 };
