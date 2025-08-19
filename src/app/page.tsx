@@ -3,19 +3,11 @@
  * @author - @FL03
  * @file - page.tsx
  */
-import { Metadata } from "next";
 import { CollapsingParticleSystem } from "@/components/animated";
-
-export const metadata: Metadata = {
-  title: "scsys.io",
-  description: "Welcome to scsys.io, home to the Scattered Systems project.",
-};
 
 export default function Page() {
   return (
-    <div className="h-screen w-full fixed z-0 top-0 bottom-0 left-0 right-0">
-      <CollapsingParticleSystem />
-    </div>
+    <CollapsingParticleSystem className="h-screen w-full relative -z-0 top-0 bottom-0 left-0 right-0" />
   );
 }
 Page.displayName = "HomePage";
