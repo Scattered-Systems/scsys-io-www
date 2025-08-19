@@ -161,18 +161,18 @@ export const CollapsingParticleCanvas: React.FC<
     timeScale?: number;
   }
 > = ({ className, particles, timeScale, ...props }) => (
-  <React.Suspense fallback={null}>
-    <Canvas
-      camera={{ position: [0, 0, 3], fov: 75 }}
-      className={cn(
-        "fixed z-0 h-full w-full bg-primary/10",
-        className,
-      )}
-      {...props}
-    >
-      <CollapsingParticles particles={particles} timeScale={timeScale}/>
-    </Canvas>
-  </React.Suspense>
+  <Canvas
+    camera={{ position: [0, 0, 3], fov: 75 }}
+    className={cn(
+      "fixed z-0 h-full w-full bg-primary/10 top-0 left-0 right-0 bottom-0",
+      className,
+    )}
+    {...props}
+  >
+    <React.Suspense fallback={null}>
+      <CollapsingParticles particles={particles} timeScale={timeScale} />
+    </React.Suspense>
+  </Canvas>
 );
 CollapsingParticleCanvas.displayName = "CollapsingParticleCanvas";
 

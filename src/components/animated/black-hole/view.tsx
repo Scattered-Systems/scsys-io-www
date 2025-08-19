@@ -21,7 +21,7 @@ export const CollapsingParticleSystem: React.FC<
   );
   return (
     <div
-      className={cn("flex-1 h-full w-full fixed -z-10 right-0 left-0 top-0 bottom-0", className)}
+      className={cn("relative z-0 flex-1 h-full w-full", className)}
       {...props}
     >
       <Comp />
