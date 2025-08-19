@@ -7,7 +7,10 @@ import { CollapsingParticleSystem } from "@/components/animated";
 
 export default function Page() {
   return (
-    <CollapsingParticleSystem className="h-screen" />
+    <div className="relative -z-0 flex-1 h-screen w-screen overflow-hidden">
+      
+      <CollapsingParticleSystem />
+    </div>
   );
 }
 Page.displayName = "HomePage";

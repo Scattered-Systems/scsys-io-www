@@ -35,8 +35,7 @@ export default async function RootLayout({
     <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body
         className={cn(
-          "flex flex-1 flex-col min-h-screen w-full relative z-0 m-0 p-0",
-          "antialiased bg-background text-foreground border-none",
+          "antialiased flex flex-1 flex-col min-h-screen w-full relative z-0 m-0 p-0",
           geistMono.variable,
           geistSans.variable,
         )}
