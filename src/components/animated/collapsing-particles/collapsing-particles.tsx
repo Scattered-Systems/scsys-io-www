@@ -78,7 +78,7 @@ export const CollapsingParticles: React.FC<
         new THREE.BufferAttribute(col, 3),
       );
     }
-  }, [particles]);
+  }, [particles, particleColor]);
 
   // Animation loop
   useFrame((_, delta) => {
