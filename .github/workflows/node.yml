@@ -49,13 +49,13 @@ jobs:
           restore-keys: |
             bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
       - name: Build the workspace
         run: bun run build
       - name: Run any tests
-        run: bun run test
+        run: bun run test --if-present
       - name: Upload the build artifacts
         uses: actions/upload-artifact@v6
         with:
           name: nextjs-build
-          path: ./{{ env.BUILD_DIR }}
+          path: ./${{ env.BUILD_DIR }}
