@@ -20,16 +20,16 @@ enabled = true
 [images]
 binding = "IMAGES"
 
-[[services]]
-binding = "WORKER_SELF_REFERENCE"
-service = "scsys-io-www"
-
 [vars]
 NEXT_PUBLIC_SITE_URL = "https://scsys.io"
 NEXT_PUBLIC_SUPABASE_URL = "https://gilqgzjkzkmhbbcqidqb.supabase.co"
 NEXT_TELEMETRY_DISABLED = 1
 NODE_ENV = "production"
 NODE_VERSION = 24
+
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "scsys-io"
 
 [[routes]]
 custom_domain = true
