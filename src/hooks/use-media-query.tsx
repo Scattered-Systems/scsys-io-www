@@ -3,9 +3,9 @@
  * @author - @FL03
  * @file - use-media-query.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 
 /**
  * A custom hook that listens to media query changes and returns a boolean indicating whether the query matches.
@@ -28,10 +28,10 @@ export const useMediaQuery = (query: string): boolean => {
     // update the state based on the initial match
     setIsMatch(mediaQueryList.matches);
     // add the listener to the media query list
-    mediaQueryList.addEventListener("change", _listener);
+    mediaQueryList.addEventListener('change', _listener);
     // cleanup function to remove the listener
     return () => {
-      mediaQueryList.removeEventListener("change", _listener);
+      mediaQueryList.removeEventListener('change', _listener);
     };
   }, [query, _listener, setIsMatch]);
 

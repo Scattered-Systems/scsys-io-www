@@ -1,0 +1,71 @@
+name: 'Copilot Setup Steps'
+
+# Automatically run the setup steps when they are changed to allow for easy validation, and
+# allow manual testing through the repository's "Actions" tab
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    branches: [main, master]
+    types: [synchronize]
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  workflow_dispatch:
+    inputs:
+      bun-version:
+        default: 'latest'
+        description: 'Bun version'
+        required: true
+        type: string
+
+# environment variables available to all jobs and steps
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: full
+  NEXT_TELEMETRY_DISABLED: 1
+  NODE_ENV: production
+# permissions enabled for all jobs
+permissions:
+  contents: read
+# the ci jobs to run
+jobs:
+  setup:
+    name: 'Copilot Setup Steps'
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DIR: .next
+      BUN_VERSION: latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Setup the Cache
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.bun/install/cache
+            apps/myfi/${{ env.BUILD_DIR }}/cache
+            apps/tips/${{ env.BUILD_DIR }}/cache
+          # Generate a new cache whenever packages or source files change.
+          key: bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-
+      - name: Install dependencies
+        run: bun i
+      - name: Build the workspace
+        run: bun run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: copilot-setup-steps
+          path: ./${{ env.BUILD_DIR }}

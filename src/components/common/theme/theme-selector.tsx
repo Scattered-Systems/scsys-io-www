@@ -2,11 +2,11 @@
   Appellation: theme_selector <module>
   Contrib: @FL03
 */
-"use client";
+'use client';
 
-import * as React from "react";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import { useTheme } from 'next-themes';
+import { cn } from '@/lib/utils';
 import {
   Select,
   SelectContent,
@@ -15,11 +15,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 // ThemeSelector
 export const ThemeSelector: React.FC<
-  Omit<React.ComponentPropsWithoutRef<typeof Select>, "children"> & {
+  Omit<React.ComponentPropsWithoutRef<typeof Select>, 'children'> & {
     className?: string;
   }
 > = ({ className, onValueChange, ...props }) => {
@@ -27,9 +27,9 @@ export const ThemeSelector: React.FC<
   const { theme, setTheme } = useTheme();
   // a map defining the available themes
   const themes = {
-    system: "System",
-    dark: "Dark",
-    light: "Light",
+    system: 'System',
+    dark: 'Dark',
+    light: 'Light',
   };
   // handle any changes to the selected value
   const handleValueChange = (value: string) => {
@@ -42,27 +42,15 @@ export const ThemeSelector: React.FC<
   };
   // render the component
   return (
-    <Select
-      onValueChange={handleValueChange}
-      value={theme}
-      {...props}
-    >
-      <SelectTrigger
-        className={cn(
-          "w-[180px]",
-          className,
-        )}
-      >
-        <SelectValue placeholder="Theme" />
+    <Select onValueChange={handleValueChange} value={theme} {...props}>
+      <SelectTrigger className={cn('w-[180px]', className)}>
+        <SelectValue placeholder='Theme' />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Themes</SelectLabel>
           {Object.entries(themes).map(([value, label], index) => (
-            <SelectItem
-              key={index}
-              value={value}
-            >
+            <SelectItem key={index} value={value}>
               {label}
             </SelectItem>
           ))}
@@ -71,6 +59,6 @@ export const ThemeSelector: React.FC<
     </Select>
   );
 };
-ThemeSelector.displayName = "ThemeSelector";
+ThemeSelector.displayName = 'ThemeSelector';
 
 export default ThemeSelector;

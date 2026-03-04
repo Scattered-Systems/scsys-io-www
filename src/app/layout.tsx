@@ -5,24 +5,24 @@
  * @file - layout.tsx
  */
 // imports
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
-import { Toaster } from "sonner";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { cookies } from 'next/headers';
+import { Toaster } from 'sonner';
 // project
-import { cn } from "@/lib/utils";
-import { AppScaffold, PlatformProvider } from "@/features/platform";
+import { cn } from '@/lib/utils';
+import { AppScaffold, PlatformProvider } from '@/features/platform';
 // stylesheet
-import "@/public/styles/globals.css";
+import '@/styles/globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export default async function RootLayout({
@@ -30,20 +30,18 @@ export default async function RootLayout({
 }: Readonly<React.PropsWithChildren>) {
   const cookieStore = await cookies();
 
-  const defaultTheme = cookieStore.get("theme")?.value ?? "system";
+  const defaultTheme = cookieStore.get('theme')?.value ?? 'system';
   return (
-    <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
+    <html lang='en' suppressContentEditableWarning suppressHydrationWarning>
       <body
         className={cn(
-          "antialiased flex flex-1 flex-col min-h-screen w-full relative z-0 m-0 p-0",
+          'antialiased flex flex-1 flex-col min-h-screen w-full relative z-0 m-0 p-0',
           geistMono.variable,
           geistSans.variable,
         )}
       >
         <PlatformProvider defaultTheme={defaultTheme}>
-          <AppScaffold fullWidth>
-            {children}
-          </AppScaffold>
+          <AppScaffold fullWidth>{children}</AppScaffold>
           <Toaster />
         </PlatformProvider>
       </body>
@@ -52,55 +50,55 @@ export default async function RootLayout({
 }
 
 export const metadata: Metadata = {
-  applicationName: "Scattered-Systems",
+  applicationName: 'Scattered-Systems',
   authors: [
     {
-      name: "Joe McCain III",
-      url: "https://github.com/FL03",
+      name: 'Joe McCain III',
+      url: 'https://github.com/FL03',
     },
     {
-      name: "Scattered-Systems, LLC",
-      url: "https://scsys.io",
+      name: 'Scattered-Systems, LLC',
+      url: 'https://scsys.io',
     },
   ],
-  category: "Technology",
-  classification: "website",
-  creator: "FL03",
-  description: "Empowering the next generation of internet-based experiences",
+  category: 'Technology',
+  classification: 'website',
+  creator: 'FL03',
+  description: 'Empowering the next generation of internet-based experiences',
   icons: [
     {
-      url: "/logo.svg",
-      sizes: "any",
-      type: "image/x-svg+xml",
+      url: '/logo.svg',
+      sizes: 'any',
+      type: 'image/x-svg+xml',
     },
     {
-      url: "/favicon.ico",
-      sizes: "any",}
-    
+      url: '/favicon.ico',
+      sizes: 'any',
+    },
   ],
-  keywords: ["technology", "network", "platform", "virtualization"],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://scsys.io"),
-  publisher: "Scattered-Systems, LLC",
-  title: { absolute: "Scattered-Systems", template: "%s | scsys-io" },
+  keywords: ['technology', 'network', 'platform', 'virtualization'],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://scsys.io'),
+  publisher: 'Scattered-Systems, LLC',
+  title: { absolute: 'Scattered-Systems', template: '%s | scsys-io' },
   twitter: {
-    card: "summary",
-    creator: "@jo3mccain",
-    site: "@scsys.io",
+    card: 'summary',
+    creator: '@jo3mccain',
+    site: '@scsys.io',
   },
   openGraph: {
     description:
-      "Scattered-Systems strives to design and develop innovative solutions that empower individuals and organizations to achieve their goals.",
-    siteName: "scsys-io",
-    locale: "en_US",
-    title: "Scattered-Systems, LLC",
-    type: "website",
-    url: "https://scsys.io",
+      'Scattered-Systems strives to design and develop innovative solutions that empower individuals and organizations to achieve their goals.',
+    siteName: 'scsys-io',
+    locale: 'en_US',
+    title: 'Scattered-Systems, LLC',
+    type: 'website',
+    url: 'https://scsys.io',
     images: [
       {
-        url: "/logo.svg",
+        url: '/logo.svg',
         width: 1200,
         height: 630,
-        alt: "Scattered-Systems",
+        alt: 'Scattered-Systems',
       },
     ],
   },

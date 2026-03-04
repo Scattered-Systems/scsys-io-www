@@ -11,7 +11,7 @@ declare global {
     turnstile?: {
       render: (
         container: string | HTMLElement,
-        options: TurnstileOptions
+        options: TurnstileOptions,
       ) => string;
       reset: (widgetId: string) => void;
       remove: (widgetId: string) => void;
@@ -46,7 +46,6 @@ const cloudflareTurnstileSiteKey = () => {
     process.env.CF_TURNSTILE_PUBLIC_KEY
   );
 };
-
 
 export const CloudflareTurnstile: React.FC<
   Omit<React.ComponentPropsWithRef<'div'>, 'id'> & TurnstileProps
@@ -103,10 +102,10 @@ export const CloudflareTurnstile: React.FC<
   }, [widgetId, setIsLoaded]);
 
   return (
-    <React.Suspense fallback={<LoaderIcon className="w-4 h-4 animate-spin" />}>
-      <div {...props} id="cf-turnstile" ref={ref} />
+    <React.Suspense fallback={<LoaderIcon className='w-4 h-4 animate-spin' />}>
+      <div {...props} id='cf-turnstile' ref={ref} />
       <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
         onLoad={() => setIsLoaded(true)}
       />
     </React.Suspense>

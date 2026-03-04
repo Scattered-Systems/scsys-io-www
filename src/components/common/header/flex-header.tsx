@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 //  project
-import { cn } from "@/lib/utils";
-import { TextSize } from "@/types";
+import { cn } from '@/lib/utils';
+import { TextSize } from '@/types';
 import {
   Header,
   HeaderContent,
@@ -10,7 +10,7 @@ import {
   HeaderLeading,
   HeaderTitle,
   HeaderTrailing,
-} from "./header";
+} from './header';
 
 type ClassNames = {
   contentClassName?: string;
@@ -37,8 +37,8 @@ type ContentHeaderProps = {
  * appearance and behavio using the `classNames` prop.
  */
 export const FlexHeader: React.FC<
-  & Omit<React.ComponentPropsWithRef<"div">, "children" | "title">
-  & ContentHeaderProps
+  Omit<React.ComponentPropsWithRef<'div'>, 'children' | 'title'> &
+    ContentHeaderProps
 > = ({
   ref,
   leading,
@@ -47,8 +47,8 @@ export const FlexHeader: React.FC<
   description,
   title,
   extended,
-  descriptionSize = "sm",
-  titleSize = "base",
+  descriptionSize = 'sm',
+  titleSize = 'base',
   classNames = {},
   ...props
 }) => {
@@ -67,18 +67,14 @@ export const FlexHeader: React.FC<
     if (extended) {
       return (
         <>
-          <div className="flex flex-row flex-nowrap w-full h-fit items-center justify-between">
+          <div className='flex flex-row flex-nowrap w-full h-fit items-center justify-between'>
             {leading && (
-              <HeaderLeading
-                className={leadingClassName}
-              >
+              <HeaderLeading className={leadingClassName}>
                 {leading}
               </HeaderLeading>
             )}
             {trailing && (
-              <HeaderTrailing
-                className={trailingClassName}
-              >
+              <HeaderTrailing className={trailingClassName}>
                 {trailing}
               </HeaderTrailing>
             )}
@@ -86,10 +82,7 @@ export const FlexHeader: React.FC<
           {withHeader && (
             <HeaderContent className={contentClassName}>
               {title && (
-                <HeaderTitle
-                  className={titleClassName}
-                  textSize={titleSize}
-                >
+                <HeaderTitle className={titleClassName} textSize={titleSize}>
                   {title}
                 </HeaderTitle>
               )}
@@ -110,19 +103,12 @@ export const FlexHeader: React.FC<
     return (
       <>
         {leading && (
-          <HeaderLeading
-            className={leadingClassName}
-          >
-            {leading}
-          </HeaderLeading>
+          <HeaderLeading className={leadingClassName}>{leading}</HeaderLeading>
         )}
         {withHeader && (
           <HeaderContent className={contentClassName}>
             {title && (
-              <HeaderTitle
-                className={titleClassName}
-                textSize={titleSize}
-              >
+              <HeaderTitle className={titleClassName} textSize={titleSize}>
                 {title}
               </HeaderTitle>
             )}
@@ -137,9 +123,7 @@ export const FlexHeader: React.FC<
           </HeaderContent>
         )}
         {trailing && (
-          <HeaderTrailing
-            className={trailingClassName}
-          >
+          <HeaderTrailing className={trailingClassName}>
             {trailing}
           </HeaderTrailing>
         )}
@@ -148,15 +132,11 @@ export const FlexHeader: React.FC<
   };
   // render the component
   return (
-    <Header
-      {...props}
-      ref={ref}
-      className={className}
-    >
+    <Header {...props} ref={ref} className={className}>
       {renderDisplay()}
     </Header>
   );
 };
-FlexHeader.displayName = "FlexHeader";
+FlexHeader.displayName = 'FlexHeader';
 
 export default FlexHeader;

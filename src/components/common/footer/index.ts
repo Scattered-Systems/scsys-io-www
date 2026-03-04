@@ -3,4 +3,4 @@
  * @author - @FL03
  * @file - footer/index.tsx
  */
-export * from "./footer";
+export * from './footer';

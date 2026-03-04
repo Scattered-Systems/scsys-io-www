@@ -1,42 +1,29 @@
-# scsys-io
+# @pzzld
 
-[![GitHub deployments](https://img.shields.io/github/deployments/scattered-systems/scsys-io-www/production?style=for-the-badge&logo=github&label=Prod&labelColor=000000)](https://github.com/scattered-systems/scsys-io-www/deployments/activity_log?environment=production)
+[![GitHub License](https://img.shields.io/github/license/FL03/pzzld-js?style=for-the-badge&logo=github)](LICENSE)
+![Docker Image Version](https://img.shields.io/docker/v/jo3mccain/pzzld-js/latest?style=for-the-badge&logo=docker)
 
-***
+[![TypeScript](https://img.shields.io/badge/TypeScript-latest-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
 
-## Getting Started
+Welcome to the `pzzld-js` monorepo! This repository contains a collections of packages, applications, components, and contracts that combine to form the basis of the `pzzld` ecosystem.
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Monorepo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### _Applications_
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All applications are located in the `apps` directory. Each application is a standalone project that can be developed, built, and deployed independently. The applications include:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `@pzzld/app`: A complete application template for creating modern web applications using NextJS, Bun, and Tailwind CSS.
 
-## Learn More
+#### _Packages_
 
-To learn more about Next.js, take a look at the following resources:
+All reusable packages are located in the `packages` directory. Each package is designed to be shared across multiple applications and can be published to npm. The packages include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `@pzzld/ui`: A collection of reusable React components styled with Tailwind CSS.
+- `@pzzld/types`: A collection of TypeScript types and interfaces
+- `@pzzld/utils`: A collection of utility functions and hooks for common tasks.
+- `@pzzld/pzzld-js`: Core logic and services for the `pzzld` ecosystem, such as authentication, data fetching, and state management

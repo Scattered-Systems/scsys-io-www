@@ -26,7 +26,7 @@ const actionGroupVariants = cva(
         inline: 'inline-flex',
       },
     },
-  }
+  },
 );
 
 type ActionGroupVariants = VariantProps<typeof actionGroupVariants>;
@@ -72,7 +72,7 @@ export const ActionButton = React.forwardRef<
 >(
   (
     { asChild, className, size = 'default', variant = 'default', ...props },
-    ref
+    ref,
   ) => {
     return (
       <Button
@@ -84,6 +84,6 @@ export const ActionButton = React.forwardRef<
         variant={variant}
       />
     );
-  }
+  },
 );
 ActionButton.displayName = 'ActionButton';

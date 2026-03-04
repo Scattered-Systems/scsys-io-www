@@ -101,7 +101,7 @@ export const RefreshButton: React.FC<
             <span
               className={cn(
                 showLabel ? 'not-sr-only' : 'sr-only',
-                isAnimating && 'animate-pulse'
+                isAnimating && 'animate-pulse',
               )}
             >
               {isAnimating ? 'Refreshing' : 'Refresh'}

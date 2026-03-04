@@ -3,8 +3,8 @@
  * @author - @FL03
  * @file - views/index.ts
  */
-export * from "./about-screen";
-export * from "./landing-screen";
-export * from "./privacy-screen";
-export * from "./sample-screen";
-export * from "./terms-screen";
+export * from './about-screen';
+export * from './landing-screen';
+export * from './privacy-screen';
+export * from './sample-screen';
+export * from './terms-screen';

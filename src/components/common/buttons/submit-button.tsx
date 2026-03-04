@@ -33,11 +33,11 @@ export const SubmitButton: React.FC<
     >
       {isSubmitting ? (
         <>
-          <Loader2Icon className="h-4 w-4 anitmate-spin" />
+          <Loader2Icon className='h-4 w-4 anitmate-spin' />
           <span
             className={cn(
               'animate-pulse',
-              hideLabel ? 'sr-only' : 'not-sr-only'
+              hideLabel ? 'sr-only' : 'not-sr-only',
             )}
           >
             Submitting...
@@ -45,7 +45,7 @@ export const SubmitButton: React.FC<
         </>
       ) : (
         <>
-          <SaveIcon className="h-4 w-4" />
+          <SaveIcon className='h-4 w-4' />
           <span className={hideLabel ? 'sr-only' : 'not-sr-only'}>Submit</span>
         </>
       )}

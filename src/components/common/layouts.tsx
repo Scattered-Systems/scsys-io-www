@@ -15,11 +15,10 @@ export const Centered = React.forwardRef<
       ref={ref}
       className={cn(
         'flex flex-col flex-1 w-full items-center justify-items-center justify-center',
-        className
+        className,
       )}
       {...props}
     />
   );
 });
 Centered.displayName = 'Centered';
-

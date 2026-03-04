@@ -77,10 +77,10 @@ export const ClockWidget = React.forwardRef<
       refresh = 30,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [time, setTime] = React.useState(
-      new Date().toLocaleTimeString(locals, options)
+      new Date().toLocaleTimeString(locals, options),
     );
     const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -109,7 +109,7 @@ export const ClockWidget = React.forwardRef<
               ref={ref}
               className={cn(
                 'inline-flex items-center text-foreground font-semibold',
-                className
+                className,
               )}
               {...props}
             >
@@ -120,7 +120,7 @@ export const ClockWidget = React.forwardRef<
         </Tooltip>
       </TooltipProvider>
     );
-  }
+  },
 );
 ClockWidget.displayName = 'Clock';
 

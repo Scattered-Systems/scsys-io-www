@@ -1,0 +1,38 @@
+!*.lock
+
+## General
+**/.artifacts
+**/.cache
+
+### File Extensions
+
+*.db
+*.db.*
+
+*.tar
+*.tar.*
+
+*.zip
+*.zip.*
+
+### Directories
+**/dist
+
+## Development
+
+### Docker
+**/Dockerfile
+
+*.dockerfile
+*.dockerfile
+
+### IDEs
+
+#### Atom
+**/.atom
+
+#### JetBrains
+**/.idea
+
+#### Visual Studio Code
+**/.vscode

@@ -3,10 +3,10 @@
  * @author - @FL03
  * @file - platform/provider.tsx
  */
-"use client";
+'use client';
 // imports
-import { ThemeProvider } from "next-themes";
-import React, { PropsWithChildren } from "react";
+import { ThemeProvider } from 'next-themes';
+import React, { PropsWithChildren } from 'react';
 
 type ProviderProps = {
   defaultTheme?: string;
@@ -14,22 +14,22 @@ type ProviderProps = {
 
 export const PlatformProvider: React.FC<PropsWithChildren<ProviderProps>> = ({
   children,
-  defaultTheme = "system",
+  defaultTheme = 'system',
 }) => {
   return (
     <ThemeProvider
       disableTransitionOnChange
       enableColorScheme
       enableSystem
-      attribute="class"
+      attribute='class'
       defaultTheme={defaultTheme}
-      storageKey="theme"
-      themes={["light", "dark"]}
+      storageKey='theme'
+      themes={['light', 'dark']}
     >
       {children}
     </ThemeProvider>
   );
 };
-PlatformProvider.displayName = "PlatformProvider";
+PlatformProvider.displayName = 'PlatformProvider';
 
 export default PlatformProvider;

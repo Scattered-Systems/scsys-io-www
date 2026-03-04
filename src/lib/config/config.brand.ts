@@ -4,7 +4,7 @@ type Brand = {
   logo: string;
   icon: string;
   url: string;
-}
+};
 
 export const brand: Brand = {
   name: 'Scattered-Systems',
@@ -12,4 +12,4 @@ export const brand: Brand = {
   logo: 'scsys',
   icon: 'scsys',
   url: 'https://scsys.io',
-}
+};

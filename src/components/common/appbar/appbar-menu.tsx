@@ -10,7 +10,6 @@ import { Slot } from '@radix-ui/react-slot';
 // project
 import { cn } from '@/lib/utils';
 
-
 /** This component is used to render dropdown-menus  */
 export const AppBarMenu: React.FC<
   React.ComponentPropsWithRef<'ul'> & { asChild?: boolean }
@@ -24,7 +23,7 @@ export const AppBarMenu: React.FC<
       className={cn(
         'inline-flex flex-row flex-nowrap flex-shrink gap-2 lg:gap-4 items-center',
         'bg-inherit text-inherit',
-        className
+        className,
       )}
       {...props}
     />
@@ -45,7 +44,7 @@ export const AppBarMenuItem: React.FC<
       className={cn(
         'inline-flex flex-row flex-1',
         'bg-inherit text-inherit',
-        className
+        className,
       )}
       {...props}
     />

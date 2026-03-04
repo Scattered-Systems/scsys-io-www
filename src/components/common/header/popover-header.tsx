@@ -56,13 +56,13 @@ export const PopoverHeader: React.FC<
       className={cn('flex flex-nowrap gap-4 items-center w-full', className)}
       {...props}
     >
-      <div className="w-full inline-flex flex-col flex-1 mr-auto">
-        {title && <span className="font-semibold text-nowrap">{title}</span>}
+      <div className='w-full inline-flex flex-col flex-1 mr-auto'>
+        {title && <span className='font-semibold text-nowrap'>{title}</span>}
         {description && (
           <span
             className={cn(
               'text-sm text-muted-foreground',
-              showDescription ? 'not-sr-only' : 'sr-only'
+              showDescription ? 'not-sr-only' : 'sr-only',
             )}
           >
             {description}
@@ -73,13 +73,13 @@ export const PopoverHeader: React.FC<
       <div
         className={cn(
           'ml-auto items-center justify-end inline-flex',
-          !showDescription && `${breakpoint}:hidden`
+          !showDescription && `${breakpoint}:hidden`,
         )}
       >
         {!showDescription && (
           <Popover>
             <PopoverTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <Button size='icon' variant='ghost'>
                 <InfoIcon />
                 <span className={showLabel ? 'not-sr-only' : 'sr-only'}>
                   {title}
@@ -87,7 +87,7 @@ export const PopoverHeader: React.FC<
               </Button>
             </PopoverTrigger>
             <PopoverContent>
-              {description && <span className="text-sm">{description}</span>}
+              {description && <span className='text-sm'>{description}</span>}
             </PopoverContent>
           </Popover>
         )}
@@ -98,6 +98,5 @@ export const PopoverHeader: React.FC<
   );
 };
 PopoverHeader.displayName = 'PopoverHeader';
-
 
 export default PopoverHeader;

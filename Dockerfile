@@ -1,81 +1,78 @@
-ARG NODE_VERSION=20
+ARG BUN_VERSION=1
 
-FROM node:${NODE_VERSION}-alpine AS node-base
+# Stage 1: Base builder image
+FROM oven/bun:${BUN_VERSION} AS builder-base
+# set the working directory to the app workspace for all stages
+WORKDIR /usr/src/app
+# configure environment variables for all stages
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_PUBLIC_BUILD_OUTPUT="standalone"
 
-# Install dependencies only when needed
-FROM node-base AS deps
+# Stage 2: Build Dependencies
+FROM builder-base AS deps
+# make the installation of dependencies a separate step to leverage Docker caching
+RUN mkdir -p /tmp/dev
+# copy package files to temp directory for dependency installation
+COPY package.json bun.lock* ./
+# install dependencies with bun
+RUN cd /tmp/dev && \
+    bun install --frozen-lockfile || bun install
 
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+# Stage 3: Install production dependencies only
+FROM builder-base AS install
+# create a temporary directory for production dependencies
+RUN mkdir -p /tmp/prod
+# copy package files to temp directory for production install
+COPY package.json bun.lock* /tmp/prod/
+# install production dependencies only
+RUN cd /tmp/prod && \
+    bun install --production --frozen-lockfile || bun install --production
 
-WORKDIR /app
+# Stage 4: Builder
+FROM builder-base AS builder
 
-# Install dependencies based on the preferred package manager
-COPY package.json package-lock.json* ./
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_PUBLIC_BUILD_OUTPUT="standalone"
+# set the working directory to the app workspace for building
+WORKDIR /usr/src/app
+# copy dependencies from the deps stage to the builder stage
+COPY --from=deps /tmp/dev/node_modules ./
+# copy source files to the builder stage
+COPY . .
+# build the workspace / app
+RUN bun run build
 
-# If you have native dependencies, you'll need extra tools
+# Stage 5: Runner
+FROM oven/bun:${BUN_VERSION}-alpine AS runner
 
-# Install all dependencies, including 'devDependencies'
-RUN npm install
-
-# Rebuild the source code only when needed
-FROM node-base AS builder
-
-ENV NEXT_PUBLIC_BUILD_OUTPUT_TYPE="standalone" \
-    NEXT_TELEMETRY_DISABLED=1 \ 
-    NODE_ENV=production
-# Set working directory
-WORKDIR /app
-
-# Copy the source code  
-ADD . .
-# Copy dependencies
-COPY --from=deps /app/node_modules ./node_modules
-
-RUN npm run build
-
-# Production image, copy all the files and run next
-FROM node-base AS runner-base
-
-# Set environment variables
-ENV NEXT_TELEMETRY_DISABLED=1 \ 
-    NODE_ENV=production
-
-# Create a group and user
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
-
-# Set working directory
-WORKDIR /app
-
-# Set the correct permission for prerender cache
-RUN mkdir .next &&\
-    chown nextjs:nodejs .next &&\
-    chmod 755 .next
-
-# Copy the public folder
-COPY --from=builder --chmod=755 --chown=nextjs:nodejs --link /app/public ./public
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chmod=755 --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chmod=755 --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-FROM runner-base AS runner
-# Set some environment variables
-ENV NEXT_PUBLIC_SITE_URL="https://template-nextjs-dashboard.vercel.app" \
-    NEXT_PUBLIC_SUPABASE_ANON_KEY="" \
-    NEXT_PUBLIC_SUPABASE_URL="http://127.0.0.1:54321" \
-    SUPABASE_JWT_SECRET="" \
-    SUPABASE_SERVICE_ROLE_KEY="" \
-    POSTGRES_PASSWORD="" \
+ENV NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_PUBLIC_SITE_URL="http://localhost:3000" \
+    NEXT_PUBLIC_SUPABASE_URL="https://gilqgzjkzkmhbbcqidqb.supabase.co" \
     HOSTNAME="0.0.0.0" \
     PORT=3000
 
-    # Expose the port the app runs on
-EXPOSE 3000
+# Create non-root user
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 ausr
 
-# Set the user to use when running this image
-USER nextjs
+WORKDIR /app
 
-# Start the application
-CMD ["node", "server.js"]
+# Ensure prerender cache directory exists and is writable
+RUN mkdir -p build && \
+    chown ausr:appgroup build && \
+    chmod 755 build
+
+# Copy build artifacts from the app workspace
+COPY --from=builder --chown=ausr:appgroup /usr/src/app/public ./public
+COPY --from=builder --chown=ausr:appgroup /usr/src/app/build/standalone ./
+COPY --from=builder --chown=ausr:appgroup /usr/src/app/build/static ./build/static
+
+# Copy production node_modules
+COPY --from=install --chown=ausr:appgroup /tmp/prod/node_modules ./node_modules
+
+USER ausr
+EXPOSE 3000/tcp
+CMD ["bun", "run", "server.js"]

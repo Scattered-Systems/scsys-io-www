@@ -3,18 +3,18 @@
  * @author - @FL03
  * @file - blog/page.tsx
  */
-"use client";
+'use client';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 export default function Page() {
   return (
     <>
-      <Card className="flex flex-col flex-1 h-full w-full">
+      <Card className='flex flex-col flex-1 h-full w-full'>
         <CardHeader>
           <CardTitle>Blog</CardTitle>
           <CardDescription>
@@ -26,4 +26,4 @@ export default function Page() {
     </>
   );
 }
-Page.displayName = "BlogPage";
+Page.displayName = 'BlogPage';

@@ -3,11 +3,11 @@
  * @author - @FL03
  * @file - error-boundary.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 // project
-import logger from "@/lib/logger";
+import logger from '@/lib/logger';
 
 export class ErrorBoundary extends React.PureComponent<
   React.PropsWithChildren<{}>,
@@ -26,10 +26,10 @@ export class ErrorBoundary extends React.PureComponent<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex flex-col flex-1 w-full min-h-full">
-          <div className="flex flex-col w-full">
-            <h2 className="text-xl font-semibold tracking-tight">Error</h2>
-            <span className="text-muted-foreground">Something went wrong.</span>
+        <div className='flex flex-col flex-1 w-full min-h-full'>
+          <div className='flex flex-col w-full'>
+            <h2 className='text-xl font-semibold tracking-tight'>Error</h2>
+            <span className='text-muted-foreground'>Something went wrong.</span>
           </div>
         </div>
       );

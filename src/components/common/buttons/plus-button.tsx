@@ -43,9 +43,9 @@ export const PlusButton: React.FC<
       {...props}
     >
       {isLoading ? (
-        <Loader2Icon className="h-4 w-4 animate-spin transition-colors" />
+        <Loader2Icon className='h-4 w-4 animate-spin transition-colors' />
       ) : (
-        <PlusIcon className="h-4 w-4" />
+        <PlusIcon className='h-4 w-4' />
       )}
       <span className={showLabel ? 'not-sr-only' : 'sr-only'}>{label}</span>
     </TooltipButton>

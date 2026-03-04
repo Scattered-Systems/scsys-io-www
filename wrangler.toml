@@ -1,7 +1,10 @@
-compatibility_date = "2025-08-05"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-03-04"
+compatibility_flags = [
+  "global_fetch_strictly_public",
+  "nodejs_compat",
+]
 main = ".open-next/worker.js"
-name = "scsys-io-www"
+name = "scsys-io"
 workers_dev = true
 
 [build]
@@ -14,12 +17,19 @@ directory = ".open-next/assets"
 [observability.logs]
 enabled = true
 
+[images]
+binding = "IMAGES"
+
 [vars]
 NEXT_PUBLIC_SITE_URL = "https://scsys.io"
 NEXT_PUBLIC_SUPABASE_URL = "https://gilqgzjkzkmhbbcqidqb.supabase.co"
 NEXT_TELEMETRY_DISABLED = 1
 NODE_ENV = "production"
 NODE_VERSION = 24
+
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "scsys-io"
 
 [[routes]]
 custom_domain = true

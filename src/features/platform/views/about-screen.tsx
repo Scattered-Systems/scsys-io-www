@@ -3,31 +3,31 @@
  * @author - @FL03
  * @file - about-screen.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 // project
-import About from "../content/about.mdx";
-import { ContentCard } from "../widgets";
+import About from '../content/about.mdx';
+import { ContentCard } from '../widgets';
 
 export const AboutScreen: React.FC<
   Omit<
     React.ComponentPropsWithRef<typeof ContentCard>,
-    "author" | "description" | "title" | "children"
+    'author' | 'description' | 'title' | 'children'
   >
 > = ({ ref, ...props }) => {
   return (
     <ContentCard
       {...props}
       ref={ref}
-      author="Joe McCain III"
-      description="A brief overview of the Scsys platform and its features."
-      title="About"
+      author='Joe McCain III'
+      description='A brief overview of the Scsys platform and its features.'
+      title='About'
     >
       <About />
     </ContentCard>
   );
 };
-AboutScreen.displayName = "AboutScreen";
+AboutScreen.displayName = 'AboutScreen';
 
 export default AboutScreen;

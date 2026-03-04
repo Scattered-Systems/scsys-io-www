@@ -1,0 +1,92 @@
+name: Docker
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  # pull_request:
+  #   branches: [main, master]
+  #   types: [synchronize]
+  push:
+    branches: [main, master]
+    tags: [latest, v*.*.*]
+  repository_dispatch:
+    types: [docker, dockerhub, docker-publish]
+  workflow_dispatch:
+    inputs:
+      build_context:
+        description: 'The path to the build context for the Docker build'
+        required: false
+        default: '.'
+      dockerfile:
+        description: 'The Dockerfile to use for the build'
+        required: false
+        default: 'Dockerfile'
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+
+jobs:
+  bnp:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    env:
+      BUILD_CONTEXT: ${{ github.event.inputs.build_context || '.' }}
+      DOCKERFILE: ${{ github.event.inputs.dockerfile || 'Dockerfile' }}
+    environment:
+      name: dockerhub
+      url: https://hub.docker.com/r/${{ env.IMAGE_NAME }}
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Docker Metadata
+        uses: docker/metadata-action@v5
+        id: meta
+        with:
+          flavor: latest=true
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+      - name: Build & Push the image to DockerHub
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          context: ${{ env.BUILD_CONTEXT }}
+          file: ./${{ env.DOCKERFILE }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+      - name: Establish Proveance
+        continue-on-error: true
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@v3
+        with:
+          push-to-registry: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}

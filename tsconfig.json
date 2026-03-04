@@ -4,11 +4,11 @@
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -30,10 +30,7 @@
       ],
       "@/public/*": [
         "./public/*"
-      ],
-      "@/root/*": [
-        "./*"
-      ],
+      ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -47,6 +44,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "build/types/**/*.ts",
+    "build/dev/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ]
 }

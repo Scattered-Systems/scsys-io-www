@@ -3,7 +3,7 @@
  * @author - @FL03
  * @file - use-modal.tsx
  */
-"use client";
+'use client';
 // imports
 import {
   RefObject,
@@ -12,7 +12,7 @@ import {
   useMemo,
   useRef,
   useState,
-} from "react";
+} from 'react';
 
 type UseModalState = {
   isOpen: boolean;
@@ -52,16 +52,18 @@ export const useModal = <TElem extends HTMLElement = HTMLDivElement>({
     return targetRef.current;
   }, [target]);
   // toggle the modal state
-  const handleChange = useCallback((open: boolean) => (
-    setIsOpen((prev) => {
-      // if the open state is the same, do nothing
-      if (prev === open) return prev;
-      // if provided, call the onOpenChange callback
-      if (onOpenChange) onOpenChange(open);
-      // return the new open state
-      return open;
-    })
-  ), [onOpenChange]);
+  const handleChange = useCallback(
+    (open: boolean) =>
+      setIsOpen((prev) => {
+        // if the open state is the same, do nothing
+        if (prev === open) return prev;
+        // if provided, call the onOpenChange callback
+        if (onOpenChange) onOpenChange(open);
+        // return the new open state
+        return open;
+      }),
+    [onOpenChange],
+  );
   // toggle the modal state
   const toggle = useCallback(() => {
     handleChange(!isOpen);

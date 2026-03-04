@@ -3,6 +3,6 @@
  * @author - @FL03
  * @file - typography/index.ts
  */
-export * from "./prose-wrapper";
-export * from "./text-block";
-export * from "./text-styles";
+export * from './prose-wrapper';
+export * from './text-block';
+export * from './text-styles';
