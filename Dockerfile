@@ -14,7 +14,7 @@ FROM builder-base AS deps
 # make the installation of dependencies a separate step to leverage Docker caching
 RUN mkdir -p /tmp/dev
 # copy package files to temp directory for dependency installation
-COPY package.json bun.lock* ./
+COPY package.json bun.lock* /tmp/dev/
 # install dependencies with bun
 RUN cd /tmp/dev && \
     bun install --frozen-lockfile || bun install
@@ -35,8 +35,6 @@ FROM builder-base AS builder
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
     NEXT_PUBLIC_BUILD_OUTPUT="standalone"
-# set the working directory to the app workspace for building
-WORKDIR /usr/src/app
 # copy dependencies from the deps stage to the builder stage
 COPY --from=deps /tmp/dev/node_modules ./
 # copy source files to the builder stage
@@ -72,6 +70,8 @@ COPY --from=builder --chown=ausr:appgroup /usr/src/app/build/static ./build/stat
 
 # Copy production node_modules
 COPY --from=install --chown=ausr:appgroup /tmp/prod/node_modules ./node_modules
+# copy any .env files if needed (optional)
+COPY --chown=ausr:appgroup .env* ./
 
 USER ausr
 EXPOSE 3000/tcp
