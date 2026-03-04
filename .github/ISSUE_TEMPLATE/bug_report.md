@@ -1,7 +1,7 @@
 ---
 about: Create a report to help us improve
-assignees: [ FL03 ]
-labels: [ bug ]
+assignees: [FL03]
+labels: [bug]
 name: Bug report
 title: 'Bug Report: '
 ---

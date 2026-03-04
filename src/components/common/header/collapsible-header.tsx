@@ -18,7 +18,6 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 
-
 type HeaderClassNames = {
   leadingClassName?: string;
   trailingClassName?: string;
@@ -36,7 +35,6 @@ type HeaderProps = {
   descriptionSize?: TextSize;
   asChild?: boolean;
 };
-
 
 export const CollapsibleHeader: React.FC<
   React.PropsWithChildren<Omit<HeaderProps, 'asChild'>> & {
@@ -66,7 +64,7 @@ export const CollapsibleHeader: React.FC<
       // if passed, call the onOpenChange callback
       if (onOpenChange) onOpenChange(open);
     },
-    [onOpenChange, setIsOpen]
+    [onOpenChange, setIsOpen],
   );
   // ensure any changes to the external open prop are reflected in the internal state
   React.useEffect(() => {
@@ -77,14 +75,14 @@ export const CollapsibleHeader: React.FC<
 
   const renderTrailing = (c?: React.ReactNode) => {
     return (
-      <div className="inline-flex flex-nowrap items-center justify-end gap-2 right-0 ml-auto">
+      <div className='inline-flex flex-nowrap items-center justify-end gap-2 right-0 ml-auto'>
         {c}
-        <CollapsibleTrigger className="ml-auto">
-          <span className="sr-only">Toggle Header</span>
+        <CollapsibleTrigger className='ml-auto'>
+          <span className='sr-only'>Toggle Header</span>
           {isOpen ? (
-            <ChevronUpIcon className="h-4 w-4" />
+            <ChevronUpIcon className='h-4 w-4' />
           ) : (
-            <ChevronDownIcon className="h-4 w-4" />
+            <ChevronDownIcon className='h-4 w-4' />
           )}
         </CollapsibleTrigger>
       </div>
@@ -97,15 +95,12 @@ export const CollapsibleHeader: React.FC<
       className={cn(
         'flex flex-nowrap items-center w-full gap-2 lg:gap-4',
         'border-b border-muted pb-2 lg:pb-4',
-        className
+        className,
       )}
       open={isOpen}
       onOpenChange={handleOpenChange}
     >
-      
-      <CollapsibleContent>
-      {children}
-      </CollapsibleContent>
+      <CollapsibleContent>{children}</CollapsibleContent>
     </Collapsible>
   );
 };

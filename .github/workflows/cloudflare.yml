@@ -1,6 +1,6 @@
 name: Clouflare Worker
 
-concurrency:   
+concurrency:
   cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -12,7 +12,7 @@ env:
 
 on:
   repository_dispatch:
-    types: [ cf-deploy, preview, production ]
+    types: [cf-deploy, preview, production]
   workflow_dispatch:
     inputs:
       environment:
@@ -34,17 +34,14 @@ jobs:
       environment: ${{ steps.publish.outputs.pages-environment }}
       url: ${{ steps.publish.outputs.deployment-url }}
     steps:
-      - 
-        name: Checkout the source code
+      - name: Checkout the source code
         uses: actions/checkout@v4
-      - 
-        name: Setup node
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-      - 
-        id: publish
+      - id: publish
         name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:

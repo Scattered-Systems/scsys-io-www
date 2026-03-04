@@ -4,14 +4,14 @@
  * @file - about/page.tsx
  */
 // imports
-import { AboutScreen } from "@/features/platform";
+import { AboutScreen } from '@/features/platform';
 
 export default function Page() {
   return <AboutScreen />;
 }
-Page.displayName = "AboutPage";
+Page.displayName = 'AboutPage';
 
 // page metadata
-export const metadata: import("next").Metadata = {
-  title: "About",
-}
+export const metadata: import('next').Metadata = {
+  title: 'About',
+};

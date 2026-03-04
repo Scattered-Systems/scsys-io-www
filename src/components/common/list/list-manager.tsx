@@ -1,10 +1,10 @@
 // imports
-import * as React from "react";
+import * as React from 'react';
 // project
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 // components
-import { Tile } from "@/components/common/tile";
-import { ListItem, UList } from "./list-view";
+import { Tile } from '@/components/common/tile';
+import { ListItem, UList } from './list-view';
 
 export type RenderItemHandler<T = any> = (
   item?: T | null,
@@ -39,7 +39,7 @@ const ListContext = React.createContext<ListContext<any>>({
 export const useDataList = () => {
   const context = React.useContext(ListContext);
   if (!context) {
-    throw new Error("useListContext must be used within a ListProvider");
+    throw new Error('useListContext must be used within a ListProvider');
   }
   return context;
 };
@@ -55,7 +55,7 @@ export function DataListProvider<TData>({
   ...props
 }: Readonly<
   React.PropsWithChildren<
-    React.ComponentPropsWithRef<"div"> & ProviderProps<TData>
+    React.ComponentPropsWithRef<'div'> & ProviderProps<TData>
   >
 >) {
   const [_data, _setData] = React.useState<TData[]>(defaultValues);
@@ -72,7 +72,7 @@ export function DataListProvider<TData>({
     <ListContext.Provider value={context}>
       <div
         ref={ref}
-        className={cn("flex flex-col w-full", className)}
+        className={cn('flex flex-col w-full', className)}
         {...props}
       >
         {children}
@@ -80,7 +80,7 @@ export function DataListProvider<TData>({
     </ListContext.Provider>
   );
 }
-DataListProvider.displayName = "DataListProvider";
+DataListProvider.displayName = 'DataListProvider';
 
 export const ListManager: React.FC<ListManagerProps> = ({
   className,
@@ -93,20 +93,17 @@ export const ListManager: React.FC<ListManagerProps> = ({
 }) => {
   const { values } = useDataList();
   return (
-    <div className={cn("flex flex-col w-full", className)}>
-      <section className="flex flex-col w-full mb-4">
+    <div className={cn('flex flex-col w-full', className)}>
+      <section className='flex flex-col w-full mb-4'>
         <div>
-          <h2 className="text-lg font-semibold">{title}</h2>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <h2 className='text-lg font-semibold'>{title}</h2>
+          <p className='text-sm text-muted-foreground'>{description}</p>
         </div>
       </section>
-      <section className="flex fle">
+      <section className='flex fle'>
         <UList>
           {values?.map((item, index) => (
-            <ListItem
-              key={index}
-              onClick={() => onItemClick?.(item)}
-            >
+            <ListItem key={index} onClick={() => onItemClick?.(item)}>
               {renderItem(item, index, {
                 onItemClick: () => onItemClick?.(item),
                 onItemDelete: () => onItemDelete?.(item),
@@ -121,11 +118,11 @@ export const ListManager: React.FC<ListManagerProps> = ({
 };
 
 export const ListManagerView: React.FC<
-  & Omit<React.ComponentPropsWithRef<typeof ListManager>, "children">
-  & ListManagerProps
+  Omit<React.ComponentPropsWithRef<typeof ListManager>, 'children'> &
+    ListManagerProps
 > = ({ ...props }) => {
   return (
-    <DataListProvider className="flex-1 w-full">
+    <DataListProvider className='flex-1 w-full'>
       <ListManager {...props} />
     </DataListProvider>
   );

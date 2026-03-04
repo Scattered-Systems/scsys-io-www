@@ -3,5 +3,5 @@
  * @author - @FL03
  * @file - index.ts
  */
-export * from "./list-view";
-export * from "./provider";
+export * from './list-view';
+export * from './provider';

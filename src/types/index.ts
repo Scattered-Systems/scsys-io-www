@@ -3,6 +3,6 @@
  * @author - @FL03
  * @file - types/index.ts
  */
-export * from "./core";
-export * from "./datetime";
-export * from "./props";
+export * from './core';
+export * from './datetime';
+export * from './props';

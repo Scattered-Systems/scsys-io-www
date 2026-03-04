@@ -3,40 +3,40 @@
  * @author - @FL03
  * @file - labeled-separator.tsx
  */
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 // project
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 // components
-import { Separator } from "@/components/ui/separator";
+import { Separator } from '@/components/ui/separator';
 
 interface WidgetProps {
   separatorClassName?: string;
 }
 
 export const LabeledSeparator: React.FC<
-  React.ComponentPropsWithoutRef<"div"> & React.PropsWithChildren<WidgetProps>
+  React.ComponentPropsWithoutRef<'div'> & React.PropsWithChildren<WidgetProps>
 > = ({ className, children, separatorClassName, ...props }) => {
   return (
     <div
       className={cn(
-        "flex flex-nowrap w-full items-center justify-center gap-2",
+        'flex flex-nowrap w-full items-center justify-center gap-2',
         className,
       )}
       {...props}
     >
       <Separator
-        orientation="horizontal"
-        className={cn("flex-1", separatorClassName)}
+        orientation='horizontal'
+        className={cn('flex-1', separatorClassName)}
       />
-      <span className="text-sm text-muted-foreground">{children}</span>
+      <span className='text-sm text-muted-foreground'>{children}</span>
       <Separator
-        orientation="horizontal"
-        className={cn("flex-1", separatorClassName)}
+        orientation='horizontal'
+        className={cn('flex-1', separatorClassName)}
       />
     </div>
   );
 };
-LabeledSeparator.displayName = "LabeledSeparator";
+LabeledSeparator.displayName = 'LabeledSeparator';
 
 export default LabeledSeparator;

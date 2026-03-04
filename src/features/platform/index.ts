@@ -3,6 +3,6 @@
  * @author - @FL03
  * @file - platform/index.ts
  */
-export * from "./provider";
-export * from "./views";
-export * from "./widgets";
+export * from './provider';
+export * from './views';
+export * from './widgets';

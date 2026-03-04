@@ -24,26 +24,21 @@ const contentVariants = cva('flex flex-col flex-1 space-y-2 px-4 py-2', {
       card: 'rounded-xl shadow-inner drop-shadow',
       hero: 'rounded-none shadow-none drop-shadow-none',
     },
-  }
+  },
 });
 
 export const ContentSection = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & 
-  VariantProps<typeof contentVariants>
+  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof contentVariants>
 >(({ className, flavor, variant, ...props }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn(
-        contentVariants({ flavor, variant }),
-        className
-      )}
+      className={cn(contentVariants({ flavor, variant }), className)}
       {...props}
     />
   );
 });
 ContentSection.displayName = 'ContentSection';
-
 
 export default ContentSection;

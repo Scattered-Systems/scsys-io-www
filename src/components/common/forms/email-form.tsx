@@ -5,19 +5,19 @@
  * @file: username-form.tsx
  */
 
-"use client";
+'use client';
 // imports
-import * as React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+import * as React from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 // project
-import { logger } from "@/lib/logger";
-import { cn } from "@/lib/utils";
+import { logger } from '@/lib/logger';
+import { cn } from '@/lib/utils';
 // components
-import { SubmitButton } from "@/components/common/buttons";
-import { Input } from "@/components/ui/input";
+import { SubmitButton } from '@/components/common/buttons';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -25,12 +25,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 export const emailSchema = z
   .object({
-    email: z
-      .email({ error: "Email is required" }),
+    email: z.email({ error: 'Email is required' }),
   })
   .loose();
 
@@ -44,7 +43,7 @@ type FormProps = {
 };
 
 export const EmailForm: React.FC<
-  FormProps & Omit<React.ComponentProps<"form">, "onSubmit" | "defaultValue">
+  FormProps & Omit<React.ComponentProps<'form'>, 'onSubmit' | 'defaultValue'>
 > = ({ className, onSubmit, defaultValues, values, ...props }) => {
   // initialize the form
   const form = useForm<EmailFormValues>({
@@ -56,9 +55,12 @@ export const EmailForm: React.FC<
   // handle form submission
   const handleSubmit = (formData: EmailFormValues) => {
     // notify the user
-    toast.promise(async () => {
-      if (onSubmit) onSubmit(formData);
-    }, { success: "Email submitted successfully!" });
+    toast.promise(
+      async () => {
+        if (onSubmit) onSubmit(formData);
+      },
+      { success: 'Email submitted successfully!' },
+    );
     // reset the form after submission
     form.reset();
   };
@@ -66,21 +68,21 @@ export const EmailForm: React.FC<
   return (
     <Form {...form}>
       <form
-        className={cn("sm:max-w-[425px]", className)}
+        className={cn('sm:max-w-[425px]', className)}
         onSubmit={form.handleSubmit(handleSubmit)}
         {...props}
       >
         <FormField
           control={form.control}
-          name="email"
+          name='email'
           render={({ field: { value, ...field } }) => (
-            <FormItem className="inline-flex flex-col w-full gap-1">
+            <FormItem className='inline-flex flex-col w-full gap-1'>
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  className="w-full"
-                  placeholder="Enter an email address"
+                  className='w-full'
+                  placeholder='Enter an email address'
                   value={value ?? undefined}
                 />
               </FormControl>
@@ -90,7 +92,7 @@ export const EmailForm: React.FC<
         />
         <SubmitButton
           hideLabel
-          type="submit"
+          type='submit'
           isSubmitting={form.formState.isSubmitting}
         />
       </form>

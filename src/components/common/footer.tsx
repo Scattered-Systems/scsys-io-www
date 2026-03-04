@@ -25,7 +25,7 @@ const footerVariant = cva('flex px-4 py-2', {
       card: 'rounded-xl shadow-inner drop-shadow',
       hero: 'rounded-none shadow-none drop-shadow-none',
     },
-  }
+  },
 });
 
 // FooterProps
@@ -34,7 +34,9 @@ type FooterProps = {};
 // Footer
 export const Footer = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof footerVariant> & FooterProps
+  React.HTMLAttributes<HTMLDivElement> &
+    VariantProps<typeof footerVariant> &
+    FooterProps
 >(({ className, flavor, variant, ...props }, ref) => {
   return (
     <footer
@@ -51,13 +53,7 @@ export const FooterContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn('w-full', className)}
-      {...props}
-    />
-  );
+  return <div ref={ref} className={cn('w-full', className)} {...props} />;
 });
 FooterContent.displayName = 'FooterContent';
 
@@ -84,10 +80,7 @@ export const FooterTrailing = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn(
-        'ml-auto my-auto w-fit max-w-sm',
-        className
-      )}
+      className={cn('ml-auto my-auto w-fit max-w-sm', className)}
       {...props}
     />
   );

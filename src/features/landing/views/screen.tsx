@@ -9,9 +9,9 @@ import * as React from 'react';
 
 export const LandingScreen: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold">Welcome to the Landing Page</h1>
-      <p className="mt-4 text-lg">This is a simple landing page example.</p>
+    <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
+      <h1 className='text-4xl font-bold'>Welcome to the Landing Page</h1>
+      <p className='mt-4 text-lg'>This is a simple landing page example.</p>
     </div>
   );
-}
+};

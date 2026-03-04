@@ -3,25 +3,25 @@
  * @author - @FL03
  * @file - use-time.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 
-type RefreshRateT = "seconds" | "minutes" | number;
+type RefreshRateT = 'seconds' | 'minutes' | number;
 
 const resolveRefreshRate = (rate: RefreshRateT): number => {
   const unit = 1000; // 1 second in milliseconds
   // check if the rate is a number
-  if (typeof rate === "number") {
+  if (typeof rate === 'number') {
     if (rate <= 0) {
-      throw new Error("Refresh rate must be a positive number greater than 0");
+      throw new Error('Refresh rate must be a positive number greater than 0');
     }
     return rate;
   } else {
     switch (rate) {
-      case "seconds":
+      case 'seconds':
         return unit;
-      case "minutes":
+      case 'minutes':
         return 60 * unit;
       default:
         throw new Error(
@@ -47,24 +47,28 @@ type UseTimeT = (options: UseTimeOptions) => UseTimeReturnT;
  * @param options - The options for the hook
  * @returns - An object containing the current date and time
  */
-export const useTime: UseTimeT = (
-  { refreshRate = "seconds", onTimeChange },
-) => {
+export const useTime: UseTimeT = ({
+  refreshRate = 'seconds',
+  onTimeChange,
+}) => {
   // initialize a reference to the interval
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
   // setup the time state
   const [value, setValue] = React.useState<Date>(() => new Date());
   // handle any changes to the time
-  const handleTimeChange = React.useCallback((time: number | string | Date) => {
-    // parse the timestamp into a compatible data object
-    const parsedDate = new Date(time);
-    // update the time state
-    setValue(parsedDate);
-    // if provided, invoke the onTimeChange callback
-    if (onTimeChange) onTimeChange(parsedDate);
-    // finish
-    return;
-  }, [onTimeChange]);
+  const handleTimeChange = React.useCallback(
+    (time: number | string | Date) => {
+      // parse the timestamp into a compatible data object
+      const parsedDate = new Date(time);
+      // update the time state
+      setValue(parsedDate);
+      // if provided, invoke the onTimeChange callback
+      if (onTimeChange) onTimeChange(parsedDate);
+      // finish
+      return;
+    },
+    [onTimeChange],
+  );
   // create a new interval
   const createInterval = React.useCallback((): NodeJS.Timeout => {
     // resolve the refresh rate

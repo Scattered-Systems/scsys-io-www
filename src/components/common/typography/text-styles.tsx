@@ -26,7 +26,7 @@ export const Description: React.FC<
       className={cn(
         'text-muted-foreground',
         textSize && `text-${textSize}`,
-        className
+        className,
       )}
     />
   );
@@ -50,7 +50,7 @@ export const Title: React.FC<
       className={cn(
         'font-semibold text-nowrap leading-none tracking-tight',
         textSize && `text-${textSize}`,
-        className
+        className,
       )}
     />
   );

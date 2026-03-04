@@ -1,5 +1,8 @@
-compatibility_date = "2025-08-05"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-03-04"
+compatibility_flags = [
+  "global_fetch_strictly_public",
+  "nodejs_compat",
+]
 main = ".open-next/worker.js"
 name = "scsys-io-www"
 workers_dev = true
@@ -13,6 +16,13 @@ directory = ".open-next/assets"
 
 [observability.logs]
 enabled = true
+
+[images]
+binding = "IMAGES"
+
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "scsys-io-www"
 
 [vars]
 NEXT_PUBLIC_SITE_URL = "https://scsys.io"

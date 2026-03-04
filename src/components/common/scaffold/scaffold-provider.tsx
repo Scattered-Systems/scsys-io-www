@@ -3,11 +3,11 @@
  * @author - @FL03
  * @file - scaffold-provider.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 // project
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type ScaffoldContext = {
   isMobile: boolean;
@@ -20,26 +20,24 @@ export const useScaffold = () => {
   const ctx = React.useContext(ScaffoldContext);
   if (!ctx) {
     throw new Error(
-      "`useScaffold` must be used within the bounds of a `ScaffoldProvider`",
+      '`useScaffold` must be used within the bounds of a `ScaffoldProvider`',
     );
   }
   return ctx;
 };
 
 // ScaffoldProvider
-export const ScaffoldProvider: React.FC<
-  React.PropsWithChildren
-> = ({ children }) => {
+export const ScaffoldProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   // use the isMobile hook to determine if the device is mobile
   const isMobile = useIsMobile();
   // declare the memoized values for the scaffold provider
   const ctx = React.useMemo(() => ({ isMobile }), [isMobile]);
   return (
-    <ScaffoldContext.Provider value={ctx}>
-      {children}
-    </ScaffoldContext.Provider>
+    <ScaffoldContext.Provider value={ctx}>{children}</ScaffoldContext.Provider>
   );
 };
-ScaffoldProvider.displayName = "ScaffoldProvider";
+ScaffoldProvider.displayName = 'ScaffoldProvider';
 
 export default ScaffoldProvider;

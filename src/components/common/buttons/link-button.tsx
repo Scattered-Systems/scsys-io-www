@@ -4,20 +4,20 @@
  * @description - Link Button Component with tooltip, icons, and more.
  * @file - link-button.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
-import Link from "next/link";
+import * as React from 'react';
+import Link from 'next/link';
 // components
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 // project
-import { Url } from "@/types";
+import { Url } from '@/types';
 
 type Props = {
   asChild?: boolean;
@@ -32,8 +32,7 @@ type Props = {
 };
 
 export const LinkButton: React.FC<
-  & React.ComponentProps<typeof Button>
-  & Props
+  React.ComponentProps<typeof Button> & Props
 > = ({
   asChild = false,
   showIcon = true,
@@ -43,17 +42,17 @@ export const LinkButton: React.FC<
   href,
   icon,
   label: name,
-  size = "default",
-  variant = "link",
+  size = 'default',
+  variant = 'link',
   onClick,
   ...props
 }) => {
   if (!href) {
     disabled = true;
-    href = "#";
+    href = '#';
   }
 
-  const buttonSize = showIcon && !showLabel ? "icon" : size;
+  const buttonSize = showIcon && !showLabel ? 'icon' : size;
   return (
     <TooltipProvider>
       <Tooltip>
@@ -67,7 +66,7 @@ export const LinkButton: React.FC<
           >
             <Link href={href} onClick={onClick}>
               {showIcon && icon}
-              <span className={showLabel ? "not-sr-only" : "sr-only"}>
+              <span className={showLabel ? 'not-sr-only' : 'sr-only'}>
                 {name}
               </span>
             </Link>

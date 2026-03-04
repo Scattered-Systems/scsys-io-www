@@ -21,7 +21,7 @@ const toolbarVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 
 type ToolbarContext = {
@@ -45,7 +45,7 @@ export const ToolbarProvider: React.FC<
 > = ({ centerTitle = false, variant, children }) => {
   const ctx = React.useMemo(
     () => ({ centerTitle, variant }),
-    [centerTitle, variant]
+    [centerTitle, variant],
   );
   return (
     <ToolbarContext.Provider value={ctx}>{children}</ToolbarContext.Provider>
@@ -65,7 +65,7 @@ export const Toolbar = React.forwardRef<
           toolbarVariants({ variant }),
           'focus:outline-none',
           'mx-auto',
-          className
+          className,
         )}
         {...props}
       />
@@ -129,7 +129,7 @@ export const ToolbarContent = React.forwardRef<
       ref={ref}
       className={cn(
         'inline-flex flex-row flex-nowrap flex-1 items-center justify-start w-full',
-        className
+        className,
       )}
       {...props}
     />
@@ -145,7 +145,7 @@ export const ToolbarLeading = React.forwardRef<
     ref={ref}
     className={cn(
       'inline-flex flex-row flex-nowrap gap-2 items-center justify-items-center mr-auto',
-      className
+      className,
     )}
     {...props}
   />
@@ -160,7 +160,7 @@ export const ToolbarTrailing = React.forwardRef<
     ref={ref}
     className={cn(
       'inline-flex flex-row flex-nowrap gap-2 items-center justify-items-center ml-auto',
-      className
+      className,
     )}
     {...props}
   />
@@ -178,7 +178,7 @@ export const ToolbarTitle = React.forwardRef<
       className={cn(
         'text-lg font-semibold',
         centerTitle && 'absolute left-1/2 transform -translate-x-1/2',
-        className
+        className,
       )}
       {...props}
     />
@@ -204,7 +204,7 @@ export const ToolbarInput = React.forwardRef<
         'bg-primary-foreground text-primary rounded-md transition-colors',
         'h-fit max-w-xs my-auto px-2 py-1',
         'hover:bg-blend-color hover:border-accent focus:border-accent',
-        className
+        className,
       )}
       placeholder={placeholder ?? 'Search...'}
       {...props}

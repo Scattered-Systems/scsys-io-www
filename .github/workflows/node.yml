@@ -1,0 +1,61 @@
+name: Node.js
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  pull_request:
+    branches: [main, master]
+    types: [auto_merge_enabled, opened, ready_for_review, reopened]
+  push:
+    branches: [main, master]
+  repository_dispatch:
+    types: [bun, bun-ci]
+  workflow_dispatch:
+    inputs:
+      bun-version:
+        default: 'latest'
+        description: 'Bun version'
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DIR: build
+      BUN_VERSION: ${{ github.event.inputs.bun-version || 'latest' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Setup the Cache
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.bun/install/cache
+            app/${{ env.BUILD_DIR }}/cache
+          # Generate a new cache whenever packages or source files change.
+          key: bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Build the workspace
+        run: bun run build
+      - name: Run any tests
+        run: bun run test
+      - name: Upload the build artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: nextjs-build
+          path: ./apps/myfi/${{ env.BUILD_DIR }}

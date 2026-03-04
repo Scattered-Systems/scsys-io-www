@@ -15,7 +15,7 @@
   },
   "tailwind": {
     "baseColor": "zinc",
-    "css": "public/styles/globals.css",
+    "css": "src/styles/globals.css",
     "cssVariables": true,
     "config": "",
     "prefix": ""

@@ -29,16 +29,11 @@ export const SaveButton: React.FC<
   const buttonSize = showLabel ? size : 'icon';
   // return the button with a tooltip
   return (
-    <Button
-      {...props}
-      ref={ref}
-      size={buttonSize}
-      variant={variant}
-    >
+    <Button {...props} ref={ref} size={buttonSize} variant={variant}>
       {isSaving ? (
-        <Loader2Icon className="animate-spin h-4 w-4" />
+        <Loader2Icon className='animate-spin h-4 w-4' />
       ) : (
-        <SaveIcon className="h-4 w-4" />
+        <SaveIcon className='h-4 w-4' />
       )}
       <span className={showLabel ? 'animate-pulse not-sr-only' : 'sr-only'}>
         {isSaving ? 'Saving...' : 'Save'}

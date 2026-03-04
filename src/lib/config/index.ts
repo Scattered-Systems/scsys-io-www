@@ -3,5 +3,5 @@
  * @author - @FL03
  * @file - config/index.ts
  */
-export * from "./config.brand";
-export * from "./config.www";
+export * from './config.brand';
+export * from './config.www';

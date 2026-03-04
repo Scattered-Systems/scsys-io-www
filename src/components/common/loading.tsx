@@ -16,13 +16,13 @@ export const Loading: React.FC<React.ComponentPropsWithRef<'div'>> = ({
     <section
       {...props}
       ref={ref}
-      className="z-50 inset-0 bg-background text-foreground flex h-full items-center"
+      className='z-50 inset-0 bg-background text-foreground flex h-full items-center'
     >
-      <div className="flex flex-1 items-center justify-center m-auto">
+      <div className='flex flex-1 items-center justify-center m-auto'>
         <div
           className={cn(
             className,
-            'w-16 h-16 border-t-2 border-b-2 border-gray-800 rounded-full animate-spin'
+            'w-16 h-16 border-t-2 border-b-2 border-gray-800 rounded-full animate-spin',
           )}
         />
       </div>

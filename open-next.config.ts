@@ -1,5 +1,5 @@
 // open-next.config.ts
-import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import { defineCloudflareConfig } from '@opennextjs/cloudflare';
 
 /**
  * OpenNext Cloudflare Configuration

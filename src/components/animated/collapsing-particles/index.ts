@@ -3,4 +3,4 @@
  * @author - @FL03
  * @file - collapsing-particles/index.ts
  */
-export * from "./collapsing-system";
+export * from './collapsing-system';

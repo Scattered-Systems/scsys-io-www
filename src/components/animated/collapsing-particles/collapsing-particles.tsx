@@ -3,12 +3,12 @@
  * @author - @FL03
  * @file - collapsing-particles.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
-import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
-import { useTheme } from "next-themes";
+import * as React from 'react';
+import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
+import { useTheme } from 'next-themes';
 
 const DEFAULT_TIME_SCALE: number = 0.9; // Adjust this to control the speed of the animation
 
@@ -24,15 +24,14 @@ function randomSpherePoint(radius: number) {
   return [x, y, z];
 }
 
-export const CollapsingParticles: React.FC<
-  { particles?: number; timeScale?: number }
-> = ({
-  particles = 3500,
-  timeScale = DEFAULT_TIME_SCALE,
-}) => {
+export const CollapsingParticles: React.FC<{
+  particles?: number;
+  timeScale?: number;
+}> = ({ particles = 3500, timeScale = DEFAULT_TIME_SCALE }) => {
   const { theme } = useTheme();
   // Set particle color based on theme
-  const particleColor = theme === "light" ? new THREE.Color(0x000000) : new THREE.Color(0xffffff);
+  const particleColor =
+    theme === 'light' ? new THREE.Color(0x000000) : new THREE.Color(0xffffff);
   const particlesRef = React.useRef<THREE.Points>(null);
   const geometryRef = React.useRef<THREE.BufferGeometry>(null);
 
@@ -70,11 +69,11 @@ export const CollapsingParticles: React.FC<
     // Set attributes directly for better control
     if (geometryRef.current) {
       geometryRef.current.setAttribute(
-        "position",
+        'position',
         new THREE.BufferAttribute(pos, 3),
       );
       geometryRef.current.setAttribute(
-        "color",
+        'color',
         new THREE.BufferAttribute(col, 3),
       );
     }
@@ -162,6 +161,6 @@ export const CollapsingParticles: React.FC<
     </points>
   );
 };
-CollapsingParticles.displayName = "CollapsingParticles";
+CollapsingParticles.displayName = 'CollapsingParticles';
 
 export default CollapsingParticles;

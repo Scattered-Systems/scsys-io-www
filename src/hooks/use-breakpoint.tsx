@@ -3,9 +3,9 @@
  * @author - @FL03
  * @file - use-breakpoint.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 
 type MediaQueryState = {
   xs: boolean;
@@ -53,7 +53,7 @@ export const useBreakpoint: HookT = ({ onWidthChange } = {}): HookReturnT => {
   );
   // a callback to handle changes in the window size
   const onWindowResize = React.useCallback(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // update the local state
       _setWidth(window.innerWidth);
       // call the onWidthChange callback if provided
@@ -66,10 +66,10 @@ export const useBreakpoint: HookT = ({ onWidthChange } = {}): HookReturnT => {
   React.useLayoutEffect(() => {
     onWindowResize();
     // set the initial width
-    window?.addEventListener("resize", onWindowResize);
+    window?.addEventListener('resize', onWindowResize);
     return () => {
       // cleanup the event listener on unmount
-      window?.removeEventListener("resize", onWindowResize);
+      window?.removeEventListener('resize', onWindowResize);
     };
   }, [onWindowResize]);
 

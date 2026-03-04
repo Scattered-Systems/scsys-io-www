@@ -3,4 +3,4 @@
  * @author - @FL03
  * @file - animated/index.ts
  */
-export * from "./collapsing-particles";
+export * from './collapsing-particles';

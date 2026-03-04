@@ -5,18 +5,18 @@
  * @file: username-form.tsx
  */
 
-"use client";
+'use client';
 // imports
-import * as React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as React from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 // project
-import { logger } from "@/lib/logger";
-import { cn } from "@/lib/utils";
+import { logger } from '@/lib/logger';
+import { cn } from '@/lib/utils';
 // components
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -24,18 +24,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { toast } from "sonner";
+} from '@/components/ui/form';
+import { toast } from 'sonner';
 
 export const usernameSchema = z
   .object({
     username: z
       .string()
-      .min(3, "Username must be at least 3 characters long")
-      .max(20, "Username must be at most 20 characters long")
+      .min(3, 'Username must be at least 3 characters long')
+      .max(20, 'Username must be at most 20 characters long')
       .regex(
         /^[a-zA-Z0-9_]+$/,
-        "Username can only contain letters, numbers, and underscores",
+        'Username can only contain letters, numbers, and underscores',
       ),
   })
   .loose();
@@ -51,8 +51,8 @@ type UsernameFormProps = {
 };
 
 export const UsernameForm: React.FC<
-  & UsernameFormProps
-  & Omit<React.ComponentProps<"form">, "onSubmit" | "defaultValue">
+  UsernameFormProps &
+    Omit<React.ComponentProps<'form'>, 'onSubmit' | 'defaultValue'>
 > = ({ className, onSubmit, defaultValues, values, showLabel, ...props }) => {
   // initialize the form
   const form = useForm<UsernameFormValues>({
@@ -63,9 +63,12 @@ export const UsernameForm: React.FC<
 
   // handle form submission
   const handleSubmit = (formData: UsernameFormValues) => {
-    toast.promise(async () => {
-      if (onSubmit) onSubmit(formData);
-    }, { success: "Email submitted successfully!" });
+    toast.promise(
+      async () => {
+        if (onSubmit) onSubmit(formData);
+      },
+      { success: 'Email submitted successfully!' },
+    );
     // reset the form after submission
     form.reset();
   };
@@ -73,24 +76,24 @@ export const UsernameForm: React.FC<
   return (
     <Form {...form}>
       <form
-        className={cn("sm:max-w-[425px]", className)}
+        className={cn('sm:max-w-[425px]', className)}
         onSubmit={form.handleSubmit(handleSubmit)}
         {...props}
       >
         <FormField
           control={form.control}
-          name="username"
+          name='username'
           render={({ field }) => (
             <FormItem>
-              <div className="inline-flex flex-nowrap items-center gap-1">
-                <FormLabel className={showLabel ? "not-sr-only" : "sr-only"}>
+              <div className='inline-flex flex-nowrap items-center gap-1'>
+                <FormLabel className={showLabel ? 'not-sr-only' : 'sr-only'}>
                   Username
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your username"
+                    placeholder='Enter your username'
                     {...field}
-                    className="w-full"
+                    className='w-full'
                   />
                 </FormControl>
               </div>
@@ -98,7 +101,7 @@ export const UsernameForm: React.FC<
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type='submit'>Submit</Button>
       </form>
     </Form>
   );

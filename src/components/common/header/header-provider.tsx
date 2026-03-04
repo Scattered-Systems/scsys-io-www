@@ -3,9 +3,9 @@
  * @author - @FL03
  * @file - scaffold-provider.tsx
  */
-"use client";
+'use client';
 // imports
-import * as React from "react";
+import * as React from 'react';
 
 type HeaderContext = {
   extended: boolean;
@@ -19,7 +19,7 @@ export const useHeader = () => {
   // ensure the context is defined
   if (!ctx) {
     throw new Error(
-      "`useHeader` must be used within the bounds of a `HeaderProvider`",
+      '`useHeader` must be used within the bounds of a `HeaderProvider`',
     );
   }
   return ctx;
@@ -35,11 +35,9 @@ export const HeaderProvider: React.FC<
   // declare the memoized values for the scaffold provider
   const ctx = React.useMemo(() => ({ extended }), [extended]);
   return (
-    <HeaderContext.Provider value={ctx}>
-      {children}
-    </HeaderContext.Provider>
+    <HeaderContext.Provider value={ctx}>{children}</HeaderContext.Provider>
   );
 };
-HeaderProvider.displayName = "HeaderProvider";
+HeaderProvider.displayName = 'HeaderProvider';
 
 export default HeaderProvider;
