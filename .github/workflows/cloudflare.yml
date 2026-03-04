@@ -5,9 +5,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 env:
+  BUN_VERSION: latest
   NEXT_TELEMTRY_DISABLED: 1
   NODE_VERSION: 24
-  WRANGLER_VERSION: 4.15.2
   STAGE: ${{ github.event.inputs.environment || 'preview' }}
 
 on:
@@ -35,18 +35,34 @@ jobs:
       url: ${{ steps.publish.outputs.deployment-url }}
     steps:
       - name: Checkout the source code
-        uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Setup the Cache
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.bun/install/cache
+          # Generate a new cache whenever packages or source files change.
+          key: bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            bun-${{ runner.os }}-${{ hashFiles('**/*.lock') }}-
       - id: publish
         name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: ${{ env.WRANGLER_VERSION }}
           environment: ${{ env.STAGE }}
-          command: npm run deploy
+          command: bun run deploy
