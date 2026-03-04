@@ -8,6 +8,8 @@ import { NextRequest, NextResponse } from 'next/server';
 // project
 import { logger } from '@/lib/logger';
 
+export const runtime = 'edge';
+
 export async function proxy(request: NextRequest): Promise<NextResponse> {
   // deconstruct the request
   const { url: requestUrl } = request;
