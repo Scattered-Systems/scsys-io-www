@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/scattered-systems/scsys-io.git"
   },
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "build": "next build",
     "deploy": "bun run wrangler:deploy",
@@ -89,7 +89,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.2",
-    "react-resizable-panels": "^4",
+    "react-resizable-panels": "^4.7.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "sonner": "^2.0.7",
