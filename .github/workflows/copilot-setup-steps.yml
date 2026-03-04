@@ -65,7 +65,7 @@ jobs:
       - name: Build the workspace
         run: bun run build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: copilot-setup-steps
           path: ./{{ env.BUILD_DIR }}
