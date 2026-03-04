@@ -5,7 +5,11 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -15,24 +19,34 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/common/*": ["./src/components/common/*"],
-      "@/ui/*": ["./src/components/ui/*"],
-      "@/public/*": ["./public/*"],
-      "@/root/*": ["./*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/common/*": [
+        "./src/components/common/*"
+      ],
+      "@/ui/*": [
+        "./src/components/ui/*"
+      ],
+      "@/public/*": [
+        "./public/*"
+      ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
-    "build/dev/types/**/*.ts"
+    "build/dev/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ]
 }
