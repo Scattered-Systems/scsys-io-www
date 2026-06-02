@@ -17,7 +17,7 @@ const nextBuildOutput = (): NextConfig['output'] => {
 function nextConfigImages({
   supabaseProjectUrl = process.env.NEXT_PUBLIC_SUPABASE_URL,
 } = {}): NextConfig['images'] {
-  let remotePatterns: (URL | RemotePattern)[] = [
+  const remotePatterns: (URL | RemotePattern)[] = [
     {
       hostname: 'images.unsplash.com',
       pathname: '/**',

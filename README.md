@@ -1,29 +1,67 @@
-# @pzzld
+# scsys-io-www
 
-[![GitHub License](https://img.shields.io/github/license/FL03/pzzld-js?style=for-the-badge&logo=github)](LICENSE)
-![Docker Image Version](https://img.shields.io/docker/v/jo3mccain/pzzld-js/latest?style=for-the-badge&logo=docker)
+[![License](https://img.shields.io/github/license/scattered-systems/scsys-io?style=for-the-badge&logo=github)](LICENSE)
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-latest-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+The official website for **Scattered-Systems, LLC** — the all-in-one portal for
+self-orchestrating cloud clusters, powered by **Eryon**, a topological substrate
+whose harmonic orchestration is derived from the neo-Riemannian theory of music.
 
----
+> Cloud clusters, in harmony.
 
-Welcome to the `pzzld-js` monorepo! This repository contains a collections of packages, applications, components, and contracts that combine to form the basis of the `pzzld` ecosystem.
+## Stack
+
+- **Next.js 16** (App Router, React 19, React Compiler)
+- **Tailwind CSS v4** + **shadcn/ui** (new-york / zinc primitives)
+- **three.js** — the hero's generalized-Tonnetz "Harmonic Lattice" animation
+- **motion** (scroll reveals) · **next-themes** (dark-first) · **sonner**
+- **Bun** toolchain · **OpenNext → Cloudflare** deploy
+
+## Develop
+
+```bash
+bun install
+bun run dev        # http://localhost:3000
+```
+
+## Scripts
+
+| Script | Purpose |
+| --- | --- |
+| `bun run dev` | Start the dev server |
+| `bun run build` | Production build |
+| `bun run start` | Serve the production build |
+| `bun run lint` | Lint with ESLint |
+| `bun run fmt` | Format with Prettier |
+| `bun run cf:deploy` | Build + deploy to Cloudflare via OpenNext |
 
 ## Structure
 
-### Monorepo
+```
+src/
+├── app/                      # App Router (homepage, info routes, SEO, OG image)
+├── components/
+│   ├── site/                 # the design layer (navbar, footer, hero, sections…)
+│   │   └── hero/scene.tsx    # the generalized-Tonnetz WebGL animation
+│   └── ui/                   # shadcn/ui primitives
+├── lib/config/site.ts        # ★ single source of truth for all site content
+└── styles/globals.css        # Tailwind v4 entry + brand design system
+```
 
-#### _Applications_
+All copy, links, features, and capabilities live in
+[`src/lib/config/site.ts`](src/lib/config/site.ts) — edit content there, not in
+component JSX.
 
-All applications are located in the `apps` directory. Each application is a standalone project that can be developed, built, and deployed independently. The applications include:
+## Deploy
 
-- `@pzzld/app`: A complete application template for creating modern web applications using NextJS, Bun, and Tailwind CSS.
+Primary target is **Cloudflare Workers** via OpenNext:
 
-#### _Packages_
+```bash
+bun run cf:deploy
+```
 
-All reusable packages are located in the `packages` directory. Each package is designed to be shared across multiple applications and can be published to npm. The packages include:
+A multi-stage **Bun Dockerfile** and `docker-compose.yml` are also provided, and
+the project runs on **Vercel** out of the box.
 
-- `@pzzld/ui`: A collection of reusable React components styled with Tailwind CSS.
-- `@pzzld/types`: A collection of TypeScript types and interfaces
-- `@pzzld/utils`: A collection of utility functions and hooks for common tasks.
-- `@pzzld/pzzld-js`: Core logic and services for the `pzzld` ecosystem, such as authentication, data fetching, and state management
+## License
+
+Licensed under the [Apache-2.0](LICENSE) license. © Scattered-Systems, LLC.

@@ -58,15 +58,14 @@ RUN addgroup --system --gid 1001 appgroup && \
 
 WORKDIR /app
 
-# Ensure prerender cache directory exists and is writable
-RUN mkdir -p build && \
-    chown ausr:appgroup build && \
-    chmod 755 build
+# Ensure the prerender cache directory exists and is writable
+RUN mkdir -p .next/cache && \
+    chown -R ausr:appgroup .next
 
-# Copy build artifacts from the app workspace
+# Copy build artifacts (Next.js `standalone` output lives under .next/)
 COPY --from=builder --chown=ausr:appgroup /usr/src/app/public ./public
-COPY --from=builder --chown=ausr:appgroup /usr/src/app/build/standalone ./
-COPY --from=builder --chown=ausr:appgroup /usr/src/app/build/static ./build/static
+COPY --from=builder --chown=ausr:appgroup /usr/src/app/.next/standalone ./
+COPY --from=builder --chown=ausr:appgroup /usr/src/app/.next/static ./.next/static
 
 # Copy production node_modules
 COPY --from=install --chown=ausr:appgroup /tmp/prod/node_modules ./node_modules
