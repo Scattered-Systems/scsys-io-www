@@ -1,5 +1,5 @@
 {
-  "name": "scsys-io",
+  "name": "Scattered-Systems",
   "short_name": "scsys",
   "icons": [
     {
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#101319",
+  "background_color": "#101319",
   "display": "standalone"
 }

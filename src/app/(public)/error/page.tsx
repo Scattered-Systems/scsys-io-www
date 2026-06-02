@@ -1,50 +1,47 @@
 /**
  * Created At: 2025.05.02:23:10:22
  * @author - @FL03
- * @file - error/page.tsx
+ * @directory - src/app/(public)/error
+ * @file - page.tsx
  */
-'use server';
 // imports
-import { ErrorCard } from '@/features/platform';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
-type RoutePropsT = {
+type RouteProps = {
   searchParams: Promise<{ message?: string; status?: string | number }>;
 };
 
-export default async function Page({ searchParams }: RoutePropsT) {
-  // await for the search parameters before destructuring
-  let { message, status = 500 } = await searchParams;
-  // ensure message is a string
-  message ??= 'An unexpected error occurred';
-  // set the default status if not provided
-  status ??= 500;
-  // render the error page
+export default async function Page({ searchParams }: RouteProps) {
+  const { message = 'An unexpected error occurred.', status = 500 } =
+    await searchParams;
+
   return (
-    <div className='flex flex-1 h-full w-full items-center justify-center'>
-      <ErrorCard
-        message={message ?? 'Something went wrong...'}
-        status={status}
-      />
-    </div>
+    <article className="text-center">
+      <p className="label-mono text-destructive">Error {status}</p>
+      <h1 className="mt-6 font-display text-5xl font-light tracking-tight sm:text-6xl">
+        Something dissonant.
+      </h1>
+      <p className="mt-5 text-muted-foreground">{message}</p>
+      <Link
+        href="/"
+        className="group mt-10 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+      >
+        <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+        Back home
+      </Link>
+    </article>
   );
 }
 Page.displayName = 'ErrorPage';
 
-// page metadata
-export async function generateMetadata(
-  { searchParams }: RoutePropsT,
-  parent: import('next').ResolvingMetadata,
-) {
-  let { message, status } = await searchParams;
-  // ensure message is a string
-  message ??= 'An unexpected error occurred';
-  // set the default status if not provided
-  status ??= 500;
-  const parentMetadata = await parent;
-
+export async function generateMetadata({
+  searchParams,
+}: RouteProps): Promise<Metadata> {
+  const { status = 500 } = await searchParams;
   return {
-    ...parentMetadata,
-    description: `An error (${status}) occurred while processing your request`,
     title: 'Error',
+    description: `An error (${status}) occurred while processing your request.`,
   };
 }

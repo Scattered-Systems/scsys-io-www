@@ -5,3 +5,4 @@
  */
 export * from './config.brand';
 export * from './config.www';
+export * from './site';

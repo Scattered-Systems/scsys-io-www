@@ -1,15 +1,27 @@
 /**
- * Created At: 2025.08.17:16:15:56
+ * Created At: 2026.06.01:00:00:00
  * @author - @FL03
+ * @directory - src/app
  * @file - page.tsx
  */
-import { CollapsingParticleSystem } from '@/components/animated';
+// project
+import { Hero } from '@/components/site/hero';
+import { Portal } from '@/components/site/sections/portal';
+import { Eryon } from '@/components/site/sections/eryon';
+import { Platform } from '@/components/site/sections/platform';
+import { About } from '@/components/site/sections/about';
+import { Contact } from '@/components/site/sections/contact';
 
-export default function Page() {
+export default function Home() {
   return (
-    <div className='h-screen w-full fixed z-0 top-0 bottom-0 left-0 right-0'>
-      <CollapsingParticleSystem />
-    </div>
+    <>
+      <Hero />
+      <Portal />
+      <Eryon />
+      <Platform />
+      <About />
+      <Contact />
+    </>
   );
 }
-Page.displayName = 'HomePage';
+Home.displayName = 'HomePage';
