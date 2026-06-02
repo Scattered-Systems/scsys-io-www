@@ -32,15 +32,16 @@ export const Contact = () => (
 
       <Reveal delay={0.06}>
         <h2 className="max-w-3xl font-display text-[clamp(2.5rem,7vw,5.5rem)] font-light leading-[0.98] tracking-tight text-balance">
-          Compose something that{' '}
-          <span className="italic text-primary">resonates.</span>
+          Build your cloud with{' '}
+          <span className="italic text-primary">us.</span>
         </h2>
       </Reveal>
 
       <Reveal delay={0.12}>
         <p className="max-w-lg text-lg leading-relaxed text-muted-foreground">
-          Spin up your first cluster in the portal, or reach out — we take on a
-          small number of partners building serious systems on Eryon.
+          Eryon and Proton are early. If you want a personal cloud that scales
+          from one device up — or you build serious distributed systems — let’s
+          talk.
         </p>
       </Reveal>
 
@@ -54,7 +55,7 @@ export const Contact = () => (
           rel="noopener noreferrer"
           className={cn(ctaPrimary, 'group gap-3 px-7 py-3.5')}
         >
-          Launch the portal
+          Request early access
           <ArrowUpRight
             aria-hidden
             className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

@@ -127,7 +127,7 @@ export const Navbar = () => {
               rel="noopener noreferrer"
               className={cn(ctaPrimary, 'hidden px-4 py-2 lg:inline-flex')}
             >
-              Launch
+              Early access
               <ArrowUpRight className="size-4" />
             </a>
             <ThemeToggle />
@@ -264,7 +264,7 @@ const MobileMenu: React.FC<{ active: string; onClose: () => void }> = ({
           transition={{ delay: 0.06 + SITE.nav.length * 0.05 }}
           className={cn(ctaPrimary, 'mt-8 w-fit')}
         >
-          Launch the portal
+          Request early access
           <ArrowUpRight className="size-4" />
         </m.a>
       </nav>

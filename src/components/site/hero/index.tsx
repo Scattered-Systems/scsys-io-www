@@ -32,8 +32,8 @@ export const Hero = () => (
 
       <Reveal delay={0.08}>
         <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.75rem,9vw,7.5rem)] font-light leading-[0.95] tracking-tight text-balance">
-          Cloud clusters,{' '}
-          <span className="italic text-primary">in harmony.</span>
+          Your own cloud,{' '}
+          <span className="italic text-primary">at any scale.</span>
         </h1>
       </Reveal>
 
@@ -50,7 +50,7 @@ export const Hero = () => (
           rel="noopener noreferrer"
           className={ctaPrimary}
         >
-          Launch the portal
+          Request early access
           <ArrowUpRight aria-hidden className="size-4" />
         </a>
         <a href="#eryon" className={ctaSecondary}>
@@ -70,7 +70,7 @@ export const Hero = () => (
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
           <span className="relative inline-flex size-2 rounded-full bg-primary" />
         </span>
-        Eryon substrate · online
+        Eryon substrate · in development
       </Reveal>
     </div>
 

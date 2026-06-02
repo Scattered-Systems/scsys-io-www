@@ -6,9 +6,9 @@
  */
 // project
 import { Hero } from '@/components/site/hero';
-import { Portal } from '@/components/site/sections/portal';
+import { Proton } from '@/components/site/sections/proton';
 import { Eryon } from '@/components/site/sections/eryon';
-import { Platform } from '@/components/site/sections/platform';
+import { Ecosystem } from '@/components/site/sections/ecosystem';
 import { About } from '@/components/site/sections/about';
 import { Contact } from '@/components/site/sections/contact';
 
@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Portal />
+      <Proton />
       <Eryon />
-      <Platform />
+      <Ecosystem />
       <About />
       <Contact />
     </>

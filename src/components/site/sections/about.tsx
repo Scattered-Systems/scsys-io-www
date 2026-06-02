@@ -20,8 +20,8 @@ export const About = () => (
           eyebrow="About"
           title={
             <>
-              Systems shouldn&apos;t feel{' '}
-              <span className="italic text-primary">scattered.</span>
+              Distributed computing,{' '}
+              <span className="italic text-primary">democratized.</span>
             </>
           }
         />
