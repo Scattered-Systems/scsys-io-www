@@ -95,12 +95,14 @@ export const Footer = () => (
         </div>
       </div>
 
-      {/* oversized wordmark band */}
+      {/* oversized wordmark band — single line, size-capped so it can never
+          grow taller than the viewport (which used to push the footer links
+          above the fold at max scroll) */}
       <div
         aria-hidden
         className="mask-fade-x pointer-events-none mt-14 select-none overflow-hidden"
       >
-        <span className="block font-display text-[16vw] font-light leading-none tracking-tighter text-foreground/[0.04]">
+        <span className="block whitespace-nowrap font-display text-[clamp(2rem,9vw,7rem)] font-light leading-none tracking-tighter text-foreground/[0.04]">
           {SITE.name}
         </span>
       </div>
