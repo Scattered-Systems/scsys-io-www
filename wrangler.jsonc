@@ -15,6 +15,7 @@
         "directory": ".open-next/assets"
     },
     "build": {
+        "watch_dir": "./src",
         "command": "bun run cf:build",
         "cwd": "."
     },
