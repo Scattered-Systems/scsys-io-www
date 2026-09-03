@@ -34,8 +34,7 @@
     "images": {
         "binding": "IMAGES"
     },
-    "secrets_store_secrets": [
-    ],
+    "secrets_store_secrets": [],
     "vars": {
         "CONTENT_PROVIDER": "notion",
         "NEXT_PUBLIC_SITE_URL": "https://scsys.io",
@@ -61,8 +60,8 @@
     ],
     "kv_namespaces": [
         {
-            "binding": "scsys-io-www-vars",
-            "id": "eeff8f657c9544d283e75e7f90ac1a70"
+            "binding": "KV",
+            "id": "3c530b84276d4e87a814153df7b25330"
         }
     ],
     "migrations": [
