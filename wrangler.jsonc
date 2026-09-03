@@ -1,0 +1,90 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "scsys-io-www",
+    "main": "worker.ts",
+    "compatibility_date": "2026-08-22",
+    "compatibility_flags": [
+        "global_fetch_strictly_public",
+        "nodejs_compat"
+    ],
+    "keep_names": false,
+    "workers_dev": true,
+    "preview_urls": true,
+    "assets": {
+        "binding": "ASSETS",
+        "directory": ".open-next/assets"
+    },
+    "build": {
+        "watch_dir": "./src",
+        "command": "bun run cf:build",
+        "cwd": "."
+    },
+    "observability": {
+        "logs": {
+            "enabled": true,
+            "invocation_logs": true
+        },
+        "traces": {
+            "enabled": true
+        }
+    },
+    "images": {
+        "binding": "IMAGES"
+    },
+    "secrets_store_secrets": [],
+    "vars": {
+        "NEXT_PUBLIC_SITE_URL": "https://scsys.io",
+        "NEXT_TELEMETRY_DISABLED": 1,
+        "NODE_ENV": "production",
+        "NODE_VERSION": "26"
+    },
+    "secrets": {
+        "required": [
+            "NOTION_TOKEN"
+        ]
+    },
+    "services": [
+        {
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "scsys-io-www"
+        }
+    ],
+    "r2_buckets": [
+        {
+            "binding": "NEXT_INC_CACHE_R2_BUCKET",
+            "bucket_name": "scsys-io-www-opennext-cache"
+        }
+    ],
+    "kv_namespaces": [
+        {
+            "binding": "KV",
+            "id": "3c530b84276d4e87a814153df7b25330"
+        }
+    ],
+    "migrations": [
+        {
+            "tag": "v1",
+            "new_sqlite_classes": [
+                "DOQueueHandler"
+            ]
+        },
+        {
+            "tag": "v2",
+            "deleted_classes": [
+                "DOQueueHandler"
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "custom_domain": true,
+            "pattern": "scsys.io",
+            "zone_id": "8b72307ff6dd06394a27edd1fc2db2f3"
+        },
+        {
+            "custom_domain": true,
+            "pattern": "www.scsys.io",
+            "zone_id": "8b72307ff6dd06394a27edd1fc2db2f3"
+        }
+    ]
+}

@@ -5,8 +5,13 @@
  * @file - site.ts
  *
  * Single source of truth for the site's content. Every section reads from
- * `SITE` so copy, links, features, and capabilities can be edited in one
+ * `SITE` so copy, links, features, and ecosystem entries can be edited in one
  * place without touching component code.
+ *
+ * Substance is grounded in the Scattered-Systems internal docs (The Scattered
+ * Papers + the Eryon technical specification): Eryon is a self-resolving
+ * distributed computational substrate; Proton is the user-facing portal; the
+ * mission is to democratize distributed computing.
  */
 
 /** A navigation entry rendered in the navbar and footer. */
@@ -25,7 +30,7 @@ export type SocialLink = {
   href: string;
 };
 
-/** A capability of the flagship portal. `icon` is a lucide icon name. */
+/** A capability of the Proton portal. `icon` is a lucide icon name. */
 export type Feature = {
   index: string;
   icon: string;
@@ -40,10 +45,12 @@ export type Principle = {
   description: string;
 };
 
-/** A grouped capability cluster shown in the stack section. */
-export type StackGroup = {
-  label: string;
-  items: string[];
+/** A project in the Scattered-Systems portfolio. */
+export type EcosystemProject = {
+  name: string;
+  tagline: string;
+  description: string;
+  status: 'building' | 'design' | 'planned';
 };
 
 /** A short definition-list fact shown in the about grid. */
@@ -58,13 +65,13 @@ export const SITE = {
   short: 'scsys',
   title: 'Scattered-Systems',
   url: 'https://scsys.io',
-  /** The product portal lives on its own subdomain. */
+  /** The Proton portal lives on its own subdomain. */
   appUrl: 'https://app.scsys.io',
   /** Owner / studio identity. */
   author: {
     name: 'Joe McCain III',
     alias: 'FL03',
-    role: 'Founder & Systems Architect',
+    role: 'Founder',
     company: 'Scattered-Systems, LLC',
     companyUrl: 'https://scsys.io',
     location: 'United States',
@@ -72,20 +79,20 @@ export const SITE = {
     coords: '38.9072°N · 77.0369°W',
   },
   /** The one-line thesis. */
-  tagline: 'Cloud clusters, in harmony.',
+  tagline: 'Your own cloud, at any scale.',
   /** Hero supporting copy. */
   intro:
-    'Scattered-Systems builds the all-in-one portal where you compose, deploy, and inhabit your own cloud clusters — and Eryon, the topological substrate that keeps every one of them in harmony.',
-  /** Short "about" prose, paragraph per entry. */
+    'Scattered-Systems builds Eryon — a topological computational substrate that turns your own devices into a self-organizing personal cloud — and Proton, the portal that makes it yours.',
+  /** Mission prose for the about section, paragraph per entry. */
   about: [
-    'Scattered-Systems, LLC is a systems studio founded by Joe McCain III. We work where low-level rigor meets high-level ambition — memory-tight Rust services, WebAssembly components that run anywhere, and orchestration that behaves less like a scheduler and more like an ensemble.',
-    'Our thesis is simple: distributed systems should not feel scattered. Given the right substrate, a cluster can move between states the way a piece of music moves between chords — smoothly, audibly coherent, never jarring.',
-    'That substrate is Eryon, and the portal is how you put it to work.',
+    'Scattered-Systems is a computational research and engineering studio built on a single conviction: the conventional architecture of distributed computing is a partial expression of what computation can be. A foundation that takes the topological, algebraic, and harmonic structure of computation seriously produces qualitatively better systems.',
+    'Our mission is to democratize distributed computing — to give individuals, small teams, and resource-constrained users access to computational fabrics that conventional infrastructure reserves for enterprise scale. A phone, a laptop, or a Raspberry Pi should be enough to take part.',
+    'Founded by Joe McCain III. We treat mathematical rigor as a discipline, not a flourish — and we would rather understate a claim and surprise you than overstate one and let you down.',
   ],
   nav: [
-    { label: 'Portal', href: '#portal' },
+    { label: 'Proton', href: '#proton' },
     { label: 'Eryon', href: '#eryon' },
-    { label: 'Platform', href: '#platform' },
+    { label: 'Ecosystem', href: '#ecosystem' },
     { label: 'About', href: '#about' },
     { label: 'Journal', href: '/blog', soon: true },
     { label: 'Contact', href: '#contact' },
@@ -105,122 +112,168 @@ export const SITE = {
   ] satisfies SocialLink[],
   email: 'support@scsys.io',
 
-  /** The flagship — the all-in-one digital portal. */
-  portal: {
-    eyebrow: 'The portal',
-    title: 'Your cloud, composed.',
-    lede: 'One portal to design a cluster, bring it online, and live inside it. No ceremony, no glue code — just the topology you drew, running.',
-    cta: { label: 'Enter the portal', href: 'https://app.scsys.io' },
+  /** Proton — the user-facing portal to your personal cloud. */
+  proton: {
+    eyebrow: 'The portal · Proton',
+    title: 'Your cloud, made yours.',
+    lede: 'Eryon produces capabilities; Proton makes them addressable. It is the portal where your own devices become a personal cloud you can compose, customize, and own.',
+    cta: { label: 'Request early access', href: 'https://app.scsys.io' },
     features: [
       {
         index: '01',
         icon: 'Boxes',
-        title: 'Compose a cluster',
+        title: 'Compose a personal cloud',
         description:
-          'Lay out nodes, services, and links on a visual canvas. The topology you sketch is the topology that ships.',
+          'Aggregate your devices — a phone, a laptop, a Raspberry Pi — into one cloud, with no architectural seam between a single device and many.',
       },
       {
         index: '02',
         icon: 'Workflow',
-        title: 'Deploy in one motion',
+        title: 'Compose with others',
         description:
-          'Blueprint to running cluster in a single step — across our infrastructure, your own hardware, or both at once.',
+          'Personal clouds join into community networks, so you can reach past your own hardware without an architectural break.',
       },
       {
         index: '03',
         icon: 'AudioLines',
-        title: 'Self-orchestrating',
+        title: 'Self-resolving',
         description:
-          'Eryon keeps services balanced and healing in the background, resolving load the way a chord resolves tension.',
+          'Eryon coordinates, balances, and heals from the geometry up — no data center to run, no central scheduler to babysit.',
       },
       {
         index: '04',
         icon: 'Activity',
-        title: 'Live observability',
+        title: 'Watch it breathe',
         description:
-          'Watch the whole cluster breathe in real time — every node, signal, and transition rendered as it happens.',
+          'See your cluster’s topology and consistency in real time, read straight off the substrate rather than guessed at.',
       },
       {
         index: '05',
         icon: 'Layers',
-        title: 'Bring your own infra',
+        title: 'Customize the experience',
         description:
-          'Span clouds, edges, and bare metal from one control plane. Clusters reach wherever your compute lives.',
+          'Shape your interface from composable, generative building blocks — pin what works, rebuild what doesn’t.',
       },
       {
         index: '06',
         icon: 'ShieldCheck',
-        title: 'Yours, end to end',
+        title: 'Own it, provably',
         description:
-          'Own your data, your keys, and your cluster. Portable by design, with nothing locked behind our walls.',
+          'Your cluster is bound to you by its shape, its data, and your key. Flat data has no shape to hash; yours does.',
       },
     ] satisfies Feature[],
   },
 
-  /** The substrate — project Eryon. */
+  /** Eryon — the computational substrate beneath everything. */
   eryon: {
-    eyebrow: 'Project Eryon',
-    title: 'A substrate that thinks in chords.',
-    lede: 'Eryon is the topological substrate beneath every cluster. Its orchestration mechanism is derived from the neo-Riemannian theory of music — so transitions between states are voice-led, minimal, and coherent by construction.',
+    eyebrow: 'Project Eryon · the substrate',
+    title: 'Computation, with shape.',
+    lede: 'Eryon treats computation as a topological–algebraic–harmonic object rather than a flat data structure. Its unit of compute — a “plant” — is a tiny universal machine whose state space is a triad on a generalized Tonnetz.',
     paragraphs: [
-      'Most orchestrators treat a cluster as a flat list of things to keep alive. Eryon treats it as a shape. Services live on a shared manifold — a generalized Tonnetz — where every reachable configuration is a point and every safe transition is a short move between neighbors.',
-      'When the cluster needs to change, Eryon looks for the smallest voice-leading move: the transition that disturbs the fewest components, exactly like resolving one chord into the next. The result is orchestration without thundering herds, cold restarts, or churn.',
+      'Conventional systems treat data as flat, computation as isolated state-transitions, and coordination as something a scheduler imposes from above. Eryon recovers the structure that approach throws away — the relations between computational positions and the topology of the computational space itself.',
+      'The 48 rooted triads of the generalized Tonnetz form a configuration space, and the neo-Riemannian group — P, L, R, and a fifth-shift — acts on it simply transitively. One set of symmetries is therefore the substrate’s geometry, its routing topology, and its addressing scheme at once. Transformations are coordinates.',
+      'Nothing is centrally scheduled. Coordination emerges from topology-aware gossip, load balances as a diffusion process, and consistency is read off with sheaf cohomology. The substrate works at any scale — from a single triad upward.',
     ],
     principles: [
       {
         index: 'I',
-        title: 'Topological by nature',
+        title: 'Topological by construction',
         description:
-          'Cluster state lives on a manifold, not a spreadsheet. Adjacency is meaningful, and distance is real.',
+          'Compute lives on a manifold of tiny universal machines, sliced from one twelve-tone alphabet by the simplicial structure of the Tonnetz.',
       },
       {
         index: 'II',
-        title: 'Harmonic orchestration',
+        title: 'Harmonic addressing',
         description:
-          'Scheduling follows neo-Riemannian voice-leading — the cheapest move is the one that changes the least.',
+          'The neo-Riemannian group acts simply transitively on the 48 triads — so every position is reachable by a unique transformation, and transformations are coordinates.',
       },
       {
         index: 'III',
-        title: 'The Tonnetz, generalized',
+        title: 'Self-resolving',
         description:
-          'The lattice in the hero is real: states are triads, and transitions are P/L/R transformations across it.',
+          'No central scheduler. Coordination, load-balancing, and regime changes emerge from local dynamics rather than authored control.',
       },
       {
         index: 'IV',
-        title: 'Coherent by construction',
+        title: 'Coherent by cohomology',
         description:
-          'Smoothness is a property of the math, not a heuristic bolted on after the fact.',
+          'Agreement is a measured quantity: sheaf cohomology says what the cluster agrees on and where a global view fails to glue.',
       },
     ] satisfies Principle[],
   },
 
-  /** Engineering pillars beneath the portal and Eryon. */
-  platform: {
-    eyebrow: 'The platform',
-    title: 'Built on rigor, all the way down.',
-    lede: 'Rust at the core, WebAssembly at the edges, and a topological orchestrator wired through the middle.',
-    stack: [
-      { label: 'Core', items: ['Rust', 'Async / Tokio', 'Type-safe APIs'] },
+  /** The portfolio Eryon's design pulls into existence. */
+  ecosystem: {
+    eyebrow: 'The portfolio',
+    title: 'A substrate, and what it makes possible.',
+    lede: 'Eryon is the foundation. Each project above it is a higher-order service the substrate’s design naturally pulls into existence — and each can stand on its own merits.',
+    projects: [
       {
-        label: 'Edge',
-        items: ['WebAssembly', 'WASI', 'Component Model'],
+        name: 'Eryon',
+        tagline: 'The substrate',
+        description:
+          'A self-resolving distributed computational fabric built on topology, the neo-Riemannian group, and sheaves.',
+        status: 'building',
       },
-      { label: 'Web', items: ['Next.js', 'React', 'Tailwind', 'Bun'] },
-      { label: 'Data', items: ['Postgres', 'Supabase', 'Time-series'] },
       {
-        label: 'Foundations',
-        items: ['Topology', 'Neo-Riemannian theory', 'Distributed systems'],
+        name: 'Proton',
+        tagline: 'The portal',
+        description:
+          'Where you reach, compose, and inhabit your substrate-based personal cloud.',
+        status: 'design',
       },
-    ] satisfies StackGroup[],
+      {
+        name: 'ACME',
+        tagline: 'Context engine',
+        description:
+          'Automated context management — context as a section of the substrate’s sheaf, not a flat key-value store.',
+        status: 'design',
+      },
+      {
+        name: 'Chaos',
+        tagline: 'Topological storage',
+        description:
+          'Durable state persisted by simplicial position and content-addressed, kept as thin as possible.',
+        status: 'design',
+      },
+      {
+        name: 'Disarray',
+        tagline: 'Multichain layer',
+        description:
+          'The hybrid-consensus fabric where independent clusters compose and authenticate.',
+        status: 'design',
+      },
+      {
+        name: 'Aether',
+        tagline: 'Composed compute',
+        description:
+          'Compute service over the composed, multi-cluster fabric.',
+        status: 'planned',
+      },
+      {
+        name: 'Reaction',
+        tagline: 'Social space',
+        description:
+          'A decentralized social space and gig economy over the substrate’s identity and consensus primitives.',
+        status: 'planned',
+      },
+      {
+        name: 'GVF',
+        tagline: 'Generative visuals',
+        description:
+          'A framework for composable, dynamic visual experiences built over the substrate.',
+        status: 'planned',
+      },
+    ] satisfies EcosystemProject[],
     /** Higher-order principles for the marquee. */
     principles: [
-      'Rust-first',
-      'Edge-native',
-      'Topologically sound',
-      'Voice-led orchestration',
-      'Own your cluster',
-      'Coherent by construction',
-      'Portable everywhere',
+      'Topology-aware',
+      'Self-resolving',
+      'No central scheduler',
+      'Works at any scale',
+      'Transformations are coordinates',
+      'Coherent by cohomology',
+      'Democratized compute',
     ],
   },
 
@@ -228,8 +281,8 @@ export const SITE = {
   facts: [
     { label: 'Studio', value: 'Scattered-Systems, LLC' },
     { label: 'Founded', value: '2021' },
-    { label: 'Flagship', value: 'The Portal' },
     { label: 'Substrate', value: 'Eryon' },
+    { label: 'Portal', value: 'Proton' },
   ] satisfies Fact[],
 } as const;
 

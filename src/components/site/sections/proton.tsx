@@ -2,7 +2,7 @@
  * Created At: 2026.06.01:00:00:00
  * @author - @FL03
  * @directory - src/components/site/sections
- * @file - portal.tsx
+ * @file - proton.tsx
  */
 // imports
 import * as React from 'react';
@@ -32,21 +32,22 @@ const ICONS: Record<string, LucideIcon> = {
   Workflow,
 };
 
-export const Portal = () => (
-  <Section id="portal" className="border-t border-border">
+export const Proton = () => (
+  <Section id="proton" className="border-t border-border">
     <SectionHeader
       index="01"
-      eyebrow={SITE.portal.eyebrow}
+      eyebrow={SITE.proton.eyebrow}
       title={
         <>
-          Your cloud, <span className="italic text-primary">composed.</span>
+          Your cloud, made{' '}
+          <span className="italic text-primary">yours.</span>
         </>
       }
-      description={SITE.portal.lede}
+      description={SITE.proton.lede}
     />
 
     <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-      {SITE.portal.features.map((feature, i) => (
+      {SITE.proton.features.map((feature, i) => (
         <Reveal key={feature.index} delay={i * 0.04}>
           <FeatureCard feature={feature} />
         </Reveal>
@@ -55,12 +56,12 @@ export const Portal = () => (
 
     <Reveal delay={0.1} className="mt-12">
       <a
-        href={SITE.portal.cta.href}
+        href={SITE.proton.cta.href}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(ctaPrimary, 'group px-7 py-3.5')}
       >
-        {SITE.portal.cta.label}
+        {SITE.proton.cta.label}
         <ArrowUpRight
           aria-hidden
           className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -69,7 +70,7 @@ export const Portal = () => (
     </Reveal>
   </Section>
 );
-Portal.displayName = 'Portal';
+Proton.displayName = 'Proton';
 
 const FeatureCard: React.FC<{ feature: Feature }> = ({ feature }) => {
   const Icon = ICONS[feature.icon] ?? Boxes;
@@ -97,4 +98,4 @@ const FeatureCard: React.FC<{ feature: Feature }> = ({ feature }) => {
 };
 FeatureCard.displayName = 'FeatureCard';
 
-export default Portal;
+export default Proton;

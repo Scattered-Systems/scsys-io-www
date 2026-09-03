@@ -28,24 +28,24 @@ export const Eryon = () => (
           eyebrow={SITE.eryon.eyebrow}
           title={
             <>
-              A substrate that thinks in{' '}
-              <span className="italic text-brand-violet">chords.</span>
+              Computation, with{' '}
+              <span className="italic text-brand-violet">shape.</span>
             </>
           }
           description={SITE.eryon.lede}
         />
 
-        {/* a quiet tie-in to the lattice in the hero */}
+        {/* the lattice in the hero is literally Eryon's configuration space */}
         <Reveal delay={0.16}>
           <div className="mt-10 rounded-2xl border border-brand-violet/25 bg-background/40 p-6">
             <span className="label-mono text-brand-violet">
               The lattice, explained
             </span>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The mesh in the hero is a generalized Tonnetz — pitch-class
-              vertices, triangular triads, wrapped on a torus. Each lit triangle
-              is a cluster state; every flip across an edge is a P · L · R
-              transformation, the cheapest possible move to the next chord.
+              The mesh in the hero is the generalized Tonnetz — Eryon’s
+              configuration space. Each plant’s headspace is one of its 48
+              rooted triads; the neo-Riemannian group walks between adjacent
+              triads, and those moves are the substrate’s coordinates.
             </p>
           </div>
         </Reveal>
