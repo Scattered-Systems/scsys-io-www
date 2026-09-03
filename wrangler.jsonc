@@ -1,6 +1,6 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "pzzld-org-www",
+    "name": "scsys-io-www",
     "main": "worker.ts",
     "compatibility_date": "2026-08-22",
     "compatibility_flags": [
@@ -49,7 +49,7 @@
     "services": [
         {
             "binding": "WORKER_SELF_REFERENCE",
-            "service": "pzzld-org-www"
+            "service": "scsys-io-www"
         }
     ],
     "r2_buckets": [
