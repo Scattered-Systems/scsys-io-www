@@ -1,14 +1,8 @@
-/**
- * Created At: 2026.06.01:00:00:00
- * @author - @FL03
- * @directory - src/app
- * @file - page.tsx
- */
-// project
 import { Hero } from '@/components/site/hero';
-import { Portal } from '@/components/site/sections/portal';
+import { Proton } from '@/components/site/sections/proton';
+import { Reaction } from '@/components/site/sections/reaction';
 import { Eryon } from '@/components/site/sections/eryon';
-import { Platform } from '@/components/site/sections/platform';
+import { Ecosystem } from '@/components/site/sections/ecosystem';
 import { About } from '@/components/site/sections/about';
 import { Contact } from '@/components/site/sections/contact';
 
@@ -16,12 +10,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Portal />
+      <Ecosystem />
+      <Proton />
+      <Reaction />
       <Eryon />
-      <Platform />
       <About />
       <Contact />
     </>
   );
 }
-Home.displayName = 'HomePage';

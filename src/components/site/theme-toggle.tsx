@@ -14,9 +14,10 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 /** A ghost icon button that toggles between the light and dark themes. */
-export const ThemeToggle: React.FC<
-  React.ComponentProps<typeof Button>
-> = ({ className, ...props }) => {
+export const ThemeToggle: React.FC<React.ComponentProps<typeof Button>> = ({
+  className,
+  ...props
+}) => {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -33,24 +34,24 @@ export const ThemeToggle: React.FC<
 
   return (
     <Button
-      type="button"
-      size="icon"
-      variant="ghost"
+      type='button'
+      size='icon'
+      variant='ghost'
       aria-label={label}
-      className={cn('text-muted-foreground hover:text-foreground', className)}
+      className={cn('size-11 text-foreground hover:text-foreground', className)}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       {...props}
     >
       {mounted ? (
         isDark ? (
-          <MoonIcon className="size-4" />
+          <MoonIcon className='size-4' />
         ) : (
-          <SunIcon className="size-4" />
+          <SunIcon className='size-4' />
         )
       ) : (
-        <span className="size-4" />
+        <span className='size-4' />
       )}
-      <span className="sr-only">Toggle theme</span>
+      <span className='sr-only'>Toggle theme</span>
     </Button>
   );
 };

@@ -1,94 +1,40 @@
-/**
- * Created At: 2026.06.01:00:00:00
- * @author - @FL03
- * @directory - src/lib/config
- * @file - site.ts
- *
- * Single source of truth for the site's content. Every section reads from
- * `SITE` so copy, links, features, and capabilities can be edited in one
- * place without touching component code.
- */
+/** Public company copy. Product direction is distinct from availability. */
+export type NavLink = { label: string; href: string };
+export type SocialLink = { label: string; handle: string; href: string };
+export type Fact = { label: string; value: string };
 
-/** A navigation entry rendered in the navbar and footer. */
-export type NavLink = {
-  label: string;
-  href: string;
-  /** Marks routes that exist but aren't fleshed out yet (e.g. the blog). */
-  soon?: boolean;
-};
-
-/** An external presence (GitHub, X, email, …). */
-export type SocialLink = {
-  label: string;
-  /** Short mono handle shown in the HUD/footer. */
-  handle: string;
-  href: string;
-};
-
-/** A capability of the flagship portal. `icon` is a lucide icon name. */
-export type Feature = {
-  index: string;
-  icon: string;
-  title: string;
-  description: string;
-};
-
-/** A facet of project Eryon. */
-export type Principle = {
-  index: string;
-  title: string;
-  description: string;
-};
-
-/** A grouped capability cluster shown in the stack section. */
-export type StackGroup = {
-  label: string;
-  items: string[];
-};
-
-/** A short definition-list fact shown in the about grid. */
-export type Fact = {
-  label: string;
-  value: string;
-};
+const contact = { label: 'Get in touch', href: 'mailto:support@scsys.io' };
 
 export const SITE = {
   name: 'Scattered-Systems',
-  /** Short wordmark used in dense UI (nav, HUD, mono labels). */
   short: 'scsys',
   title: 'Scattered-Systems',
   url: 'https://scsys.io',
-  /** The product portal lives on its own subdomain. */
-  appUrl: 'https://app.scsys.io',
-  /** Owner / studio identity. */
   author: {
     name: 'Joe McCain III',
     alias: 'FL03',
-    role: 'Founder & Systems Architect',
+    role: 'Founder',
     company: 'Scattered-Systems, LLC',
     companyUrl: 'https://scsys.io',
     location: 'United States',
-    /** Decorative coordinates for the observatory HUD readout. */
+    // Retained for the existing, unused HUD component.
     coords: '38.9072°N · 77.0369°W',
   },
-  /** The one-line thesis. */
-  tagline: 'Cloud clusters, in harmony.',
-  /** Hero supporting copy. */
+  tagline: 'Harmonizing compute. Distributing possibility.',
   intro:
-    'Scattered-Systems builds the all-in-one portal where you compose, deploy, and inhabit your own cloud clusters — and Eryon, the topological substrate that keeps every one of them in harmony.',
-  /** Short "about" prose, paragraph per entry. */
-  about: [
-    'Scattered-Systems, LLC is a systems studio founded by Joe McCain III. We work where low-level rigor meets high-level ambition — memory-tight Rust services, WebAssembly components that run anywhere, and orchestration that behaves less like a scheduler and more like an ensemble.',
-    'Our thesis is simple: distributed systems should not feel scattered. Given the right substrate, a cluster can move between states the way a piece of music moves between chords — smoothly, audibly coherent, never jarring.',
-    'That substrate is Eryon, and the portal is how you put it to work.',
-  ],
+    'Scattered-Systems is building an ecosystem for digital spaces people can shape, work in, and connect on their own terms.',
+  hero: {
+    lines: ['HARMONIZING COMPUTE.', 'DISTRIBUTING POSSIBILITY.'],
+    primary: { label: 'Explore the ecosystem', href: '/#ecosystem' },
+    secondary: contact,
+    note: 'Product direction, grounded in research.',
+  },
   nav: [
-    { label: 'Portal', href: '#portal' },
-    { label: 'Eryon', href: '#eryon' },
-    { label: 'Platform', href: '#platform' },
-    { label: 'About', href: '#about' },
-    { label: 'Journal', href: '/blog', soon: true },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Ecosystem', href: '/#ecosystem' },
+    { label: 'Proton', href: '/#proton' },
+    { label: 'Reaction', href: '/#reaction' },
+    { label: 'About', href: '/about' },
+    { label: 'Journal', href: '/blog' },
   ] satisfies NavLink[],
   socials: [
     {
@@ -104,135 +50,109 @@ export const SITE = {
     },
   ] satisfies SocialLink[],
   email: 'support@scsys.io',
-
-  /** The flagship — the all-in-one digital portal. */
-  portal: {
-    eyebrow: 'The portal',
-    title: 'Your cloud, composed.',
-    lede: 'One portal to design a cluster, bring it online, and live inside it. No ceremony, no glue code — just the topology you drew, running.',
-    cta: { label: 'Enter the portal', href: 'https://app.scsys.io' },
+  cta: contact,
+  ecosystem: {
+    title: 'Individual agency. Shared possibility.',
+    lede: 'Two complementary products guide the ecosystem: a workspace for your own work, and a relational application for working with others.',
+    note: 'These are product and research directions. Availability and capabilities will be described as they are established.',
+    projects: [
+      {
+        name: 'Proton',
+        role: 'Generative workspace',
+        description:
+          'A personal environment for creating, reading, and managing digital work.',
+        status: 'Product direction',
+        href: '/#proton',
+      },
+      {
+        name: 'Reaction',
+        role: 'Relational collaboration',
+        description:
+          'Opportunity, coordination, and exchange across independently controlled environments.',
+        status: 'Product direction',
+        href: '/#reaction',
+      },
+      {
+        name: 'Eryon',
+        role: 'Proposed compute substrate',
+        description:
+          'Research toward a distributed virtual operating system supporting the ecosystem.',
+        status: 'Research · proposed',
+        href: '/#eryon',
+      },
+    ],
+  },
+  proton: {
+    name: 'Proton',
+    title: 'A workspace that starts with you.',
+    lede: 'Proton is a generative digital workspace. Its current priority is the portal, workspace manager, and editor: a coherent place to create, read, organize, and return to your work.',
+    status: 'Current product direction',
     features: [
       {
-        index: '01',
-        icon: 'Boxes',
-        title: 'Compose a cluster',
+        title: 'Create and edit',
         description:
-          'Lay out nodes, services, and links on a visual canvas. The topology you sketch is the topology that ships.',
+          'Purposeful reader and editor views are the starting point for useful work.',
       },
       {
-        index: '02',
-        icon: 'Workflow',
-        title: 'Deploy in one motion',
+        title: 'Keep work connected',
         description:
-          'Blueprint to running cluster in a single step — across our infrastructure, your own hardware, or both at once.',
+          'Workspace navigation and retained resources give the environment continuity.',
       },
       {
-        index: '03',
-        icon: 'AudioLines',
-        title: 'Self-orchestrating',
+        title: 'Shape the environment',
         description:
-          'Eryon keeps services balanced and healing in the background, resolving load the way a chord resolves tension.',
+          'The broader direction is an adaptable visual shell for permitted resources and services.',
       },
-      {
-        index: '04',
-        icon: 'Activity',
-        title: 'Live observability',
-        description:
-          'Watch the whole cluster breathe in real time — every node, signal, and transition rendered as it happens.',
-      },
-      {
-        index: '05',
-        icon: 'Layers',
-        title: 'Bring your own infra',
-        description:
-          'Span clouds, edges, and bare metal from one control plane. Clusters reach wherever your compute lives.',
-      },
-      {
-        index: '06',
-        icon: 'ShieldCheck',
-        title: 'Yours, end to end',
-        description:
-          'Own your data, your keys, and your cluster. Portable by design, with nothing locked behind our walls.',
-      },
-    ] satisfies Feature[],
+    ],
+    cta: {
+      label: 'Ask about Proton',
+      href: 'mailto:support@scsys.io?subject=Proton',
+    },
   },
-
-  /** The substrate — project Eryon. */
+  reaction: {
+    name: 'Reaction',
+    title: 'Connection, with independence intact.',
+    lede: 'Reaction is the relational application for collaboration, opportunity, and exchange. Its direction brings people and organizations together across environments they control independently.',
+    detail:
+      'Relationships give shared work its context. Participation, coordination, and enterprise belong here, while each environment retains its own boundaries.',
+    status: 'Product direction',
+    cta: {
+      label: 'Ask about Reaction',
+      href: 'mailto:support@scsys.io?subject=Reaction',
+    },
+  },
   eryon: {
-    eyebrow: 'Project Eryon',
-    title: 'A substrate that thinks in chords.',
-    lede: 'Eryon is the topological substrate beneath every cluster. Its orchestration mechanism is derived from the neo-Riemannian theory of music — so transitions between states are voice-led, minimal, and coherent by construction.',
-    paragraphs: [
-      'Most orchestrators treat a cluster as a flat list of things to keep alive. Eryon treats it as a shape. Services live on a shared manifold — a generalized Tonnetz — where every reachable configuration is a point and every safe transition is a short move between neighbors.',
-      'When the cluster needs to change, Eryon looks for the smallest voice-leading move: the transition that disturbs the fewest components, exactly like resolving one chord into the next. The result is orchestration without thundering herds, cold restarts, or churn.',
-    ],
-    principles: [
-      {
-        index: 'I',
-        title: 'Topological by nature',
-        description:
-          'Cluster state lives on a manifold, not a spreadsheet. Adjacency is meaningful, and distance is real.',
-      },
-      {
-        index: 'II',
-        title: 'Harmonic orchestration',
-        description:
-          'Scheduling follows neo-Riemannian voice-leading — the cheapest move is the one that changes the least.',
-      },
-      {
-        index: 'III',
-        title: 'The Tonnetz, generalized',
-        description:
-          'The lattice in the hero is real: states are triads, and transitions are P/L/R transformations across it.',
-      },
-      {
-        index: 'IV',
-        title: 'Coherent by construction',
-        description:
-          'Smoothness is a property of the math, not a heuristic bolted on after the fact.',
-      },
-    ] satisfies Principle[],
+    title: 'Research beneath the experience.',
+    lede: 'Eryon is a proposed distributed virtual operating system and compute substrate. Its research explores the foundations for execution, state, and resource placement.',
+    note: 'This is a research direction, not a claim of a deployed distributed OS or guaranteed runtime behavior.',
+    // Do not turn internal Plant/VNode definitions or proof results into marketing claims.
+    cta: {
+      label: 'Discuss the research',
+      href: 'mailto:support@scsys.io?subject=Eryon%20research',
+    },
   },
-
-  /** Engineering pillars beneath the portal and Eryon. */
-  platform: {
-    eyebrow: 'The platform',
-    title: 'Built on rigor, all the way down.',
-    lede: 'Rust at the core, WebAssembly at the edges, and a topological orchestrator wired through the middle.',
-    stack: [
-      { label: 'Core', items: ['Rust', 'Async / Tokio', 'Type-safe APIs'] },
-      {
-        label: 'Edge',
-        items: ['WebAssembly', 'WASI', 'Component Model'],
-      },
-      { label: 'Web', items: ['Next.js', 'React', 'Tailwind', 'Bun'] },
-      { label: 'Data', items: ['Postgres', 'Supabase', 'Time-series'] },
-      {
-        label: 'Foundations',
-        items: ['Topology', 'Neo-Riemannian theory', 'Distributed systems'],
-      },
-    ] satisfies StackGroup[],
-    /** Higher-order principles for the marquee. */
-    principles: [
-      'Rust-first',
-      'Edge-native',
-      'Topologically sound',
-      'Voice-led orchestration',
-      'Own your cluster',
-      'Coherent by construction',
-      'Portable everywhere',
-    ],
-  },
-
-  /** Decorative facts for the about grid. */
+  aboutTitle: 'Building for people and the systems they share.',
+  about: [
+    'Scattered-Systems is an ecosystem and platform company founded by Joe McCain III. We bring research and engineering together around a long-term goal: more agency over the digital spaces where people live and work.',
+    'Proton centers the individual workspace. Reaction centers relationships and shared opportunity. Research into the enabling foundations supports that direction, with each capability judged by its own evidence.',
+  ],
   facts: [
-    { label: 'Studio', value: 'Scattered-Systems, LLC' },
-    { label: 'Founded', value: '2021' },
-    { label: 'Flagship', value: 'The Portal' },
-    { label: 'Substrate', value: 'Eryon' },
+    { label: 'Company', value: 'Scattered-Systems, LLC' },
+    { label: 'Founder', value: 'Joe McCain III' },
+    { label: 'Products', value: 'Proton · Reaction' },
+    { label: 'Research', value: 'Eryon' },
   ] satisfies Fact[],
+  contact: {
+    title: 'Start a conversation.',
+    description:
+      'Interested in the company, the product direction, or the research? Get in touch with Scattered-Systems.',
+  },
+  journal: {
+    title: 'The journal.',
+    description:
+      'Notes from Scattered-Systems on our products, research, and engineering.',
+    empty: 'No articles published yet.',
+  },
 } as const;
-
 export type Site = typeof SITE;
-
 export default SITE;
