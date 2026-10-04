@@ -61,20 +61,6 @@
             "id": "3c530b84276d4e87a814153df7b25330"
         }
     ],
-    "migrations": [
-        {
-            "tag": "v1",
-            "new_sqlite_classes": [
-                "DOQueueHandler"
-            ]
-        },
-        {
-            "tag": "v2",
-            "deleted_classes": [
-                "DOQueueHandler"
-            ]
-        }
-    ],
     "routes": [
         {
             "custom_domain": true,
