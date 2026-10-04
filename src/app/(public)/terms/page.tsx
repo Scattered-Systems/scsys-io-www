@@ -10,7 +10,13 @@ import { SITE } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: `The terms governing use of ${SITE.author.company}, the portal, and Eryon.`,
+  description: `Terms of Service for ${SITE.author.company}.`,
+  alternates: { canonical: '/terms' },
+  openGraph: {
+    title: 'Terms of Service',
+    description: `Terms of Service for ${SITE.author.company}.`,
+    url: '/terms',
+  },
 };
 
 export default function Page() {

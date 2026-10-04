@@ -11,6 +11,12 @@ import { SITE } from '@/lib/config';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: `How ${SITE.author.company} collects, uses, and protects your information.`,
+  alternates: { canonical: '/privacy' },
+  openGraph: {
+    title: 'Privacy Policy',
+    description: `Privacy Policy for ${SITE.author.company}.`,
+    url: '/privacy',
+  },
 };
 
 export default function Page() {
