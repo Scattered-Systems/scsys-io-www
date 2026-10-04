@@ -28,6 +28,7 @@
   --elevation-overlay: 0 12px 32px rgb(20 22 24 / 0.12);
   --duration-state: 140ms;
   --background: var(--scsys-white);
+  --brand-mark-surface: var(--scsys-white);
   --foreground: var(--scsys-carbon);
   --card: var(--scsys-warm-field);
   --card-foreground: var(--scsys-carbon);
@@ -319,11 +320,17 @@
   .site-product-link:focus-visible {
     outline-offset: 6px;
   }
-  .site-signature {
-    font-size: 1.125rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    line-height: 1;
+  .site-logo {
+    display: inline-flex;
+    flex: none;
+    /* At 32px high, 34 SVG units equal 3.97px: preserve at least 4px. */
+    padding: 4px;
+    background: var(--brand-mark-surface);
+  }
+  .site-logo-mark {
+    display: block;
+    height: 32px;
+    width: auto;
   }
   .hero-title {
     font-size: var(--type-display);
