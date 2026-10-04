@@ -65,6 +65,12 @@ export const metadata: Metadata = {
     description: SITE.intro,
     creator: '@scsys_io',
   },
-  // Legacy icons remain until approved asset bytes can be verified and installed.
-  icons: [{ rel: 'icon', url: '/favicon.ico' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32' },
+      { url: '/icon1.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icon0.svg', type: 'image/svg+xml', sizes: 'any' },
+    ],
+    apple: [{ url: '/apple-icon.png', type: 'image/png', sizes: '180x180' }],
+  },
 };
