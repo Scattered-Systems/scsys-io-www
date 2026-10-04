@@ -38,11 +38,6 @@
         "NODE_ENV": "production",
         "NODE_VERSION": "26"
     },
-    "secrets": {
-        "required": [
-            "NOTION_TOKEN"
-        ]
-    },
     "services": [
         {
             "binding": "WORKER_SELF_REFERENCE",
