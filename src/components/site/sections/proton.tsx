@@ -1,101 +1,38 @@
-/**
- * Created At: 2026.06.01:00:00:00
- * @author - @FL03
- * @directory - src/components/site/sections
- * @file - proton.tsx
- */
-// imports
-import * as React from 'react';
-import {
-  Activity,
-  ArrowUpRight,
-  AudioLines,
-  Boxes,
-  Layers,
-  ShieldCheck,
-  Workflow,
-  type LucideIcon,
-} from 'lucide-react';
-// project
-import { cn } from '@/lib/utils';
-import { SITE, type Feature } from '@/lib/config';
-import { Section, SectionHeader } from '@/components/site/section';
-import { Reveal } from '@/components/site/reveal';
-import { ctaPrimary } from '@/components/site/cta';
-
-const ICONS: Record<string, LucideIcon> = {
-  Activity,
-  AudioLines,
-  Boxes,
-  Layers,
-  ShieldCheck,
-  Workflow,
-};
+import { ArrowUpRight } from 'lucide-react';
+import { SITE } from '@/lib/config';
+import { Section } from '@/components/site/section';
+import { ctaSecondary } from '@/components/site/cta';
 
 export const Proton = () => (
-  <Section id="proton" className="border-t border-border">
-    <SectionHeader
-      index="01"
-      eyebrow={SITE.proton.eyebrow}
-      title={
-        <>
-          Your cloud, made{' '}
-          <span className="italic text-primary">yours.</span>
-        </>
-      }
-      description={SITE.proton.lede}
-    />
-
-    <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-      {SITE.proton.features.map((feature, i) => (
-        <Reveal key={feature.index} delay={i * 0.04}>
-          <FeatureCard feature={feature} />
-        </Reveal>
-      ))}
+  <Section id='proton' className='border-y border-border bg-card'>
+    <div className='grid gap-12 md:grid-cols-[1.1fr_1fr] md:gap-24'>
+      <div>
+        <h2 className='site-heading'>
+          {SITE.proton.name}
+          <span className='mt-5 block text-2xl font-normal tracking-normal sm:text-3xl'>
+            {SITE.proton.title}
+          </span>
+        </h2>
+        <p className='mt-6 max-w-xl text-lg text-muted-foreground'>
+          {SITE.proton.lede}
+        </p>
+        <span className='site-status mt-5'>{SITE.proton.status}</span>
+        <div className='mt-8'>
+          <a href={SITE.proton.cta.href} className={ctaSecondary}>
+            {SITE.proton.cta.label}
+            <ArrowUpRight aria-hidden className='size-4' />
+          </a>
+        </div>
+      </div>
+      <ul className='divide-y divide-border border-y border-border'>
+        {SITE.proton.features.map((feature) => (
+          <li key={feature.title} className='py-7 first:pt-7'>
+            <h3 className='text-xl font-medium'>{feature.title}</h3>
+            <p className='mt-3 text-muted-foreground'>{feature.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-
-    <Reveal delay={0.1} className="mt-12">
-      <a
-        href={SITE.proton.cta.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(ctaPrimary, 'group px-7 py-3.5')}
-      >
-        {SITE.proton.cta.label}
-        <ArrowUpRight
-          aria-hidden
-          className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-        />
-      </a>
-    </Reveal>
   </Section>
 );
-Proton.displayName = 'Proton';
-
-const FeatureCard: React.FC<{ feature: Feature }> = ({ feature }) => {
-  const Icon = ICONS[feature.icon] ?? Boxes;
-  return (
-    <div className="group flex h-full flex-col gap-5 bg-card p-6 transition-colors hover:bg-card/60">
-      <div className="flex items-center justify-between">
-        <Icon
-          aria-hidden
-          className="size-5 text-primary transition-transform duration-300 group-hover:scale-110"
-        />
-        <span className="label-mono text-muted-foreground/50">
-          {feature.index}
-        </span>
-      </div>
-      <div>
-        <h3 className="font-display text-xl font-light tracking-tight">
-          {feature.title}
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {feature.description}
-        </p>
-      </div>
-    </div>
-  );
-};
-FeatureCard.displayName = 'FeatureCard';
-
 export default Proton;

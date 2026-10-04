@@ -7,6 +7,7 @@
 // imports
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ctaSecondary } from '@/components/site/cta';
 import { ArrowLeft } from 'lucide-react';
 
 type RouteProps = {
@@ -18,17 +19,12 @@ export default async function Page({ searchParams }: RouteProps) {
     await searchParams;
 
   return (
-    <article className="text-center">
-      <p className="label-mono text-destructive">Error {status}</p>
-      <h1 className="mt-6 font-display text-5xl font-light tracking-tight sm:text-6xl">
-        Something dissonant.
-      </h1>
-      <p className="mt-5 text-muted-foreground">{message}</p>
-      <Link
-        href="/"
-        className="group mt-10 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
-      >
-        <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+    <article className='text-center'>
+      <h1 className='site-heading'>Something went wrong.</h1>
+      <p className='label-mono mt-4 text-destructive'>Error {status}</p>
+      <p className='mt-5 text-muted-foreground'>{message}</p>
+      <Link href='/' className={`${ctaSecondary} mt-10`}>
+        <ArrowLeft aria-hidden className='size-4' />
         Back home
       </Link>
     </article>

@@ -1,17 +1,10 @@
-/**
- * Created At: 2025.08.17:01:22:54
- * @author - @FL03
- * @directory - src/app
- * @file - loading.tsx
- */
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[99] flex items-center justify-center bg-background/60 backdrop-blur-xl">
-      <div className="flex flex-col items-center gap-4">
-        <div className="size-8 animate-spin rounded-full border-2 border-primary/25 border-t-primary" />
-        <span className="label-mono text-muted-foreground">Orchestrating…</span>
-      </div>
+    <div
+      role='status'
+      className='site-container flex min-h-[60svh] items-center justify-center pt-20'
+    >
+      <p className='text-muted-foreground'>Loading page…</p>
     </div>
   );
 }
-Loading.displayName = 'LoadingPage';

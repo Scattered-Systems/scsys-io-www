@@ -1,73 +1,15 @@
-/**
- * Created At: 2026.06.01:00:00:00
- * @author - @FL03
- * @directory - src/lib/config
- * @file - site.ts
- *
- * Single source of truth for the site's content. Every section reads from
- * `SITE` so copy, links, features, and ecosystem entries can be edited in one
- * place without touching component code.
- *
- * Substance is grounded in the Scattered-Systems internal docs (The Scattered
- * Papers + the Eryon technical specification): Eryon is a self-resolving
- * distributed computational substrate; Proton is the user-facing portal; the
- * mission is to democratize distributed computing.
- */
+/** Public company copy. Product direction is distinct from availability. */
+export type NavLink = { label: string; href: string };
+export type SocialLink = { label: string; handle: string; href: string };
+export type Fact = { label: string; value: string };
 
-/** A navigation entry rendered in the navbar and footer. */
-export type NavLink = {
-  label: string;
-  href: string;
-  /** Marks routes that exist but aren't fleshed out yet (e.g. the blog). */
-  soon?: boolean;
-};
-
-/** An external presence (GitHub, X, email, …). */
-export type SocialLink = {
-  label: string;
-  /** Short mono handle shown in the HUD/footer. */
-  handle: string;
-  href: string;
-};
-
-/** A capability of the Proton portal. `icon` is a lucide icon name. */
-export type Feature = {
-  index: string;
-  icon: string;
-  title: string;
-  description: string;
-};
-
-/** A facet of project Eryon. */
-export type Principle = {
-  index: string;
-  title: string;
-  description: string;
-};
-
-/** A project in the Scattered-Systems portfolio. */
-export type EcosystemProject = {
-  name: string;
-  tagline: string;
-  description: string;
-  status: 'building' | 'design' | 'planned';
-};
-
-/** A short definition-list fact shown in the about grid. */
-export type Fact = {
-  label: string;
-  value: string;
-};
+const contact = { label: 'Get in touch', href: 'mailto:support@scsys.io' };
 
 export const SITE = {
   name: 'Scattered-Systems',
-  /** Short wordmark used in dense UI (nav, HUD, mono labels). */
   short: 'scsys',
   title: 'Scattered-Systems',
   url: 'https://scsys.io',
-  /** The Proton portal lives on its own subdomain. */
-  appUrl: 'https://app.scsys.io',
-  /** Owner / studio identity. */
   author: {
     name: 'Joe McCain III',
     alias: 'FL03',
@@ -75,27 +17,24 @@ export const SITE = {
     company: 'Scattered-Systems, LLC',
     companyUrl: 'https://scsys.io',
     location: 'United States',
-    /** Decorative coordinates for the observatory HUD readout. */
+    // Retained for the existing, unused HUD component.
     coords: '38.9072°N · 77.0369°W',
   },
-  /** The one-line thesis. */
-  tagline: 'Your own cloud, at any scale.',
-  /** Hero supporting copy. */
+  tagline: 'Harmonizing compute. Distributing possibility.',
   intro:
-    'Scattered-Systems builds Eryon — a topological computational substrate that turns your own devices into a self-organizing personal cloud — and Proton, the portal that makes it yours.',
-  /** Mission prose for the about section, paragraph per entry. */
-  about: [
-    'Scattered-Systems is a computational research and engineering studio built on a single conviction: the conventional architecture of distributed computing is a partial expression of what computation can be. A foundation that takes the topological, algebraic, and harmonic structure of computation seriously produces qualitatively better systems.',
-    'Our mission is to democratize distributed computing — to give individuals, small teams, and resource-constrained users access to computational fabrics that conventional infrastructure reserves for enterprise scale. A phone, a laptop, or a Raspberry Pi should be enough to take part.',
-    'Founded by Joe McCain III. We treat mathematical rigor as a discipline, not a flourish — and we would rather understate a claim and surprise you than overstate one and let you down.',
-  ],
+    'Scattered-Systems is building an ecosystem for digital spaces people can shape, work in, and connect on their own terms.',
+  hero: {
+    lines: ['HARMONIZING COMPUTE.', 'DISTRIBUTING POSSIBILITY.'],
+    primary: { label: 'Explore the ecosystem', href: '/#ecosystem' },
+    secondary: contact,
+    note: 'Product direction, grounded in research.',
+  },
   nav: [
-    { label: 'Proton', href: '#proton' },
-    { label: 'Eryon', href: '#eryon' },
-    { label: 'Ecosystem', href: '#ecosystem' },
-    { label: 'About', href: '#about' },
-    { label: 'Journal', href: '/blog', soon: true },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Ecosystem', href: '/#ecosystem' },
+    { label: 'Proton', href: '/#proton' },
+    { label: 'Reaction', href: '/#reaction' },
+    { label: 'About', href: '/about' },
+    { label: 'Journal', href: '/blog' },
   ] satisfies NavLink[],
   socials: [
     {
@@ -111,181 +50,109 @@ export const SITE = {
     },
   ] satisfies SocialLink[],
   email: 'support@scsys.io',
-
-  /** Proton — the user-facing portal to your personal cloud. */
-  proton: {
-    eyebrow: 'The portal · Proton',
-    title: 'Your cloud, made yours.',
-    lede: 'Eryon produces capabilities; Proton makes them addressable. It is the portal where your own devices become a personal cloud you can compose, customize, and own.',
-    cta: { label: 'Request early access', href: 'https://app.scsys.io' },
-    features: [
-      {
-        index: '01',
-        icon: 'Boxes',
-        title: 'Compose a personal cloud',
-        description:
-          'Aggregate your devices — a phone, a laptop, a Raspberry Pi — into one cloud, with no architectural seam between a single device and many.',
-      },
-      {
-        index: '02',
-        icon: 'Workflow',
-        title: 'Compose with others',
-        description:
-          'Personal clouds join into community networks, so you can reach past your own hardware without an architectural break.',
-      },
-      {
-        index: '03',
-        icon: 'AudioLines',
-        title: 'Self-resolving',
-        description:
-          'Eryon coordinates, balances, and heals from the geometry up — no data center to run, no central scheduler to babysit.',
-      },
-      {
-        index: '04',
-        icon: 'Activity',
-        title: 'Watch it breathe',
-        description:
-          'See your cluster’s topology and consistency in real time, read straight off the substrate rather than guessed at.',
-      },
-      {
-        index: '05',
-        icon: 'Layers',
-        title: 'Customize the experience',
-        description:
-          'Shape your interface from composable, generative building blocks — pin what works, rebuild what doesn’t.',
-      },
-      {
-        index: '06',
-        icon: 'ShieldCheck',
-        title: 'Own it, provably',
-        description:
-          'Your cluster is bound to you by its shape, its data, and your key. Flat data has no shape to hash; yours does.',
-      },
-    ] satisfies Feature[],
-  },
-
-  /** Eryon — the computational substrate beneath everything. */
-  eryon: {
-    eyebrow: 'Project Eryon · the substrate',
-    title: 'Computation, with shape.',
-    lede: 'Eryon treats computation as a topological–algebraic–harmonic object rather than a flat data structure. Its unit of compute — a “plant” — is a tiny universal machine whose state space is a triad on a generalized Tonnetz.',
-    paragraphs: [
-      'Conventional systems treat data as flat, computation as isolated state-transitions, and coordination as something a scheduler imposes from above. Eryon recovers the structure that approach throws away — the relations between computational positions and the topology of the computational space itself.',
-      'The 48 rooted triads of the generalized Tonnetz form a configuration space, and the neo-Riemannian group — P, L, R, and a fifth-shift — acts on it simply transitively. One set of symmetries is therefore the substrate’s geometry, its routing topology, and its addressing scheme at once. Transformations are coordinates.',
-      'Nothing is centrally scheduled. Coordination emerges from topology-aware gossip, load balances as a diffusion process, and consistency is read off with sheaf cohomology. The substrate works at any scale — from a single triad upward.',
-    ],
-    principles: [
-      {
-        index: 'I',
-        title: 'Topological by construction',
-        description:
-          'Compute lives on a manifold of tiny universal machines, sliced from one twelve-tone alphabet by the simplicial structure of the Tonnetz.',
-      },
-      {
-        index: 'II',
-        title: 'Harmonic addressing',
-        description:
-          'The neo-Riemannian group acts simply transitively on the 48 triads — so every position is reachable by a unique transformation, and transformations are coordinates.',
-      },
-      {
-        index: 'III',
-        title: 'Self-resolving',
-        description:
-          'No central scheduler. Coordination, load-balancing, and regime changes emerge from local dynamics rather than authored control.',
-      },
-      {
-        index: 'IV',
-        title: 'Coherent by cohomology',
-        description:
-          'Agreement is a measured quantity: sheaf cohomology says what the cluster agrees on and where a global view fails to glue.',
-      },
-    ] satisfies Principle[],
-  },
-
-  /** The portfolio Eryon's design pulls into existence. */
+  cta: contact,
   ecosystem: {
-    eyebrow: 'The portfolio',
-    title: 'A substrate, and what it makes possible.',
-    lede: 'Eryon is the foundation. Each project above it is a higher-order service the substrate’s design naturally pulls into existence — and each can stand on its own merits.',
+    title: 'Individual agency. Shared possibility.',
+    lede: 'Two complementary products guide the ecosystem: a workspace for your own work, and a relational application for working with others.',
+    note: 'These are product and research directions. Availability and capabilities will be described as they are established.',
     projects: [
       {
-        name: 'Eryon',
-        tagline: 'The substrate',
-        description:
-          'A self-resolving distributed computational fabric built on topology, the neo-Riemannian group, and sheaves.',
-        status: 'building',
-      },
-      {
         name: 'Proton',
-        tagline: 'The portal',
+        role: 'Generative workspace',
         description:
-          'Where you reach, compose, and inhabit your substrate-based personal cloud.',
-        status: 'design',
-      },
-      {
-        name: 'ACME',
-        tagline: 'Context engine',
-        description:
-          'Automated context management — context as a section of the substrate’s sheaf, not a flat key-value store.',
-        status: 'design',
-      },
-      {
-        name: 'Chaos',
-        tagline: 'Topological storage',
-        description:
-          'Durable state persisted by simplicial position and content-addressed, kept as thin as possible.',
-        status: 'design',
-      },
-      {
-        name: 'Disarray',
-        tagline: 'Multichain layer',
-        description:
-          'The hybrid-consensus fabric where independent clusters compose and authenticate.',
-        status: 'design',
-      },
-      {
-        name: 'Aether',
-        tagline: 'Composed compute',
-        description:
-          'Compute service over the composed, multi-cluster fabric.',
-        status: 'planned',
+          'A personal environment for creating, reading, and managing digital work.',
+        status: 'Product direction',
+        href: '/#proton',
       },
       {
         name: 'Reaction',
-        tagline: 'Social space',
+        role: 'Relational collaboration',
         description:
-          'A decentralized social space and gig economy over the substrate’s identity and consensus primitives.',
-        status: 'planned',
+          'Opportunity, coordination, and exchange across independently controlled environments.',
+        status: 'Product direction',
+        href: '/#reaction',
       },
       {
-        name: 'GVF',
-        tagline: 'Generative visuals',
+        name: 'Eryon',
+        role: 'Proposed compute substrate',
         description:
-          'A framework for composable, dynamic visual experiences built over the substrate.',
-        status: 'planned',
+          'Research toward a distributed virtual operating system supporting the ecosystem.',
+        status: 'Research · proposed',
+        href: '/#eryon',
       },
-    ] satisfies EcosystemProject[],
-    /** Higher-order principles for the marquee. */
-    principles: [
-      'Topology-aware',
-      'Self-resolving',
-      'No central scheduler',
-      'Works at any scale',
-      'Transformations are coordinates',
-      'Coherent by cohomology',
-      'Democratized compute',
     ],
   },
-
-  /** Decorative facts for the about grid. */
+  proton: {
+    name: 'Proton',
+    title: 'A workspace that starts with you.',
+    lede: 'Proton is a generative digital workspace. Its current priority is the portal, workspace manager, and editor: a coherent place to create, read, organize, and return to your work.',
+    status: 'Current product direction',
+    features: [
+      {
+        title: 'Create and edit',
+        description:
+          'Purposeful reader and editor views are the starting point for useful work.',
+      },
+      {
+        title: 'Keep work connected',
+        description:
+          'Workspace navigation and retained resources give the environment continuity.',
+      },
+      {
+        title: 'Shape the environment',
+        description:
+          'The broader direction is an adaptable visual shell for permitted resources and services.',
+      },
+    ],
+    cta: {
+      label: 'Ask about Proton',
+      href: 'mailto:support@scsys.io?subject=Proton',
+    },
+  },
+  reaction: {
+    name: 'Reaction',
+    title: 'Connection, with independence intact.',
+    lede: 'Reaction is the relational application for collaboration, opportunity, and exchange. Its direction brings people and organizations together across environments they control independently.',
+    detail:
+      'Relationships give shared work its context. Participation, coordination, and enterprise belong here, while each environment retains its own boundaries.',
+    status: 'Product direction',
+    cta: {
+      label: 'Ask about Reaction',
+      href: 'mailto:support@scsys.io?subject=Reaction',
+    },
+  },
+  eryon: {
+    title: 'Research beneath the experience.',
+    lede: 'Eryon is a proposed distributed virtual operating system and compute substrate. Its research explores the foundations for execution, state, and resource placement.',
+    note: 'This is a research direction, not a claim of a deployed distributed OS or guaranteed runtime behavior.',
+    // Do not turn internal Plant/VNode definitions or proof results into marketing claims.
+    cta: {
+      label: 'Discuss the research',
+      href: 'mailto:support@scsys.io?subject=Eryon%20research',
+    },
+  },
+  aboutTitle: 'Building for people and the systems they share.',
+  about: [
+    'Scattered-Systems is an ecosystem and platform company founded by Joe McCain III. We bring research and engineering together around a long-term goal: more agency over the digital spaces where people live and work.',
+    'Proton centers the individual workspace. Reaction centers relationships and shared opportunity. Research into the enabling foundations supports that direction, with each capability judged by its own evidence.',
+  ],
   facts: [
-    { label: 'Studio', value: 'Scattered-Systems, LLC' },
-    { label: 'Founded', value: '2021' },
-    { label: 'Substrate', value: 'Eryon' },
-    { label: 'Portal', value: 'Proton' },
+    { label: 'Company', value: 'Scattered-Systems, LLC' },
+    { label: 'Founder', value: 'Joe McCain III' },
+    { label: 'Products', value: 'Proton · Reaction' },
+    { label: 'Research', value: 'Eryon' },
   ] satisfies Fact[],
+  contact: {
+    title: 'Start a conversation.',
+    description:
+      'Interested in the company, the product direction, or the research? Get in touch with Scattered-Systems.',
+  },
+  journal: {
+    title: 'The journal.',
+    description:
+      'Notes from Scattered-Systems on our products, research, and engineering.',
+    empty: 'No articles published yet.',
+  },
 } as const;
-
 export type Site = typeof SITE;
-
 export default SITE;
