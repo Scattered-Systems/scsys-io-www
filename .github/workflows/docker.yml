@@ -1,92 +1,120 @@
-name: Docker
+name: Container
 
 concurrency:
   cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
 on:
-  # pull_request:
-  #   branches: [main, master]
-  #   types: [synchronize]
+  pull_request:
+    branches: [main, master]
   push:
     branches: [main, master]
     tags: [latest, v*.*.*]
-  repository_dispatch:
-    types: [docker, dockerhub, docker-publish]
   workflow_dispatch:
     inputs:
-      build_context:
-        description: 'The path to the build context for the Docker build'
-        required: false
-        default: '.'
-      dockerfile:
-        description: 'The Dockerfile to use for the build'
-        required: false
-        default: 'Dockerfile'
+      publish:
+        description: 'Publish to the owner-approved private GHCR package (main only)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
 
 env:
-  REGISTRY: docker.io
-  IMAGE_NAME: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/scattered-systems/scsys-io-www
+  DOCKER_BUILD_SUMMARY: 'false'
+  DOCKER_BUILD_RECORD_UPLOAD: 'false'
 
 jobs:
-  bnp:
-    name: Build and Push Docker Image
+  build:
+    name: Build and check container
     runs-on: ubuntu-latest
-    env:
-      BUILD_CONTEXT: ${{ github.event.inputs.build_context || '.' }}
-      DOCKERFILE: ${{ github.event.inputs.dockerfile || 'Dockerfile' }}
-    environment:
-      name: dockerhub
-      url: https://hub.docker.com/r/${{ env.IMAGE_NAME }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build without publishing
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: false
+          load: true
+          provenance: false
+          tags: ${{ env.IMAGE_NAME }}:check
+      - name: Check container HTTP response
+        run: |
+          docker run --detach --name container-check \
+            --publish 127.0.0.1:3000:3000 "$IMAGE_NAME:check"
+          curl --fail --silent --show-error --retry 12 --retry-delay 2 \
+            --retry-all-errors --max-time 5 http://127.0.0.1:3000/ --output /dev/null || {
+              docker logs container-check
+              exit 1
+            }
+      - name: Remove check container
+        if: always()
+        run: docker rm --force container-check || true
+
+  publish:
+    name: Publish verified private GHCR image
+    needs: build
+    if: >-
+      github.event_name == 'workflow_dispatch' && inputs.publish &&
+      github.ref == 'refs/heads/main' &&
+      github.repository == 'Scattered-Systems/scsys-io-www'
+    runs-on: ubuntu-latest
     permissions:
-      attestations: write
       contents: read
-      id-token: write
       packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify private package destination
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh api /orgs/Scattered-Systems/packages/container/scsys-io-www \
+            --jq '{visibility, repository: .repository.full_name}' > "$RUNNER_TEMP/package.json"
+          jq --exit-status \
+            '.visibility == "private" and .repository == "Scattered-Systems/scsys-io-www"' \
+            "$RUNNER_TEMP/package.json" > /dev/null || {
+              echo 'Publishing requires an existing private GHCR package linked to this repository.' >&2
+              exit 1
+            }
       - name: Setup Docker Metadata
         uses: docker/metadata-action@v5
         id: meta
         with:
-          flavor: latest=true
+          flavor: latest=false
           images: ${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=raw,value=latest
             type=sha
-      - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
+          labels: |
+            org.opencontainers.image.source=https://github.com/Scattered-Systems/scsys-io-www
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Login to DockerHub
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-      - name: Build & Push the image to DockerHub
-        id: build
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish private image
         uses: docker/build-push-action@v6
         with:
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          provenance: mode=min
           platforms: linux/amd64
-          context: ${{ env.BUILD_CONTEXT }}
-          file: ./${{ env.DOCKERFILE }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          context: .
+          file: ./Dockerfile
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
-      - name: Establish Proveance
-        continue-on-error: true
-        if: ${{ !github.event.repository.private }}
-        uses: actions/attest-build-provenance@v3
-        with:
-          push-to-registry: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          subject-digest: ${{ steps.build.outputs.digest }}
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
