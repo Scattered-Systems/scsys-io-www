@@ -6,9 +6,11 @@
  */
 import type { MetadataRoute } from 'next';
 import { SITE } from '@/lib/config';
+import { getPosts } from '@/features/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const posts = getPosts();
   return [
     {
       url: SITE.url,
@@ -22,5 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.5,
     },
+    ...posts.map(({ slug, meta }) => ({
+      url: `${SITE.url}/blog/${slug}`,
+      lastModified: new Date(meta.date),
+      priority: 0.4,
+    })),
   ];
 }

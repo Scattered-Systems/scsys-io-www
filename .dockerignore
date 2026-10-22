@@ -1,5 +1,17 @@
 !*.lock
 
+# Keep local credentials, source history, and host build output out of all layers.
+**/.env*
+**/.dev.vars*
+**/.npmrc
+**/.git
+**/.github
+**/node_modules
+**/.next
+**/.open-next
+**/.wrangler
+**/*.log
+
 ## General
 **/.artifacts
 **/.cache
@@ -23,7 +35,6 @@
 ### Docker
 **/Dockerfile
 
-*.dockerfile
 *.dockerfile
 
 ### IDEs

@@ -1,7 +1,7 @@
 services:
   web:
     container_name: scsys-io
-    image: scsys-io:latest
+    image: ghcr.io/scattered-systems/scsys-io-www:local
     build:
       context: .
       dockerfile: Dockerfile
